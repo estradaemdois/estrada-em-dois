@@ -298,12 +298,19 @@
     }
     .trip-img{
       height:180px;
-      background-position:center;
-      background-size:cover;
+      width:100%;
+      overflow:hidden;
+      background:none;
     }
-    .trip-one{background-image:url("https://images.unsplash.com/photo-1531761535209-180857e963b9?auto=format&fit=crop&w=1200&q=85")}
-    .trip-two{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85")}
-    .trip-three{background-image:url("https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1200&q=85")}
+    .trip-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .trip-one img{object-position:center 55%}
+    .trip-two img{object-position:center 50%}
+    .trip-three img{object-position:center 56%}
     .trip-copy{padding:18px}
     .trip-copy h3{
       margin:0 0 5px;
@@ -641,7 +648,7 @@
 
       <div class="trip-grid">
         <article class="trip-card">
-          <div class="trip-img trip-one"></div>
+          <div class="trip-img trip-one"><img src="assets/argentina-atacama.png" alt="Estrada em Dois na viagem da Argentina ao Atacama"></div>
           <div class="trip-copy">
             <h3>Da Argentina ao Atacama</h3>
             <p>Uma viagem de carro, dois países e milhares de quilômetros de histórias.</p>
@@ -650,7 +657,7 @@
         </article>
 
         <article class="trip-card">
-          <div class="trip-img trip-two"></div>
+          <div class="trip-img trip-two"><img src="assets/salta-norte-argentino.png" alt="Paisagem de Salta e Norte Argentino"></div>
           <div class="trip-copy">
             <h3>Salta e Norte Argentino</h3>
             <p>Estradas incríveis, paisagens surpreendentes e lugares que fizeram essa viagem valer cada quilômetro.</p>
@@ -659,7 +666,7 @@
         </article>
 
         <article class="trip-card">
-          <div class="trip-img trip-three"></div>
+          <div class="trip-img trip-three"><img src="assets/deserto-atacama.jpg" alt="Vulcão Licancabur no Deserto do Atacama"></div>
           <div class="trip-copy">
             <h3>Deserto do Atacama</h3>
             <p>Paisagens de outro mundo e experiências que ficaram para a memória.</p>
