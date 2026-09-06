@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estrada em Dois — viagens, experiências e histórias reais pelo Brasil, Argentina, Chile e muito mais.">
+  <meta name="theme-color" content="#07343c">
+  <title>Estrada em Dois | Viagens, experiências e histórias</title>
+
+  <link rel="icon" href="assets/logo-estrada-em-dois.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --teal-950:#04262c;
+      --teal-900:#07323a;
+      --teal-850:#083a43;
+      --teal-800:#0b424c;
+      --cream:#f7f0e7;
+      --white:#fff;
+      --muted:#d6e2e3;
+      --line:rgba(255,255,255,.27);
+      --soft:rgba(255,255,255,.055);
+      --shadow:0 18px 50px rgba(0,0,0,.25);
+      --radius:19px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"DM Sans",Arial,sans-serif;
+      color:#fff;
+      background:var(--teal-900);
+      line-height:1.45;
+    }
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent }
+    .container{width:min(var(--max),calc(100% - 38px));margin-inline:auto}
+    .section{padding:70px 0}
+    .center{text-align:center}
+    .section-title{
+      margin:0;
+      font-weight:800;
+      font-size:clamp(2rem,4vw,3.25rem);
+      line-height:.98;
+      letter-spacing:-.045em;
+    }
+    .section-sub{
+      margin:10px auto 0;
+      color:var(--muted);
+      max-width:780px;
+      font-size:.95rem;
+      text-transform:uppercase;
+      letter-spacing:.035em;
+    }
+    .script{
+      font-family:"Caveat",cursive;
+      font-weight:600;
+      line-height:.9;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      background:var(--cream);
+      color:#102f36;
+      padding:13px 22px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.9rem;
+      box-shadow:0 7px 20px rgba(0,0,0,.13);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.22)}
+    .btn.small{font-size:.78rem;padding:9px 17px}
+
+    /* HEADER */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(4,38,44,.92);
+      backdrop-filter:blur(13px);
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+    .nav{
+      min-height:72px;
+      display:grid;
+      grid-template-columns:180px 1fr 180px;
+      align-items:center;
+      gap:22px;
+    }
+    .logo-wrap{
+      position:relative;
+      height:72px;
+    }
+    .logo{
+      position:absolute;
+      top:7px;
+      left:0;
+      width:112px;
+      height:112px;
+      object-fit:cover;
+      border-radius:50%;
+      border:4px solid white;
+      box-shadow:0 8px 24px rgba(0,0,0,.28);
+      background:#fff;
+      z-index:5;
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:27px;
+      font-size:.87rem;
+      font-weight:600;
+    }
+    .nav-links a{opacity:.92}
+    .nav-links a:hover{opacity:1}
+    .nav-social{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+    }
+    .top-social{
+      width:33px;height:33px;
+      display:grid;place-items:center;
+      border-radius:9px;
+      border:1px solid transparent;
+      font-size:.78rem;
+      font-weight:800;
+    }
+    .top-social:hover{border-color:var(--line);background:var(--soft)}
+
+    /* HERO */
+    .hero{
+      min-height:650px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background-image:
+        linear-gradient(90deg,rgba(3,36,42,.92) 0%,rgba(3,36,42,.7) 33%,rgba(3,36,42,.12) 68%,rgba(3,36,42,.12) 100%),
+        url("assets/hero-casal.jpg");
+      background-position:center center;
+      background-size:cover;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0;
+      height:110px;
+      background:linear-gradient(transparent,rgba(4,38,44,.75));
+    }
+    .hero-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      min-height:650px;
+      align-items:center;
+      padding:80px 0 70px;
+    }
+    .hero-copy{max-width:520px}
+    .hero-kicker{
+      font-size:.83rem;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#e0eeee;
+    }
+    .hero h1{
+      margin:9px 0 14px;
+      max-width:520px;
+      font-size:clamp(3rem,5.25vw,4.95rem);
+      line-height:.87;
+      letter-spacing:-.055em;
+      text-shadow:0 4px 18px rgba(0,0,0,.2);
+    }
+    .hero p{
+      max-width:480px;
+      margin:0;
+      font-size:1.06rem;
+      font-weight:500;
+    }
+    .hero .btn{margin-top:25px}
+    .hero-note{
+      justify-self:end;
+      align-self:start;
+      margin-top:70px;
+      margin-right:35px;
+      font-size:2.55rem;
+      transform:rotate(-6deg);
+      text-shadow:0 3px 16px rgba(0,0,0,.2);
+    }
+    .heart{font-size:2.5rem;display:block;margin-left:70px;margin-top:10px}
+    .hero-icons{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:26px;
+      display:flex;
+      gap:55px;
+      align-items:center;
+      z-index:5;
+      font-size:.72rem;
+      font-weight:700;
+      text-transform:uppercase;
+    }
+    .hero-icon{
+      display:grid;
+      gap:6px;
+      place-items:center;
+      min-width:68px;
+    }
+    .hero-icon b{font-size:1.5rem;font-weight:400}
+
+    /* DESTINOS */
+    .destinations{
+      position:relative;
+      background:
+        radial-gradient(circle at 10% 25%,rgba(255,255,255,.04),transparent 24%),
+        radial-gradient(circle at 90% 22%,rgba(255,255,255,.035),transparent 25%),
+        linear-gradient(180deg,var(--teal-900),var(--teal-950));
+      padding-top:55px;
+    }
+    .destination-grid{
+      margin:25px auto 0;
+      max-width:800px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:17px;
+    }
+    .country{
+      text-align:left;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:22px 26px;
+      background:rgba(4,32,37,.3);
+      min-height:207px;
+    }
+    .country h3{
+      margin:0 0 14px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      font-size:1rem;
+    }
+    .country .flag{font-size:1.55rem}
+    .country ul{list-style:none;padding:0;margin:0}
+    .country li{
+      border-bottom:1px solid rgba(255,255,255,.18);
+      padding:6px 0;
+      font-size:.88rem;
+    }
+    .country li:last-child{border-bottom:0}
+    .map-note{
+      position:absolute;
+      left:3.2%;
+      top:120px;
+      color:#d9e5e6;
+      font-size:1.7rem;
+      transform:rotate(-8deg);
+    }
+    .roads-note{
+      position:absolute;
+      right:3.5%;
+      top:132px;
+      font-size:1.7rem;
+      transform:rotate(7deg);
+    }
+
+    /* TRIPS */
+    .trip-area{
+      background:var(--teal-950);
+      padding-top:8px;
+      padding-bottom:34px;
+    }
+    .trip-grid{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .trip-card{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:#0a3138;
+      box-shadow:var(--shadow);
+      text-align:left;
+    }
+    .trip-img{
+      height:180px;
+      width:100%;
+      overflow:hidden;
+      background:none;
+    }
+    .trip-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .trip-one img{object-position:center 55%}
+    .trip-two img{object-position:center 50%}
+    .trip-three img{object-position:center 56%}
+    .trip-copy{padding:18px}
+    .trip-copy h3{
+      margin:0 0 5px;
+      text-transform:uppercase;
+      font-size:1.02rem;
+      line-height:1.05;
+    }
+    .trip-copy p{margin:0 0 16px;font-size:.86rem;color:#e0eaeb;min-height:58px}
+
+    /* ROAD BANNER */
+    .road-banner{
+      min-height:320px;
+      display:flex;
+      align-items:center;
+      background-image:
+        linear-gradient(90deg,rgba(4,30,34,.82),rgba(4,30,34,.13) 65%),
+        url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=88");
+      background-position:center;
+      background-size:cover;
+    }
+    .road-copy{max-width:610px;padding:52px 0}
+    .road-copy h2{
+      margin:0 0 12px;
+      font-size:clamp(2.3rem,4.5vw,4rem);
+      line-height:.95;
+      letter-spacing:-.04em;
+    }
+    .road-copy p{max-width:510px;margin:0 0 18px}
+    .road-script{
+      float:right;
+      margin-top:-60px;
+      margin-right:5%;
+      font-size:2rem;
+      transform:rotate(-5deg);
+    }
+
+    /* SOCIAL */
+    .social{
+      background:linear-gradient(180deg,var(--teal-900),var(--teal-950));
+      padding:40px 0 28px;
+    }
+    .social-grid{
+      max-width:820px;
+      margin:20px auto 0;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .social-card{
+      border:1px solid var(--line);
+      border-radius:13px;
+      padding:17px;
+      display:grid;
+      grid-template-columns:55px 1fr;
+      gap:13px;
+      text-align:left;
+      background:rgba(255,255,255,.018);
+      align-items:start;
+    }
+    .social-logo{
+      width:52px;height:52px;
+      border-radius:12px;
+      display:grid;place-items:center;
+      font-weight:900;
+      font-size:1.3rem;
+      background:#fff;color:#0a3036;
+    }
+    .social-card h3{margin:0 0 3px;font-size:.95rem}
+    .social-card p{margin:0 0 12px;color:#d6e1e2;font-size:.75rem;min-height:34px}
+
+    /* SHOP */
+    .shop{
+      background:var(--teal-950);
+      padding:10px 0 35px;
+    }
+    .product-grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr .95fr;
+      gap:12px;
+      align-items:stretch;
+    }
+    .product{
+      border-radius:14px;
+      overflow:hidden;
+      min-height:225px;
+      background:#dfe5e1;
+      position:relative;
+    }
+    .product::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-position:center;
+      background-size:cover;
+    }
+    .mug::before{
+      background-image:
+        linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),
+        url("assets/logo-estrada-em-dois.png");
+      background-size:66%;
+      background-repeat:no-repeat;
+      background-color:#d9d6cc;
+    }
+    .cap::before{
+      background-image:url("assets/logo-estrada-em-dois.png");
+      background-size:58%;
+      background-repeat:no-repeat;
+      background-color:#161c20;
+    }
+    .shirt::before{
+      background-image:url("assets/logo-estrada-em-dois.png");
+      background-size:58%;
+      background-repeat:no-repeat;
+      background-color:#eef2f3;
+    }
+    .shop-card{
+      min-height:225px;
+      background:var(--cream);
+      color:#12333a;
+      border-radius:14px;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:left;
+    }
+    .shop-card .shop-icon{font-size:2.3rem}
+    .shop-card h3{font-size:1.65rem;line-height:1;margin:5px 0 10px}
+    .shop-card p{font-size:.83rem;margin:0 0 17px}
+
+    /* ABOUT */
+    .about{
+      background:#082f36;
+      border-top:1px solid rgba(255,255,255,.1);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      padding:43px 0;
+    }
+    .about-grid{
+      display:grid;
+      grid-template-columns:220px 1fr 250px;
+      gap:36px;
+      align-items:center;
+    }
+    .about h2{font-size:2rem;margin:0;line-height:.96}
+    .about p{margin:0;color:#e2ebec;font-size:.86rem}
+    .about-brand{text-align:center}
+    .about-brand img{
+      width:125px;height:125px;object-fit:cover;border-radius:50%;
+      margin:0 auto 7px;border:2px solid #fff;
+    }
+    .about-brand strong{font-size:1.1rem}
+
+    /* FOOTER */
+    footer{background:#06272d;padding:25px 0 18px}
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.1fr 1.1fr .9fr;
+      gap:28px;
+      align-items:start;
+    }
+    footer h4{font-size:.72rem;margin:0 0 10px;text-transform:uppercase}
+    .contact-lines{display:grid;gap:8px}
+    .contact-lines a,.footer-social a{font-size:.81rem;color:#e3eded}
+    .footer-social{display:flex;gap:14px;flex-wrap:wrap}
+    .footer-note{font-size:.75rem;color:#c5d3d5}
+    .footer-bottom{
+      margin-top:19px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);
+      display:flex;justify-content:space-between;align-items:end;gap:20px;
+    }
+    .footer-bottom small{color:#afc2c4}
+    .bye{font-size:1.65rem;transform:rotate(-5deg);margin-right:18px}
+
+    @media (max-width:900px){
+      .nav{grid-template-columns:110px 1fr}
+      .nav-links{display:none}
+      .nav-social{justify-content:flex-end}
+      .logo{width:84px;height:84px}
+      .hero{background-position:52% center}
+      .hero-grid{grid-template-columns:1fr;min-height:610px;padding:95px 0 90px}
+      .hero-copy{max-width:500px}
+      .hero-note{display:none}
+      .hero-icons{gap:20px;overflow:auto;padding-bottom:3px}
+      .destination-grid,.trip-grid,.social-grid{grid-template-columns:1fr}
+      .map-note,.roads-note{display:none}
+      .trip-copy p{min-height:auto}
+      .product-grid{grid-template-columns:1fr 1fr}
+      .about-grid{grid-template-columns:1fr;text-align:center}
+      .about-brand{order:-1}
+      .footer-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:560px){
+      .container{width:min(var(--max),calc(100% - 28px))}
+      .nav{min-height:62px}
+      .logo-wrap{height:62px}
+      .logo{width:72px;height:72px;top:6px}
+      .nav-social{gap:4px}
+      .top-social{width:31px;height:31px}
+      .hero{min-height:590px;background-position:50% center}
+      .hero::before{
+        content:"";position:absolute;inset:0;
+        background:linear-gradient(90deg,rgba(3,32,38,.82),rgba(3,32,38,.32));
+      }
+      .hero-grid{min-height:590px;padding:85px 0 95px}
+      .hero h1{font-size:3rem;max-width:360px}
+      .hero p{font-size:.95rem;max-width:360px}
+      .hero-icons{font-size:.62rem;gap:12px}
+      .hero-icon{min-width:58px}
+      .section{padding:56px 0}
+      .destination-grid{margin-top:22px}
+      .country{min-height:auto}
+      .product-grid{grid-template-columns:1fr}
+      .road-banner{background-position:63% center}
+      .road-script{display:none}
+      .footer-bottom{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Estrada em Dois",
+    "alternateName":"Estradaemdois",
+    "url":"https://estradaemdois.com.br/",
+    "logo":"https://estradaemdois.com.br/assets/logo-estrada-em-dois.png",
+    "sameAs":[
+      "https://www.youtube.com/@Estradaemdois",
+      "https://www.tiktok.com/@estradaemdois",
+      "https://www.instagram.com/estradaemdois_",
+      "https://collshp.com/estradaemdois?view=storefront"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <div class="logo-wrap">
+      <a href="#inicio" aria-label="Início">
+        <img class="logo" src="assets/logo-estrada-em-dois.png" alt="Logo Estrada em Dois">
+      </a>
+    </div>
+
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#destinos">Destinos</a>
+      <a href="#experiencias">Experiências</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#loja">Loja</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="nav-social">
+      <a class="top-social" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">YT</a>
+      <a class="top-social" href="https://www.instagram.com/estradaemdois_" target="_blank" rel="noopener">IG</a>
+      <a class="top-social" href="https://www.tiktok.com/@estradaemdois" target="_blank" rel="noopener">TT</a>
+      <a class="top-social" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">🛍</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-kicker">Estrada em Dois</div>
+        <h1>Dois viajantes.<br>Muitas estradas.<br>Um mundo para descobrir.</h1>
+        <p>Viagens, experiências e histórias reais para inspirar sua próxima aventura.</p>
+        <a class="btn" href="#destinos">EXPLORE COM A GENTE →</a>
+      </div>
+
+      <div class="hero-note script">
+        Viver<br>Viajar<br>Compartilhar
+        <span class="heart">♡</span>
+      </div>
+
+      <div class="hero-icons">
+        <span class="hero-icon"><b>△</b>Natureza</span>
+        <span class="hero-icon"><b>▣</b>Experiências</span>
+        <span class="hero-icon"><b>⌖</b>Destinos</span>
+        <span class="hero-icon"><b>▤</b>Estrada</span>
+        <span class="hero-icon"><b>♡</b>Histórias</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section destinations" id="destinos">
+    <div class="map-note script">Próximo<br>destino?</div>
+    <div class="roads-note script">Mais<br>estradas<br>por vir...</div>
+
+    <div class="container center">
+      <h2 class="section-title">Por onde já passamos</h2>
+      <p class="section-sub">Destinos que já fazem parte da nossa história</p>
+
+      <div class="destination-grid">
+        <article class="country">
+          <h3><span class="flag">🇨🇱</span> CHILE</h3>
+          <ul>
+            <li>San Pedro de Atacama</li>
+            <li>Valle de la Luna</li>
+            <li>Valle de la Muerte</li>
+          </ul>
+        </article>
+
+        <article class="country">
+          <h3><span class="flag">🇦🇷</span> ARGENTINA</h3>
+          <ul>
+            <li>Salta</li>
+            <li>Purmamarca / Jujuy</li>
+            <li>Salinas Grandes</li>
+            <li>Cafayate</li>
+          </ul>
+        </article>
+
+        <article class="country">
+          <h3><span class="flag">🇧🇷</span> BRASIL</h3>
+          <ul>
+            <li>Águas de São Pedro - SP</li>
+            <li>Brotas - SP</li>
+            <li>Pardinho - SP</li>
+            <li>E muitos outros destinos</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="trip-area" id="experiencias">
+    <div class="container center">
+      <h2 class="section-title">Destaques das nossas viagens</h2>
+      <p class="section-sub">Algumas aventuras que já vivemos e que valem muito a pena conhecer</p>
+
+      <div class="trip-grid">
+        <article class="trip-card">
+          <div class="trip-img trip-one"><img src="assets/argentina-atacama.png" alt="Estrada em Dois na viagem da Argentina ao Atacama"></div>
+          <div class="trip-copy">
+            <h3>Da Argentina ao Atacama</h3>
+            <p>Uma viagem de carro, dois países e milhares de quilômetros de histórias.</p>
+            <a class="btn small" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">VER ESSA VIAGEM →</a>
+          </div>
+        </article>
+
+        <article class="trip-card">
+          <div class="trip-img trip-two"><img src="assets/salta-norte-argentino.png" alt="Paisagem de Salta e Norte Argentino"></div>
+          <div class="trip-copy">
+            <h3>Salta e Norte Argentino</h3>
+            <p>Estradas incríveis, paisagens surpreendentes e lugares que fizeram essa viagem valer cada quilômetro.</p>
+            <a class="btn small" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">VER ESSA VIAGEM →</a>
+          </div>
+        </article>
+
+        <article class="trip-card">
+          <div class="trip-img trip-three"><img src="assets/deserto-atacama.jpg" alt="Vulcão Licancabur no Deserto do Atacama"></div>
+          <div class="trip-copy">
+            <h3>Deserto do Atacama</h3>
+            <p>Paisagens de outro mundo e experiências que ficaram para a memória.</p>
+            <a class="btn small" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">VER ESSA VIAGEM →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="road-banner">
+    <div class="container">
+      <div class="road-copy">
+        <h2>A estrada é o nosso destino.</h2>
+        <p>Entre paisagens incríveis, quilômetros rodados e alguns perrengues, colecionamos histórias que fazem cada viagem valer a pena.</p>
+        <a class="btn small" href="#sobre">CONHEÇA NOSSA HISTÓRIA →</a>
+      </div>
+      <div class="road-script script">Estrada em Dois<br>sempre! ♡</div>
+    </div>
+  </section>
+
+  <section class="social">
+    <div class="container center">
+      <h2 class="section-title" style="font-size:2rem">A viagem continua por aqui</h2>
+      <p class="section-sub" style="text-transform:none">Acompanhe nossos vídeos, bastidores, dicas e tudo o que acontece entre uma viagem e outra.</p>
+
+      <div class="social-grid">
+        <article class="social-card">
+          <div class="social-logo">▶</div>
+          <div>
+            <h3>YOUTUBE</h3>
+            <p>Assista às nossas viagens completas.</p>
+            <a class="btn small" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">ASSISTIR →</a>
+          </div>
+        </article>
+
+        <article class="social-card">
+          <div class="social-logo">◎</div>
+          <div>
+            <h3>INSTAGRAM</h3>
+            <p>Fotos, bastidores e histórias pelo caminho.</p>
+            <a class="btn small" href="https://www.instagram.com/estradaemdois_" target="_blank" rel="noopener">SEGUIR →</a>
+          </div>
+        </article>
+
+        <article class="social-card">
+          <div class="social-logo">♪</div>
+          <div>
+            <h3>TIKTOK</h3>
+            <p>Momentos, dicas e descobertas em vídeos rápidos.</p>
+            <a class="btn small" href="https://www.tiktok.com/@estradaemdois" target="_blank" rel="noopener">ACOMPANHAR →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop" id="loja">
+    <div class="container center">
+      <h2 class="section-title" style="font-size:2rem">Leve o Estrada em Dois com você</h2>
+      <p class="section-sub" style="text-transform:none">Nossa lojinha nasceu para quem, assim como a gente, ama viajar, pegar a estrada e colecionar histórias pelo caminho.</p>
+
+      <div class="product-grid">
+        <div class="product mug" aria-label="Produto Estrada em Dois"></div>
+        <div class="product cap" aria-label="Produto Estrada em Dois"></div>
+        <div class="product shirt" aria-label="Produto Estrada em Dois"></div>
+
+        <div class="shop-card">
+          <div class="shop-icon">🛍</div>
+          <h3>Nossa lojinha na Shopee</h3>
+          <p>Produtos para quem vive a estrada no dia a dia.</p>
+          <a class="btn small" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">VISITAR A LOJINHA →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="sobre">
+    <div class="container about-grid">
+      <h2>Sobre o<br>Estrada em Dois</h2>
+
+      <div>
+        <p>Somos um casal que ama viajar, pegar a estrada e descobrir novos lugares. Criamos o Estrada em Dois para compartilhar nossas experiências pelo Brasil e pelo mundo — com as paisagens incríveis, os quilômetros rodados, as descobertas e também os perrengues que fazem parte de cada viagem.</p>
+        <p style="margin-top:8px">Por aqui, você acompanha nossas aventuras e encontra inspiração para criar as suas próprias histórias pelo caminho.</p>
+      </div>
+
+      <div class="about-brand">
+        <img src="assets/logo-estrada-em-dois.png" alt="Estrada em Dois">
+        <strong>Estrada em Dois</strong>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contato">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Fale com a gente</h4>
+        <div class="contact-lines">
+          <a href="mailto:estradaemdois@gmail.com">✉ estradaemdois@gmail.com</a>
+          <a href="tel:+5517997290389">☎ (17) 99729-0389</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Nossas redes</h4>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.instagram.com/estradaemdois_" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@estradaemdois" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">Shopee</a>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        © 2026 Estrada em Dois<br>
+        Todos os direitos reservados.
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <small>Viagens · experiências · histórias.</small>
+      <div class="bye script">Nos vemos<br>na estrada. ♡</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
