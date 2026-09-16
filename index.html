@@ -245,6 +245,9 @@
       background:rgba(4,32,37,.3);
       min-height:207px;
     }
+    a.country{display:block;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+    a.country:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.075)}
+    a.country:focus-visible{outline:3px solid var(--cream);outline-offset:4px}
     .country h3{
       margin:0 0 14px;
       display:flex;
@@ -609,14 +612,14 @@
       <p class="section-sub">Destinos que já fazem parte da nossa história</p>
 
       <div class="destination-grid">
-        <article class="country">
+        <a class="country" href="chile.html" aria-label="Conheça nossa viagem pelo Chile">
           <h3><span class="flag">🇨🇱</span> CHILE</h3>
           <ul>
             <li>San Pedro de Atacama</li>
             <li>Valle de la Luna</li>
             <li>Valle de la Muerte</li>
           </ul>
-        </article>
+        </a>
 
         <article class="country">
           <h3><span class="flag">🇦🇷</span> ARGENTINA</h3>
