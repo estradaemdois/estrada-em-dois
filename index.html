@@ -3,12 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Estrada em Dois — viagens, experiências e histórias reais pelo Brasil, Argentina, Chile e muito mais.">
+  <meta name="description" content="Roteiros de carro, dicas práticas e vídeos reais de viagem pela Argentina, Chile e Brasil, contados por um casal que vive a estrada.">
   <meta name="theme-color" content="#07343c">
   <meta name="color-scheme" content="dark">
   <title>Estrada em Dois | Viagens, experiências e histórias</title>
 
-  <link rel="icon" href="assets/logo-estrada-em-dois.png">
+  <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png"><link rel="apple-touch-icon" href="/assets/icon-180.png">
+  <!-- GOOGLE ANALYTICS: troque G-XXXXXXXXXX pelo seu código e apague as linhas de comentário
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -148,7 +152,7 @@
       overflow:hidden;
       background-image:
         linear-gradient(90deg,rgba(3,36,42,.92) 0%,rgba(3,36,42,.7) 33%,rgba(3,36,42,.12) 68%,rgba(3,36,42,.12) 100%),
-        url("assets/hero-casal.jpg");
+        url("assets/hero-casal.webp");
       background-position:center center;
       background-size:cover;
     }
@@ -414,19 +418,19 @@
     .mug::before{
       background-image:
         linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),
-        url("assets/logo-estrada-em-dois.png");
+        url("assets/logo-estrada-em-dois.webp");
       background-size:66%;
       background-repeat:no-repeat;
       background-color:#d9d6cc;
     }
     .cap::before{
-      background-image:url("assets/logo-estrada-em-dois.png");
+      background-image:url("assets/logo-estrada-em-dois.webp");
       background-size:58%;
       background-repeat:no-repeat;
       background-color:#161c20;
     }
     .shirt::before{
-      background-image:url("assets/logo-estrada-em-dois.png");
+      background-image:url("assets/logo-estrada-em-dois.webp");
       background-size:58%;
       background-repeat:no-repeat;
       background-color:#eef2f3;
@@ -575,6 +579,87 @@
     @media(max-width:780px){.travel-benefits{padding:54px 0 58px}.travel-benefits-head{margin-bottom:25px;text-align:left}.travel-benefits-grid{grid-template-columns:1fr}.benefit-card{padding:27px 22px}.insurance-benefit{order:1}.shop-benefit{order:2}.benefit-btn{width:100%;box-sizing:border-box}}
     @media(max-width:480px){.benefit-coupon{align-items:stretch;flex-direction:column}.benefit-coupon button{width:100%;min-height:42px}}
 
+
+    /* ===== MELHORIAS DE UX ===== */
+    .anchor{position:relative;top:-90px;display:block}
+    [id]{scroll-margin-top:80px}
+    .kicker{display:block;font-size:.75rem;font-weight:800;letter-spacing:.16em;color:#9fd0cf;margin-bottom:8px}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6);box-shadow:none}
+    .btn.ghost:hover{background:rgba(255,255,255,.1)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .hero-actions .btn{margin-top:0}
+    .top-social{color:#fff}
+    .top-social svg{display:block}
+    .menu-btn{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:transparent;cursor:pointer;padding:0;place-items:center;align-content:center;gap:5px}
+    .menu-btn span{display:block;width:18px;height:2px;background:#fff;border-radius:2px;transition:.25s;margin:0 auto}
+    .menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+    .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .menu-mobile{display:none}
+    /* vídeos */
+    .videos{padding:70px 0 20px;background:var(--teal-950)}
+    .videos-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+    .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+    .video-card{border-radius:var(--radius);overflow:hidden;background:var(--teal-850);border:1px solid rgba(255,255,255,.1)}
+    .yt-lite{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;background:#000;cursor:pointer;overflow:hidden}
+    .yt-lite img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease,opacity .3s}
+    .yt-lite:hover img{transform:scale(1.04);opacity:.85}
+    .yt-play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--cream);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s}
+    .yt-play::after{content:"";position:absolute;left:29px;top:23px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent #102f36}
+    .yt-lite:hover .yt-play{transform:scale(1.08)}
+    .yt-lite iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .video-copy{padding:16px 20px 20px}
+    .video-place{font-size:.72rem;font-weight:800;letter-spacing:.1em;color:#9fd0cf;text-transform:uppercase}
+    .video-copy h3{margin:4px 0 0;font-size:1.2rem}
+    /* destinos */
+    .country-tag{display:inline-block;margin-top:10px;font-size:.75rem;font-weight:800;color:var(--cream);opacity:.85}
+    /* guia */
+    .guide-banner{display:grid;gap:6px;text-align:left;max-width:1040px;margin:26px auto 26px;padding:24px 28px;border-radius:var(--radius);background:linear-gradient(120deg,#0b4b50,#083a43);border:1px solid var(--line);transition:transform .2s,border-color .2s}
+    .guide-banner:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.55)}
+    .guide-badge{justify-self:start;font-size:.7rem;font-weight:900;letter-spacing:.14em;background:var(--cream);color:#102f36;border-radius:999px;padding:5px 11px}
+    .guide-banner strong{font-size:1.45rem;line-height:1.15}
+    .guide-banner span{color:var(--muted)}
+    .guide-banner .guide-badge{color:#102f36}
+    .guide-banner .guide-cta{color:var(--cream);font-weight:800;font-size:.85rem;margin-top:4px}
+    /* newsletter */
+    .news{padding:70px 0;background:var(--teal-900)}
+    .news-card{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;max-width:1040px;padding:38px 40px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 90% 10%,rgba(247,240,231,.08),transparent 45%),var(--teal-850)}
+    .news h2{margin:0 0 10px;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.05;letter-spacing:-.03em}
+    .news p{margin:0;color:var(--muted)}
+    .news-form{display:grid;gap:10px}
+    .news-form input{width:100%;font:inherit;font-size:1rem;padding:14px 18px;border-radius:999px;border:1px solid var(--line);background:rgba(4,38,44,.6);color:#fff}
+    .news-form input::placeholder{color:#a9bec1}
+    .news-form input:focus{outline:2px solid var(--cream);outline-offset:2px}
+    .news-form button{font:inherit;font-weight:800;font-size:.95rem;padding:14px 18px;border-radius:999px;border:0;background:var(--cream);color:#102f36;cursor:pointer;transition:transform .2s}
+    .news-form button:hover{transform:translateY(-2px)}
+    .news-ok{color:var(--cream)!important;font-weight:700}
+    .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+    /* sobre */
+    .about-photo{margin:0;justify-self:center;text-align:center}
+    .about-photo img{width:210px;height:260px;object-fit:cover;object-position:center 35%;border-radius:22px;border:4px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.3);transform:rotate(3deg)}
+    .about-photo figcaption{margin-top:14px;font-size:1.35rem;max-width:230px}
+    @media (max-width:900px){
+      .nav{grid-template-columns:110px 1fr}
+      .menu-btn{display:grid}
+      .nav-social{align-items:center}
+      .menu-mobile{display:grid;position:absolute;left:0;right:0;top:100%;background:rgba(4,38,44,.98);border-bottom:1px solid var(--line);padding:8px 19px 18px;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transition:max-height .3s ease,opacity .25s,visibility .25s}
+      .menu-mobile.open{max-height:520px;opacity:1;visibility:visible}
+      .menu-mobile a{padding:14px 4px;font-weight:700;font-size:1.05rem;border-bottom:1px solid rgba(255,255,255,.08)}
+      .menu-mobile a:last-child{border-bottom:0}
+      .video-grid,.news-card{grid-template-columns:1fr}
+      .news-card{padding:28px 22px}
+      .about-photo{order:-1}
+    }
+    @media (max-width:560px){
+      .top-social{width:34px;height:34px}
+      .nav-social .top-social:nth-child(3){display:none}
+      .hero h1{font-size:2.6rem;line-height:.95}
+      .hero-actions .btn{flex:1 1 100%}
+      .videos{padding-top:52px}
+      .guide-banner{padding:20px}
+      .guide-banner strong{font-size:1.25rem}
+    }
 </style>
 
   <script type="application/ld+json">
@@ -588,7 +673,7 @@
     "sameAs":[
       "https://www.youtube.com/@Estradaemdois",
       "https://www.tiktok.com/@estradaemdois",
-      "https://www.instagram.com/estradaemdois_",
+      "https://www.instagram.com/estradaemdois.oficial",
       "https://collshp.com/estradaemdois?view=storefront"
     ]
   }
@@ -600,26 +685,34 @@
   <div class="container nav">
     <div class="logo-wrap">
       <a href="#inicio" aria-label="Início">
-        <img class="logo" src="assets/logo-estrada-em-dois.png" alt="Logo Estrada em Dois">
+        <img class="logo" src="assets/logo-estrada-em-dois.webp" alt="Logo Estrada em Dois" width="112" height="112">
       </a>
     </div>
 
     <nav class="nav-links" aria-label="Navegação principal">
-      <a href="#inicio">Início</a>
       <a href="#destinos">Destinos</a>
-      <a href="#experiencias">Experiências</a>
-      <a href="#sobre">Sobre Nós</a>
-      <a href="#loja">Loja</a>
-      <a href="#contato">Contato</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#guias">Guias</a>
+      <a href="#seguro">Seguro viagem</a>
+      <a href="#sobre">Sobre nós</a>
     </nav>
 
     <div class="nav-social">
-      <a class="top-social" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">YT</a>
-      <a class="top-social" href="https://www.instagram.com/estradaemdois_" target="_blank" rel="noopener">IG</a>
-      <a class="top-social" href="https://www.tiktok.com/@estradaemdois" target="_blank" rel="noopener">TT</a>
-      <a class="top-social" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">🛍</a>
+      <a class="top-social" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9L15.5 12l-5.8 3.1Z"/></svg></a>
+      <a class="top-social" href="https://www.instagram.com/estradaemdois.oficial" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm6-7.9a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1ZM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6Zm-2 9.5a3.1 3.1 0 0 1-1.7 1.7c-1.2.5-4 .4-6.2.4s-5 .1-6.2-.4a3.1 3.1 0 0 1-1.7-1.7c-.5-1.2-.4-4-.4-5.7s-.1-4.5.4-5.7a3.1 3.1 0 0 1 1.7-1.7C7 4.1 9.8 4.2 12 4.2s5-.1 6.2.4a3.1 3.1 0 0 1 1.7 1.7c.5 1.2.4 4 .4 5.7s.1 4.5-.4 5.7Z"/></svg></a>
+      <a class="top-social" href="https://www.tiktok.com/@estradaemdois" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M16.6 2h-3.4v13.5a2.9 2.9 0 1 1-2.9-2.9 3 3 0 0 1 .9.1V9.2a6.4 6.4 0 1 0 5.4 6.3V8.7a8.2 8.2 0 0 0 4.8 1.5V6.8a4.8 4.8 0 0 1-4.8-4.8Z"/></svg></a>
+      <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuMobile"><span></span><span></span><span></span></button>
     </div>
   </div>
+  <nav class="menu-mobile" id="menuMobile" aria-label="Menu">
+    <a href="#destinos">Destinos</a>
+    <a href="#videos">Vídeos</a>
+    <a href="#guias">Guias de viagem</a>
+    <a href="#seguro">Seguro viagem com desconto</a>
+    <a href="#novidades">Receber roteiros por e-mail</a>
+    <a href="#sobre">Sobre nós</a>
+    <a href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">Nossa lojinha</a>
+  </nav>
 </header>
 
 <main>
@@ -627,9 +720,12 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <div class="hero-kicker">Estrada em Dois</div>
-        <h1>Dois viajantes.<br>Muitas estradas.<br>Um mundo para descobrir.</h1>
-        <p>Viagens, experiências e histórias reais para inspirar sua próxima aventura.</p>
-        <a class="btn" href="#destinos">EXPLORE COM A GENTE →</a>
+        <h1>Roteiros de carro contados por quem fez.</h1>
+        <p>Argentina, Chile e Brasil na estrada: roteiros parada por parada, dicas de fronteira e os vídeos de cada viagem.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#guias">VER ROTEIROS →</a>
+          <a class="btn ghost" href="#videos">▶ ASSISTIR VÍDEOS</a>
+        </div>
       </div>
 
       <div class="hero-note script">
@@ -637,16 +733,37 @@
         <span class="heart">♡</span>
       </div>
 
-      <div class="hero-icons">
-        <span class="hero-icon"><b>△</b>Natureza</span>
-        <span class="hero-icon"><b>▣</b>Experiências</span>
-        <span class="hero-icon"><b>⌖</b>Destinos</span>
-        <span class="hero-icon"><b>▤</b>Estrada</span>
-        <span class="hero-icon"><b>♡</b>Histórias</span>
-      </div>
     </div>
   </section>
 
+
+  <section class="videos" id="videos">
+    <div class="container">
+      <div class="videos-head">
+        <div>
+          <span class="kicker">NOSSOS VÍDEOS</span>
+          <h2 class="section-title">Aperte o play e viaje com a gente</h2>
+        </div>
+        <a class="btn small ghost" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener">INSCREVA-SE NO CANAL →</a>
+      </div>
+      <div class="video-grid">
+        <article class="video-card">
+          <button class="yt-lite" type="button" data-id="8o86PJfPpd8" aria-label="Assistir: -14°C nos Geysers del Tatio">
+            <img src="https://i.ytimg.com/vi/8o86PJfPpd8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="yt-play" aria-hidden="true"></span>
+          </button>
+          <div class="video-copy"><span class="video-place">Chile · Atacama</span><h3>-14°C nos Geysers del Tatio</h3></div>
+        </article>
+        <article class="video-card">
+          <button class="yt-lite" type="button" data-id="EV2iWn7ADlc" aria-label="Assistir: Valle de la Luna, a paisagem de outro planeta">
+            <img src="https://i.ytimg.com/vi/EV2iWn7ADlc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="yt-play" aria-hidden="true"></span>
+          </button>
+          <div class="video-copy"><span class="video-place">Chile · Atacama</span><h3>Valle de la Luna, a paisagem de outro planeta</h3></div>
+        </article>
+      </div>
+    </div>
+  </section>
   <section class="section destinations" id="destinos">
     <div class="map-note script">Próximo<br>destino?</div>
     <div class="roads-note script">Mais<br>estradas<br>por vir...</div>
@@ -675,27 +792,34 @@
           </ul>
         </a>
 
-        <article class="country">
+        <a class="country" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener" aria-label="Veja nossas viagens pelo Brasil no YouTube">
           <h3><span class="flag">🇧🇷</span> BRASIL</h3>
           <ul>
             <li>Águas de São Pedro - SP</li>
             <li>Brotas - SP</li>
             <li>Pardinho - SP</li>
-            <li>E muitos outros destinos</li>
           </ul>
-        </article>
+          <span class="country-tag">vídeos no YouTube ↗</span>
+        </a>
       </div>
     </div>
   </section>
 
   <section class="trip-area" id="experiencias">
+    <span id="guias" class="anchor"></span>
     <div class="container center">
       <h2 class="section-title">Destaques das nossas viagens</h2>
       <p class="section-sub">Algumas aventuras que já vivemos e que valem muito a pena conhecer</p>
 
+      <a class="guide-banner" href="documentos-argentina-de-carro.html">
+        <span class="guide-badge">GUIA PRÁTICO</span>
+        <strong>Vai entrar na Argentina de carro?</strong>
+        <span>Documentos, Carta Verde, seguro e itens obrigatórios: a lista completa pra não travar na fronteira.</span>
+        <span class="guide-cta">VER O CHECKLIST →</span>
+      </a>
       <div class="trip-grid">
         <article class="trip-card">
-          <div class="trip-img trip-one"><img src="assets/argentina-atacama.png" alt="Estrada em Dois na viagem da Argentina ao Atacama"></div>
+          <div class="trip-img trip-one"><img src="assets/argentina-atacama.webp" loading="lazy" alt="Estrada em Dois na viagem da Argentina ao Atacama"></div>
           <div class="trip-copy">
             <h3>Da Argentina ao Atacama</h3>
             <p>Uma viagem de carro, dois países e milhares de quilômetros de histórias.</p>
@@ -704,7 +828,7 @@
         </article>
 
         <article class="trip-card">
-          <div class="trip-img trip-two"><img src="assets/salta-norte-argentino.png" alt="Paisagem de Salta e Norte Argentino"></div>
+          <div class="trip-img trip-two"><img src="assets/salta-norte-argentino.webp" loading="lazy" alt="Paisagem de Salta e Norte Argentino"></div>
           <div class="trip-copy">
             <h3>Salta e Norte Argentino</h3>
             <p>Estradas incríveis, paisagens surpreendentes e lugares que fizeram essa viagem valer cada quilômetro.</p>
@@ -713,7 +837,7 @@
         </article>
 
         <article class="trip-card">
-          <div class="trip-img trip-three"><img src="assets/deserto-atacama.jpg" alt="Vulcão Licancabur no Deserto do Atacama"></div>
+          <div class="trip-img trip-three"><img src="assets/deserto-atacama.webp" loading="lazy" alt="Vulcão Licancabur no Deserto do Atacama"></div>
           <div class="trip-copy">
             <h3>Deserto do Atacama</h3>
             <p>Paisagens de outro mundo e experiências que ficaram para a memória.</p>
@@ -742,7 +866,7 @@
 
       <div class="social-grid">
         <article class="social-card">
-          <div class="social-logo">▶</div>
+          <div class="social-logo"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9L15.5 12l-5.8 3.1Z"/></svg></div>
           <div>
             <h3>YOUTUBE</h3>
             <p>Assista às nossas viagens completas.</p>
@@ -751,16 +875,16 @@
         </article>
 
         <article class="social-card">
-          <div class="social-logo">◎</div>
+          <div class="social-logo"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm6-7.9a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1ZM21.9 8.2a5.5 5.5 0 0 0-1.5-3.9 5.5 5.5 0 0 0-3.9-1.5C15 2.7 9 2.7 7.5 2.8a5.5 5.5 0 0 0-3.9 1.5 5.5 5.5 0 0 0-1.5 3.9C2 9.7 2 14.3 2.1 15.8a5.5 5.5 0 0 0 1.5 3.9 5.5 5.5 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.5 5.5 0 0 0 3.9-1.5 5.5 5.5 0 0 0 1.5-3.9c.1-1.5.1-6.1 0-7.6Zm-2 9.5a3.1 3.1 0 0 1-1.7 1.7c-1.2.5-4 .4-6.2.4s-5 .1-6.2-.4a3.1 3.1 0 0 1-1.7-1.7c-.5-1.2-.4-4-.4-5.7s-.1-4.5.4-5.7a3.1 3.1 0 0 1 1.7-1.7C7 4.1 9.8 4.2 12 4.2s5-.1 6.2.4a3.1 3.1 0 0 1 1.7 1.7c.5 1.2.4 4 .4 5.7s.1 4.5-.4 5.7Z"/></svg></div>
           <div>
             <h3>INSTAGRAM</h3>
             <p>Fotos, bastidores e histórias pelo caminho.</p>
-            <a class="btn small" href="https://www.instagram.com/estradaemdois_" target="_blank" rel="noopener">SEGUIR →</a>
+            <a class="btn small" href="https://www.instagram.com/estradaemdois.oficial" target="_blank" rel="noopener">SEGUIR →</a>
           </div>
         </article>
 
         <article class="social-card">
-          <div class="social-logo">♪</div>
+          <div class="social-logo"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M16.6 2h-3.4v13.5a2.9 2.9 0 1 1-2.9-2.9 3 3 0 0 1 .9.1V9.2a6.4 6.4 0 1 0 5.4 6.3V8.7a8.2 8.2 0 0 0 4.8 1.5V6.8a4.8 4.8 0 0 1-4.8-4.8Z"/></svg></div>
           <div>
             <h3>TIKTOK</h3>
             <p>Momentos, dicas e descobertas em vídeos rápidos.</p>
@@ -795,7 +919,7 @@
         </article>
 
         <article class="benefit-card shop-benefit">
-          <div class="benefit-icon benefit-icon-dark" aria-hidden="true">🛍</div>
+          <div class="benefit-icon benefit-icon-dark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 8h14l-1 12H6L5 8Zm4 0V6.5a3 3 0 0 1 6 0V8"/></svg></div>
           <span class="benefit-label benefit-label-dark">NOSSA LOJINHA</span>
           <h3>Achadinhos para quem ama viajar</h3>
           <p>Produtos e itens que selecionamos para estrada, camping e viagem.</p>
@@ -805,19 +929,41 @@
     </div>
   </section>
 
+<section class="news" id="novidades">
+    <div class="container news-card">
+      <div class="news-copy">
+        <span class="kicker">RECEBA NO SEU E-MAIL</span>
+        <h2>Novos roteiros, direto na sua caixa de entrada</h2>
+        <p>Quando sair roteiro, guia ou vídeo novo, a gente te avisa. Sem spam, só estrada.</p>
+      </div>
+      <form class="news-form" action="https://formsubmit.co/estradaemdois@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nova inscrição — roteiros por e-mail">
+        <input type="hidden" name="_next" value="https://estradaemdois.com.br/?inscrito=1#novidades">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="sr" for="newsNome">Seu nome</label>
+        <input id="newsNome" name="nome" type="text" placeholder="Seu nome" autocomplete="given-name" required>
+        <label class="sr" for="newsEmail">Seu e-mail</label>
+        <input id="newsEmail" name="email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
+        <button type="submit">QUERO RECEBER →</button>
+        <p class="news-ok" id="newsOk" hidden>Inscrição feita! Agora é só esperar a próxima estrada. ♡</p>
+      </form>
+    </div>
+  </section>
 <section class="about" id="sobre">
     <div class="container about-grid">
       <h2>Sobre o<br>Estrada em Dois</h2>
 
       <div>
-        <p>Somos um casal que ama viajar, pegar a estrada e descobrir novos lugares. Criamos o Estrada em Dois para compartilhar nossas experiências pelo Brasil e pelo mundo — com as paisagens incríveis, os quilômetros rodados, as descobertas e também os perrengues que fazem parte de cada viagem.</p>
+        <p>Oi! A gente é a Andressa e o Guilherme, um casal que ama viajar, pegar a estrada e descobrir novos lugares. Criamos o Estrada em Dois para compartilhar nossas experiências pelo Brasil e pelo mundo — com as paisagens incríveis, os quilômetros rodados, as descobertas e também os perrengues que fazem parte de cada viagem.</p>
         <p style="margin-top:8px">Por aqui, você acompanha nossas aventuras e encontra inspiração para criar as suas próprias histórias pelo caminho.</p>
       </div>
 
-      <div class="about-brand">
-        <img src="assets/logo-estrada-em-dois.png" alt="Estrada em Dois">
-        <strong>Estrada em Dois</strong>
-      </div>
+      <figure class="about-photo">
+        <img src="assets/el-tatio-casal.webp" alt="Andressa e Guilherme encarando o frio nos Geysers del Tatio" loading="lazy" width="888" height="1566">
+        <figcaption class="script">-14°C no El Tatio, e a gente sorrindo (juro) ♡</figcaption>
+      </figure>
     </div>
   </section>
 </main>
@@ -837,7 +983,7 @@
         <h4>Nossas redes</h4>
         <div class="footer-social">
           <a href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener">YouTube</a>
-          <a href="https://www.instagram.com/estradaemdois_" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.instagram.com/estradaemdois.oficial" target="_blank" rel="noopener">Instagram</a>
           <a href="https://www.tiktok.com/@estradaemdois" target="_blank" rel="noopener">TikTok</a>
           <a href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">Shopee</a>
         </div>
@@ -864,6 +1010,26 @@ function copiarCupomSeguro(botao){
     setTimeout(()=>botao.textContent=original,2000);
   });
 }
+// menu mobile
+(function(){
+  const btn=document.querySelector('.menu-btn'), menu=document.getElementById('menuMobile');
+  if(!btn||!menu) return;
+  const set=open=>{menu.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);btn.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')};
+  btn.addEventListener('click',()=>set(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
+})();
+// vídeo leve: só carrega o player do YouTube no clique
+document.querySelectorAll('.yt-lite').forEach(b=>b.addEventListener('click',()=>{
+  const f=document.createElement('iframe');
+  f.src='https://www.youtube.com/embed/'+b.dataset.id+'?autoplay=1&rel=0';
+  f.title=b.getAttribute('aria-label');
+  f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  f.allowFullscreen=true; b.innerHTML=''; b.appendChild(f);
+},{once:true}));
+// mensagem após inscrição
+if(new URLSearchParams(location.search).get('inscrito')){const ok=document.getElementById('newsOk');if(ok){ok.hidden=false;document.querySelectorAll('.news-form input:not([type=hidden]),.news-form button').forEach(el=>el.style.display='none')}}
+
 </script>
 </body>
 </html>
