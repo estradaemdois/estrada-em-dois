@@ -560,6 +560,13 @@
     .travel-benefits-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:stretch;max-width:1040px;margin:0 auto}
     .benefit-card{min-width:0;border-radius:24px;padding:34px;display:flex;flex-direction:column;box-shadow:0 18px 45px rgba(3,39,43,.10)}
     .insurance-benefit{background:#0b4b50;color:#fff}
+    .ebook-benefit{grid-column:1/-1;flex-direction:row;align-items:center;gap:30px;background:#07383c;color:#fff}
+    .ebook-cover{width:210px;height:210px;border-radius:18px;object-fit:cover;flex:0 0 auto;box-shadow:0 14px 34px rgba(0,0,0,.25)}
+    .ebook-copy{display:flex;flex-direction:column;align-items:flex-start}
+    .ebook-copy h3{margin:6px 0 8px}
+    .ebook-copy p{color:#d6e2e3;margin:0 0 18px}
+    .ebook-benefit .benefit-label{color:#f3c879}
+    @media(max-width:780px){.ebook-benefit{flex-direction:column;align-items:flex-start;order:3}.ebook-cover{width:100%;height:auto;aspect-ratio:1}}
     .shop-benefit{background:#fffaf2;color:#07383c;border:1px solid rgba(7,56,60,.09)}
     .benefit-icon{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;margin-bottom:24px;background:#f3eee4;color:#07383c;font-size:1.35rem}
     .benefit-icon-dark{background:#e7f0ef}
@@ -695,6 +702,7 @@
       <a href="#guias">Guias</a>
       <a href="#seguro">Seguro viagem</a>
       <a href="#sobre">Sobre nós</a>
+      <a href="midia-kit.html">Parcerias</a>
     </nav>
 
     <div class="nav-social">
@@ -711,6 +719,7 @@
     <a href="#seguro">Seguro viagem com desconto</a>
     <a href="#novidades">Receber roteiros por e-mail</a>
     <a href="#sobre">Sobre nós</a>
+    <a href="midia-kit.html">Parcerias e mídia kit</a>
     <a href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">Nossa lojinha</a>
   </nav>
 </header>
@@ -792,14 +801,14 @@
           </ul>
         </a>
 
-        <a class="country" href="https://www.youtube.com/@Estradaemdois" target="_blank" rel="noopener" aria-label="Veja nossas viagens pelo Brasil no YouTube">
+        <a class="country" href="brasil.html" aria-label="Conheça nossas viagens pelo Brasil">
           <h3><span class="flag">🇧🇷</span> BRASIL</h3>
           <ul>
+            <li>Foz do Iguaçu - PR</li>
+            <li>Serra Negra - SP</li>
             <li>Águas de São Pedro - SP</li>
-            <li>Brotas - SP</li>
-            <li>Pardinho - SP</li>
+            <li>Lagoa Santa - GO</li>
           </ul>
-          <span class="country-tag">vídeos no YouTube ↗</span>
         </a>
       </div>
     </div>
@@ -925,6 +934,16 @@
           <p>Produtos e itens que selecionamos para estrada, camping e viagem.</p>
           <a class="benefit-btn benefit-btn-dark" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="noopener">VER A LOJINHA →</a>
         </article>
+        <article class="benefit-card ebook-benefit">
+          <img class="ebook-cover" src="assets/ebook-foz-1-dia.webp" alt="Capa do e-book Foz do Iguaçu em 1 dia" loading="lazy" width="800" height="800">
+          <div class="ebook-copy">
+            <span class="benefit-label">E-BOOK</span>
+            <h3>Foz do Iguaçu em 1 dia: Itaipu + Cataratas</h3>
+            <p>O roteiro exato que fizemos, com a ordem dos passeios, quanto gastamos, horários e checklist. 8 páginas em PDF para levar no celular.</p>
+            <!-- Link de venda do e-book na Hotmart -->
+            <a class="benefit-btn benefit-btn-light" href="https://go.hotmart.com/U107773484C" target="_blank" rel="noopener">QUERO O E-BOOK →</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -976,6 +995,7 @@
         <div class="contact-lines">
           <a href="mailto:estradaemdois@gmail.com">✉ estradaemdois@gmail.com</a>
           <a href="tel:+5517997290389">☎ (17) 99729-0389</a>
+          <a href="midia-kit.html">★ Parcerias e mídia kit</a>
         </div>
       </div>
 
