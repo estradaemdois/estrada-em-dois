@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>QuickTrip | Viagens de fim de semana por Estrada em Dois</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap">
+<meta name="description" content="Escolha de onde você sai e até onde topa dirigir. O QuickTrip mostra destinos de fim de semana dentro do raio, com pontos turísticos, eventos, hospedagem, custo de combustível e rota, e sorteia um destino para você.">
+<meta name="theme-color" content="#07343c">
+<link rel="canonical" href="https://estradaemdois.com.br/quicktrip/">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png"><link rel="apple-touch-icon" href="/assets/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Estrada em Dois">
+<meta property="og:title" content="QuickTrip | Viagens de fim de semana por Estrada em Dois">
+<meta property="og:description" content="Escolha de onde você sai e até onde topa dirigir. O QuickTrip mostra destinos de fim de semana dentro do raio, com pontos turísticos, eventos, hospedagem, custo de combustível e rota, e sorteia um destino para você.">
+<meta property="og:url" content="https://estradaemdois.com.br/quicktrip/">
+<meta property="og:image" content="https://estradaemdois.com.br/assets/hero-casal.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+  /* Layout: cabeçalho com marca, filtros e mapa à esquerda, sorteio e cartões de destino à direita.
+     Paleta: azul-petróleo profundo com creme e azul-claro, tema escuro por padrão e tema claro em creme. */
+  :root {
+    --bg: #07323a;
+    --bg-deep: #04262c;
+    --surface: #083a43;
+    --raised: #0b424c;
+    --ink: #ffffff;
+    --muted: #d6e2e3;
+    --line: rgba(255, 255, 255, .22);
+    --soft: rgba(255, 255, 255, .07);
+    --accent: #9fd0cf;
+    --btn-bg: #f7f0e7;
+    --btn-ink: #102f36;
+    --plate-bg: #f7f0e7;
+    --plate-ink: #102f36;
+    --star: #f4c26b;
+    --map: #04262c;
+    --ring: rgba(255, 255, 255, .26);
+    --pin: #9fd0cf;
+    --shadow: 0 18px 50px rgba(0, 0, 0, .25);
+    --radius: 19px;
+    --font: "DM Sans", Arial, sans-serif;
+    --font-hand: "Caveat", "Segoe Script", cursive;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f7f0e7; --bg-deep: #ede3d3; --surface: #fffaf2; --raised: #ffffff; --ink: #102f36; --muted: #47646a;
+      --line: rgba(7, 50, 58, .2); --soft: rgba(7, 50, 58, .07); --accent: #0b6672; --btn-bg: #07323a; --btn-ink: #f7f0e7;
+      --plate-bg: #07323a; --plate-ink: #f7f0e7; --star: #9a6700; --map: #e9e1d2; --ring: rgba(7, 50, 58, .3); --pin: #07323a;
+      --shadow: 0 12px 30px rgba(7, 50, 58, .12);
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f0e7; --bg-deep: #ede3d3; --surface: #fffaf2; --raised: #ffffff; --ink: #102f36; --muted: #47646a;
+    --line: rgba(7, 50, 58, .2); --soft: rgba(7, 50, 58, .07); --accent: #0b6672; --btn-bg: #07323a; --btn-ink: #f7f0e7;
+    --plate-bg: #07323a; --plate-ink: #f7f0e7; --star: #9a6700; --map: #e9e1d2; --ring: rgba(7, 50, 58, .3); --pin: #07323a;
+    --shadow: 0 12px 30px rgba(7, 50, 58, .12);
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding-block: 22px 44px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1, h2, h3, h4, p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .brandbar { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+  .site-logo { display: inline-flex; align-self: center; }
+  .site-logo img { display: block; width: 52px; height: 52px; object-fit: contain; }
+  .voltar { margin-left: auto; align-self: center; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  .voltar:hover { color: var(--ink); }
+  .logo { font-weight: 800; font-size: 28px; letter-spacing: -.02em; line-height: 1; }
+  .logo em { font-style: normal; color: var(--accent); }
+  .hand { font-family: var(--font-hand); font-size: 24px; font-weight: 600; color: var(--accent); line-height: 1; }
+
+  .top { display: flex; flex-direction: column; gap: 14px; margin-bottom: 26px; }
+  h1 { font-weight: 800; font-size: clamp(34px, 6vw, 58px); line-height: 1.03; letter-spacing: -.02em; text-wrap: balance; max-width: 17ch; }
+  .lede { color: var(--muted); max-width: 60ch; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  @media (min-width: 920px) { .layout { grid-template-columns: 370px minmax(0, 1fr); align-items: start; } }
+
+  .panel { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 18px; box-shadow: var(--shadow); }
+  .field { display: flex; flex-direction: column; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .field > label, .field > legend { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); padding: 0; }
+  select, input[type="number"] {
+    font: inherit; color: var(--ink); background: var(--bg-deep);
+    border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; width: 100%; min-width: 0; box-sizing: border-box;
+  }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .rangeline { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .rangeline output { font-weight: 800; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; display: inline-flex; }
+  .chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .chip span { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); font-size: 14px; font-weight: 500; user-select: none; }
+  .chip input:checked + span { background: var(--btn-bg); color: var(--btn-ink); border-color: var(--btn-bg); font-weight: 600; }
+  .chip input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hint { font-size: 13px; color: var(--muted); }
+
+  .mapbox { padding: 12px; gap: 10px; }
+  .mapbox svg { width: 100%; height: auto; display: block; border-radius: 14px; background: var(--map); }
+  #leaflet { width: 100%; height: 380px; border-radius: 14px; z-index: 0; }
+  .ring { fill: none; stroke: var(--ring); stroke-width: 1; stroke-dasharray: 3 4; }
+  .axis { stroke: var(--ring); stroke-width: 1; }
+  .tick { font: 500 10px var(--font); fill: var(--muted); }
+  .origin-dot { fill: var(--star); stroke: var(--ink); stroke-width: 1.5; }
+  .origin-lbl { font: 800 11px var(--font); letter-spacing: .1em; fill: var(--ink); text-transform: uppercase; }
+  .pin { fill: var(--pin); stroke: var(--map); stroke-width: 2; }
+  .pin-g { cursor: pointer; }
+  .pin-g:focus-visible { outline: none; }
+  .pin-g:focus-visible .pin, .pin-g.sel .pin { stroke: var(--ink); stroke-width: 2.5; }
+  .pin-g.sel .pin { r: 8; }
+  .lbl { font: 600 11px var(--font); fill: var(--ink); paint-order: stroke; stroke: var(--map); stroke-width: 3px; stroke-linejoin: round; }
+  .north { font: 800 10px var(--font); fill: var(--muted); letter-spacing: .1em; }
+
+  .results { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .resbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  .summary { font-weight: 800; font-size: 24px; line-height: 1.15; letter-spacing: -.01em; min-width: 0; flex: 1 1 260px; }
+  .summary small { display: block; margin-top: 4px; font-size: 14px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+  .list { display: flex; flex-direction: column; gap: 18px; }
+  .empty { background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius); padding: 26px 22px; color: var(--muted); }
+  .empty strong { color: var(--ink); display: block; font-weight: 800; font-size: 20px; margin-bottom: 4px; }
+
+  .btn {
+    display: inline-block; background: var(--btn-bg); color: var(--btn-ink); text-decoration: none; cursor: pointer;
+    font: 700 13px/1 var(--font); letter-spacing: .04em; text-transform: uppercase;
+    padding: 12px 18px; border-radius: 999px; border: 1px solid var(--btn-bg);
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn.alt { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn.alt:hover { background: var(--soft); filter: none; }
+  .btn.big { font-size: 14px; padding: 15px 24px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .sorteio { background: var(--raised); border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
+  .sorteio .hand { font-size: 28px; }
+  .sorteio .nome { font-weight: 800; font-size: clamp(32px, 6vw, 52px); line-height: 1.02; letter-spacing: -.02em; min-height: 1.05em; }
+  .sorteio.girando .nome { opacity: .6; }
+  .sorteio .meta { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sorteio .actions { margin-top: 6px; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0; scroll-margin-top: 16px; box-shadow: var(--shadow); }
+  .card.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
+  .card-head { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+  .sign { background: var(--plate-bg); color: var(--plate-ink); border-radius: 16px; padding: 10px 12px 9px; text-align: center; min-width: 70px; flex: none; line-height: 1; }
+  .sign b { font-size: 32px; font-weight: 800; font-variant-numeric: tabular-nums; display: block; letter-spacing: -.02em; }
+  .sign i { font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .head { flex: 1 1 200px; min-width: 0; }
+  .head h3 { font-weight: 800; font-size: 28px; line-height: 1.05; letter-spacing: -.02em; }
+  .meta { margin-top: 4px; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .badge { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; align-self: flex-start; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span { font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; }
+
+  .cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  @media (min-width: 680px) { .cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .sec { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .sec h4 { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .sec ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .sec.stay .btn { align-self: flex-start; margin-top: 4px; }
+  .rev { display: inline-block; margin-left: 6px; font-size: 13px; color: var(--star); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .rev:hover { text-decoration: underline; }
+  .rev small { color: var(--muted); font-weight: 400; }
+  .evt-item { display: flex; flex-direction: column; gap: 1px; }
+  .evt-item b { font-weight: 600; }
+  .evt-item span { font-size: 13.5px; color: var(--muted); }
+  .nota { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+
+  .parceiros { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .pub { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); background: var(--soft); border-radius: 999px; padding: 4px 10px; }
+  .parceiro { display: flex; flex-direction: column; gap: 3px; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+  .parceiro b { font-weight: 700; }
+  .parceiro span { font-size: 13.5px; color: var(--muted); }
+  .parceiro .btn { align-self: flex-start; margin-top: 6px; }
+  .parceiro.vaga { border-style: dashed; }
+  .vaga-tag { font-size: 11px !important; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent) !important; }
+
+  .foot { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; display: flex; flex-direction: column; gap: 8px; }
+  .foot p { max-width: 82ch; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="brandbar">
+    <a class="site-logo" href="/" aria-label="Estrada em Dois, página inicial"><img src="/assets/logo-estrada-em-dois.webp" alt="Estrada em Dois" width="52" height="52"></a>
+    <span class="logo">Quick<em>Trip</em></span>
+    <span class="hand">viagens de fim de semana</span>
+    <a class="voltar" href="/">← Estrada em Dois</a>
+  </div>
+
+  <header class="top">
+    <h1>Para onde ir neste fim de semana?</h1>
+    <p class="lede">Diga de onde você sai e até onde topa dirigir. O QuickTrip lista destinos dentro do raio, com pontos turísticos, eventos, ideias de hospedagem, custo de combustível e rota no Google Maps. Sem ideia? Sorteie um.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="panel" aria-label="Filtros">
+      <div class="box">
+        <div class="field">
+          <label for="origem">Saindo de</label>
+          <select id="origem"></select>
+        </div>
+
+        <div class="field">
+          <label for="raio">Raio máximo</label>
+          <div class="rangeline"><output id="raioVal" for="raio">160 km</output><span class="hint">em linha reta</span></div>
+          <input type="range" id="raio" min="40" max="200" step="10" value="160">
+        </div>
+
+        <fieldset class="field">
+          <legend>Duração da viagem</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="dur" value="bv"><span>Bate-volta</span></label>
+            <label class="chip"><input type="radio" name="dur" value="noite"><span>1 noite</span></label>
+            <label class="chip"><input type="radio" name="dur" value="dois" checked><span>2 dias</span></label>
+          </div>
+          <p class="hint">Bate-volta: até 1h30 de carro. 1 noite: até 2h15. 2 dias: sem limite de tempo dentro do raio.</p>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Interesses</legend>
+          <div class="chips" id="tagChips"></div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Seu carro</legend>
+          <div class="two">
+            <div>
+              <label class="hint" for="consumo">Consumo (km/l)</label>
+              <input type="number" id="consumo" value="12" min="1" step="0.5" inputmode="decimal">
+            </div>
+            <div>
+              <label class="hint" for="preco">Litro (R$)</label>
+              <input type="number" id="preco" value="6.20" min="1" step="0.05" inputmode="decimal">
+            </div>
+          </div>
+          <p class="hint">Valores de exemplo para estimar o combustível. Ajuste para o seu carro e o preço do posto.</p>
+        </fieldset>
+      </div>
+
+      <div class="box mapbox">
+        <div id="mapaWrap"></div>
+        <p class="hint" id="mapaHint"></p>
+      </div>
+    </aside>
+
+    <section class="results" aria-label="Resultados">
+      <div class="resbar">
+        <p class="summary" id="resumo" aria-live="polite"></p>
+        <button type="button" class="btn big" id="btnSortear">Sortear um destino →</button>
+      </div>
+
+      <div class="sorteio" id="sorteio" hidden>
+        <span class="hand">a sorte escolheu</span>
+        <p class="nome" id="sorteioNome" aria-hidden="true"></p>
+        <p class="meta" id="sorteioMeta"></p>
+        <p class="sr-only" id="sorteioLive" role="status"></p>
+        <div class="actions">
+          <a class="btn" id="sorteioRota" href="#" target="_blank" rel="noopener">Traçar rota</a>
+          <button type="button" class="btn alt" id="sorteioVer">Ver detalhes</button>
+          <button type="button" class="btn alt" id="sorteioDeNovo">Sortear de novo</button>
+        </div>
+      </div>
+
+      <div class="list" id="lista"></div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <p>Distâncias em linha reta (fórmula de Haversine). A estrada é estimada em 25% a mais e a velocidade média em 75 km/h. Pedágios não entram na conta. Para o trajeto real, use o botão de rota de cada destino.</p>
+    <p>Alguns links de hospedagem são de afiliados e podem render comissão ao QuickTrip, sem custo extra para você. Espaços marcados como Publicidade são ocupados por parceiros.</p>
+    <p>A base de destinos vem de matérias e diretórios de turismo, como <a href="https://www.gazetasp.com.br/turismo/muito-alem-da-festa-do-peao-de-barretos-7-cidades-da-regiao-com-praias-festas-e-parques-aquaticos/" target="_blank" rel="noopener">Gazeta SP</a>, <a href="https://quantocustaviajar.com/blog/?p=88732" target="_blank" rel="noopener">Quanto Custa Viajar</a> e <a href="https://www.buser.com.br/destinos/pontos-turisticos/sp/catanduva/todos" target="_blank" rel="noopener">Buser</a>. Confira horários, preços e disponibilidade nos sites oficiais antes de viajar.</p>
+    
+    <p>QuickTrip é um projeto do <a href="/">Estrada em Dois</a>. © 2026 Estrada em Dois. Todos os direitos reservados.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var FATOR_ESTRADA = 1.25, VEL_MEDIA = 75;
+  var INLINE = null;
+  var DADOS = { tags: [], origens: [], destinos: [], config: {} }, EVENTOS = { atualizado_em: null, eventos: [] }, AVAL = { atualizado_em: null, lugares: {} };
+  var USA_LEAFLET = typeof window.L !== "undefined";
+  var selecionado = null, mapa = null, camada = null, estAtual = null, ultimoSorteio = null, timer = null;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  function urlSegura(u) { return /^https?:\/\//i.test(String(u || "")) ? String(u) : ""; }
+  function km(a, b, c, d) { var R = 6371, r = Math.PI / 180, dLat = (c - a) * r, dLon = (d - b) * r, h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a * r) * Math.cos(c * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2); return 2 * R * Math.asin(Math.sqrt(h)); }
+  function fmtTempo(min) { var h = Math.floor(min / 60), m = Math.round(min % 60); if (m === 60) { h += 1; m = 0; } return h === 0 ? m + " min" : h + "h" + (m < 10 ? "0" : "") + m; }
+  function fmtReais(v) { return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }); }
+  function fmtData(iso) { var d = new Date(String(iso) + "T12:00:00"); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(".", ""); }
+  function fmtDataLonga(iso) { var d = new Date(String(iso)); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }); }
+  function categoria(min) { return min <= 90 ? "Bate-volta" : (min <= 135 ? "1 noite" : "2 dias"); }
+  function reduzMovimento() { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+
+  function linkRota(o, d) {
+    return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(o.nome + ", SP, Brasil") +
+      "&destination=" + encodeURIComponent(d.nome + ", SP, Brasil") + "&travelmode=driving";
+  }
+  function linkAvaliacoes(ponto, d) {
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ponto + ", " + d.nome + ", SP");
+  }
+  function linkHospedagem(d) {
+    var aid = DADOS.config && DADOS.config.booking_aid ? String(DADOS.config.booking_aid) : "";
+    return { url: "https://www.booking.com/searchresults.pt-br.html?ss=" + encodeURIComponent(d.nome + ", São Paulo, Brasil") + (aid ? "&aid=" + encodeURIComponent(aid) : ""), afiliado: !!aid };
+  }
+
+  function carregar() {
+    if (INLINE) {
+      DADOS = INLINE.destinos; EVENTOS = INLINE.eventos || EVENTOS; AVAL = INLINE.avaliacoes || AVAL;
+      return Promise.resolve();
+    }
+    function j(u, padrao) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }).catch(function () { return padrao; }); }
+    return Promise.all([j("dados/destinos.json", null), j("dados/eventos.json", EVENTOS), j("dados/avaliacoes.json", AVAL)]).then(function (r) {
+      if (!r[0]) throw new Error("Não foi possível ler dados/destinos.json. Abra o site por um servidor local (veja o README).");
+      DADOS = r[0]; EVENTOS = r[1]; AVAL = r[2];
+    });
+  }
+
+  function iniciar() {
+    var oSel = $("origem");
+    DADOS.origens.forEach(function (o) { var op = document.createElement("option"); op.value = o.id; op.textContent = o.nome; oSel.appendChild(op); });
+    $("tagChips").innerHTML = DADOS.tags.map(function (t, i) {
+      return '<label class="chip"><input type="checkbox" name="tag" value="' + esc(t) + '" id="tag' + i + '"><span>' + esc(t) + '</span></label>';
+    }).join("");
+
+    if (USA_LEAFLET) {
+      $("mapaWrap").innerHTML = '<div id="leaflet" role="application" aria-label="Mapa dos destinos"></div>';
+      $("mapaHint").textContent = "Mapa do OpenStreetMap. O círculo mostra o raio escolhido. Toque em um ponto para ver o destino.";
+      mapa = L.map("leaflet", { scrollWheelZoom: false });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "&copy; colaboradores do OpenStreetMap" }).addTo(mapa);
+      camada = L.layerGroup().addTo(mapa);
+    } else {
+      $("mapaWrap").innerHTML = '<svg id="mapa" viewBox="0 0 360 360" role="img" aria-label="Mapa esquemático dos destinos ao redor da origem"></svg>';
+      $("mapaHint").textContent = "Mapa esquemático: o centro é a origem, o norte fica para cima e os anéis marcam a distância em linha reta. Toque em um ponto para ir ao destino. O mapa real está na versão do projeto.";
+      $("mapa").addEventListener("click", function (e) { var g = e.target.closest ? e.target.closest(".pin-g") : null; if (g) selecionar(g.getAttribute("data-id")); });
+      $("mapa").addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        var g = e.target.closest ? e.target.closest(".pin-g") : null;
+        if (g) { e.preventDefault(); selecionar(g.getAttribute("data-id")); }
+      });
+    }
+
+    ["origem", "raio", "consumo", "preco"].forEach(function (id) { $(id).addEventListener("input", render); });
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="dur"], input[name="tag"]'), function (i) { i.addEventListener("change", render); });
+    $("btnSortear").addEventListener("click", sortear);
+    $("sorteioDeNovo").addEventListener("click", sortear);
+    $("sorteioVer").addEventListener("click", function () { if (ultimoSorteio) selecionar(ultimoSorteio); });
+    render();
+  }
+
+  function calcular() {
+    var o = DADOS.origens.filter(function (x) { return x.id === $("origem").value; })[0];
+    var raio = +$("raio").value;
+    var modo = document.querySelector('input[name="dur"]:checked').value;
+    var maxMin = { bv: 90, noite: 135, dois: Infinity }[modo];
+    var tags = Array.prototype.map.call(document.querySelectorAll('input[name="tag"]:checked'), function (i) { return i.value; });
+    var consumo = +$("consumo").value > 0 ? +$("consumo").value : 12;
+    var preco = +$("preco").value > 0 ? +$("preco").value : 6.2;
+    var r = Math.PI / 180;
+
+    var itens = DADOS.destinos.map(function (d) {
+      var dist = km(o.lat, o.lon, d.lat, d.lon);
+      var estrada = dist * FATOR_ESTRADA;
+      var min = estrada / VEL_MEDIA * 60;
+      var dx = (d.lon - o.lon) * r * 6371 * Math.cos(((d.lat + o.lat) / 2) * r);
+      var dy = (d.lat - o.lat) * r * 6371;
+      return { d: d, dist: dist, estrada: estrada, min: min, custo: (estrada * 2 / consumo) * preco, ang: Math.atan2(dx, dy) };
+    }).filter(function (x) {
+      return x.dist > 8 && x.dist <= raio && x.min <= maxMin &&
+        (!tags.length || x.d.tags.some(function (t) { return tags.indexOf(t) > -1; }));
+    }).sort(function (a, b) { return a.dist - b.dist; });
+
+    return { o: o, raio: raio, itens: itens };
+  }
+
+  function desenharSvg(est) {
+    var cx = 180, cy = 180, rp = 140, raio = est.raio, s = "";
+    for (var i = 1; i <= 4; i++) {
+      var rr = rp * i / 4;
+      s += '<circle class="ring" cx="' + cx + '" cy="' + cy + '" r="' + rr + '"/>';
+      s += '<text class="tick" x="' + (cx + 3) + '" y="' + (cy - rr + 11) + '">' + Math.round(raio * i / 4) + ' km</text>';
+    }
+    s += '<line class="axis" x1="' + cx + '" y1="' + (cy - rp - 8) + '" x2="' + cx + '" y2="' + (cy + rp + 8) + '"/>';
+    s += '<line class="axis" x1="' + (cx - rp - 8) + '" y1="' + cy + '" x2="' + (cx + rp + 8) + '" y2="' + cy + '"/>';
+    s += '<text class="north" x="' + (cx + 5) + '" y="14">N</text>';
+    var pts = est.itens.map(function (x) { var f = x.dist / raio; return { x: cx + Math.sin(x.ang) * rp * f, y: cy - Math.cos(x.ang) * rp * f, it: x }; });
+    var lados = { dir: [], esq: [] };
+    pts.forEach(function (p) { (p.x >= cx ? lados.dir : lados.esq).push(p); });
+    [lados.dir, lados.esq].forEach(function (grupo) {
+      grupo.sort(function (a, b) { return a.y - b.y; });
+      var ultimo = -1000;
+      grupo.forEach(function (p) { p.ly = Math.max(p.y + 4, ultimo + 13); ultimo = p.ly; });
+    });
+    pts.forEach(function (p) {
+      var dir = p.x >= cx, id = p.it.d.id, tx = dir ? p.x + 11 : p.x - 11;
+      s += '<g class="pin-g' + (selecionado === id ? ' sel' : '') + '" data-id="' + esc(id) + '" tabindex="0" role="button" aria-label="' + esc(p.it.d.nome) + ', ' + Math.round(p.it.dist) + ' km">' +
+        '<circle class="pin" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="6"/>' +
+        '<text class="lbl" x="' + tx.toFixed(1) + '" y="' + p.ly.toFixed(1) + '" text-anchor="' + (dir ? "start" : "end") + '">' + esc(p.it.d.nome) + '</text></g>';
+    });
+    s += '<circle class="origin-dot" cx="' + cx + '" cy="' + cy + '" r="6"/>';
+    s += '<text class="origin-lbl" x="' + cx + '" y="' + (cy + 22) + '" text-anchor="middle">Saída</text>';
+    $("mapa").innerHTML = s;
+  }
+
+  function desenharLeaflet(est) {
+    camada.clearLayers();
+    var o = est.o;
+    var circ = L.circle([o.lat, o.lon], { radius: est.raio * 1000, color: "#07323a", weight: 1.5, dashArray: "4 6", fillColor: "#9fd0cf", fillOpacity: 0.12 }).addTo(camada);
+    L.circleMarker([o.lat, o.lon], { radius: 7, color: "#07323a", weight: 2, fillColor: "#f4c26b", fillOpacity: 1 }).bindTooltip("Saída: " + o.nome).addTo(camada);
+    est.itens.forEach(function (x) {
+      var d = x.d;
+      var m = L.circleMarker([d.lat, d.lon], { radius: 8, color: "#f7f0e7", weight: 2, fillColor: "#07323a", fillOpacity: 1 });
+      var pop = document.createElement("div");
+      var tit = document.createElement("strong"); tit.textContent = d.nome;
+      pop.appendChild(tit);
+      pop.appendChild(document.createElement("br"));
+      pop.appendChild(document.createTextNode(Math.round(x.dist) + " km em linha reta"));
+      pop.appendChild(document.createElement("br"));
+      var a = document.createElement("a"); a.href = linkRota(o, d); a.target = "_blank"; a.rel = "noopener"; a.textContent = "Traçar rota no Google Maps";
+      pop.appendChild(a);
+      m.bindPopup(pop);
+      m.on("click", function () { selecionar(d.id); });
+      m.addTo(camada);
+    });
+    mapa.fitBounds(circ.getBounds(), { padding: [10, 10] });
+  }
+
+  function htmlAvaliacao(d, ponto) {
+    var info = AVAL && AVAL.lugares ? AVAL.lugares[d.id + "|" + ponto] : null;
+    var href = linkAvaliacoes(ponto, d);
+    if (info && typeof info.rating === "number") {
+      var u = urlSegura(info.url) || href;
+      return ' <a class="rev" href="' + esc(u) + '" target="_blank" rel="noopener">★ ' + info.rating.toFixed(1).replace(".", ",") +
+        (info.total ? ' <small>(' + Number(info.total).toLocaleString("pt-BR") + ')</small>' : '') + '</a>';
+    }
+    return ' <a class="rev" href="' + esc(href) + '" target="_blank" rel="noopener">★ ver avaliações</a>';
+  }
+
+  function htmlEventos(d) {
+    var hoje = new Date().toISOString().slice(0, 10);
+    var lista = (EVENTOS.eventos || []).filter(function (e) {
+      return e && e.id_destino === d.id && (e.data_fim || e.data_inicio || "9999") >= hoje;
+    }).sort(function (a, b) { return String(a.data_inicio).localeCompare(String(b.data_inicio)); });
+    var atual = EVENTOS.atualizado_em ? "Verificado em " + fmtDataLonga(EVENTOS.atualizado_em) + "." : "Ainda não verificado.";
+    if (!lista.length) return '<div class="sec evt"><h4>Eventos</h4><p class="hint">Nenhum evento confirmado na base. ' + esc(atual) + '</p></div>';
+    return '<div class="sec evt"><h4>Eventos</h4><ul>' + lista.map(function (e) {
+      var quando = fmtData(e.data_inicio) + (e.data_fim && e.data_fim !== e.data_inicio ? " a " + fmtData(e.data_fim) : "");
+      var href = urlSegura(e.url);
+      var nome = href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener">' + esc(e.nome) + '</a>' : esc(e.nome);
+      return '<li class="evt-item"><b>' + nome + '</b><span>' + esc(quando) + (e.local ? " · " + esc(e.local) : "") + '</span></li>';
+    }).join("") + '</ul><p class="hint">' + esc(atual) + '</p></div>';
+  }
+
+  function htmlParceiros(d) {
+    var reais = (d.parceiros || []).filter(function (p) { return p && p.nome && urlSegura(p.url); });
+    var s = '<div class="parceiros"><span class="pub">Publicidade</span>';
+    if (reais.length) {
+      s += reais.map(function (p) {
+        return '<div class="parceiro"><b>' + esc(p.nome) + '</b>' + (p.tipo ? '<span>' + esc(p.tipo) + '</span>' : '') +
+          (p.descricao ? '<span>' + esc(p.descricao) + '</span>' : '') +
+          '<a class="btn alt" href="' + esc(urlSegura(p.url)) + '" target="_blank" rel="sponsored noopener">Ver diárias</a></div>';
+      }).join("");
+    } else {
+      s += ["Pousada parceira", "Hotel parceiro"].map(function (t) {
+        return '<div class="parceiro vaga"><b>' + t + ' em ' + esc(d.nome) + '</b>' +
+          '<span>Espaço reservado para a hospedagem de um parceiro, com link de afiliado.</span>' +
+          '<span class="vaga-tag">Vaga de exemplo</span></div>';
+      }).join("");
+    }
+    return s + '</div>';
+  }
+
+  function cartao(x, o) {
+    var d = x.d;
+    var ficar = d.ficar && d.ficar.length ? '<ul>' + d.ficar.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") + '</ul>' : "";
+    var hosp = linkHospedagem(d);
+    return '<article class="card' + (selecionado === d.id ? ' sel' : '') + '" id="c-' + esc(d.id) + '">' +
+      '<div class="card-head">' +
+        '<div class="sign" role="img" aria-label="' + Math.round(x.dist) + ' quilômetros em linha reta"><b>' + Math.round(x.dist) + '</b><i>km</i></div>' +
+        '<div class="head"><h3>' + esc(d.nome) + '</h3>' +
+          '<p class="meta">Estrada ≈ ' + Math.round(x.estrada) + ' km · ≈ ' + fmtTempo(x.min) + ' de carro</p>' +
+          '<p class="meta">Ida e volta: ≈ ' + fmtReais(x.custo) + ' de combustível, sem pedágio</p></div>' +
+        '<span class="badge">' + categoria(x.min) + '</span>' +
+      '</div>' +
+      '<div class="actions"><a class="btn" href="' + esc(linkRota(o, d)) + '" target="_blank" rel="noopener">Traçar rota de ' + esc(o.nome) + '</a>' +
+        '<a class="btn alt" href="' + esc(linkAvaliacoes(d.nome, d)) + '" target="_blank" rel="noopener">★ Avaliações de ' + esc(d.nome) + '</a></div>' +
+      '<div class="tags">' + d.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join("") + '</div>' +
+      '<div class="cols">' +
+        '<div class="sec tour"><h4>Pontos turísticos</h4><ul>' + d.pontos.map(function (p) { return '<li>' + esc(p) + htmlAvaliacao(d, p) + '</li>'; }).join("") + '</ul></div>' +
+        '<div class="sec stay"><h4>Onde ficar</h4><p class="hint">' + esc(d.tipo) + '</p>' + ficar +
+          '<a class="btn alt" href="' + esc(hosp.url) + '" target="_blank" rel="' + (hosp.afiliado ? "sponsored " : "") + 'noopener">Ver hospedagens' + (hosp.afiliado ? " (afiliado)" : "") + '</a>' +
+          htmlParceiros(d) + '</div>' +
+        htmlEventos(d) +
+      '</div>' +
+      (d.nota ? '<p class="nota">' + esc(d.nota) + '</p>' : '') +
+    '</article>';
+  }
+
+  function render() {
+    var est = calcular();
+    estAtual = est;
+    $("raioVal").textContent = est.raio + " km";
+    var n = est.itens.length;
+    if (n === 0) {
+      $("resumo").textContent = "Nenhum destino encontrado";
+      $("lista").innerHTML = '<div class="empty"><strong>Nada na base com esses filtros</strong>Aumente o raio, tire algum interesse ou escolha outro tipo de viagem. A base cobre a região de Rio Preto, Barretos, Catanduva e Ribeirão Preto.</div>';
+    } else {
+      $("resumo").innerHTML = n + (n === 1 ? " destino" : " destinos") + " a até " + est.raio + " km de " + esc(est.o.nome) + '<small>Do mais perto para o mais longe.</small>';
+      $("lista").innerHTML = est.itens.map(function (x) { return cartao(x, est.o); }).join("");
+    }
+    if (!$("sorteio").hidden && !est.itens.some(function (x) { return x.d.id === ultimoSorteio; })) $("sorteio").hidden = true;
+    if (USA_LEAFLET) desenharLeaflet(est); else desenharSvg(est);
+  }
+
+  function mostrarResultado(x) {
+    var painel = $("sorteio");
+    painel.classList.remove("girando");
+    $("sorteioNome").textContent = x.d.nome;
+    $("sorteioMeta").textContent = Math.round(x.dist) + " km em linha reta · ≈ " + fmtTempo(x.min) + " de carro · ida e volta ≈ " + fmtReais(x.custo) + " de combustível";
+    $("sorteioRota").href = linkRota(estAtual.o, x.d);
+    $("sorteioLive").textContent = "Destino sorteado: " + x.d.nome + ", a " + Math.round(x.dist) + " quilômetros.";
+    selecionar(x.d.id);
+  }
+
+  function sortear() {
+    clearInterval(timer);
+    var painel = $("sorteio"), itens = estAtual ? estAtual.itens : [];
+    painel.hidden = false;
+    if (!itens.length) {
+      painel.classList.remove("girando");
+      $("sorteioNome").textContent = "Nenhum destino";
+      $("sorteioMeta").textContent = "Aumente o raio ou tire algum filtro para ter o que sortear.";
+      $("sorteioRota").hidden = true; $("sorteioVer").hidden = true;
+      ultimoSorteio = null;
+      return;
+    }
+    $("sorteioRota").hidden = false; $("sorteioVer").hidden = false;
+    var escolha;
+    do { escolha = itens[Math.floor(Math.random() * itens.length)]; } while (itens.length > 1 && escolha.d.id === ultimoSorteio);
+    ultimoSorteio = escolha.d.id;
+    if (reduzMovimento() || itens.length === 1) { mostrarResultado(escolha); return; }
+    painel.classList.add("girando");
+    $("sorteioMeta").textContent = "Sorteando...";
+    var i = Math.floor(Math.random() * itens.length), t0 = Date.now();
+    timer = setInterval(function () {
+      $("sorteioNome").textContent = itens[i++ % itens.length].d.nome;
+      if (Date.now() - t0 > 900) { clearInterval(timer); mostrarResultado(escolha); }
+    }, 70);
+  }
+
+  function selecionar(id) {
+    selecionado = id;
+    Array.prototype.forEach.call(document.querySelectorAll(".card"), function (c) { c.classList.toggle("sel", c.id === "c-" + id); });
+    Array.prototype.forEach.call(document.querySelectorAll(".pin-g"), function (g) { g.classList.toggle("sel", g.getAttribute("data-id") === id); });
+    var c = $("c-" + id);
+    if (c) c.scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "nearest" });
+  }
+
+  carregar().then(iniciar).catch(function (e) {
+    $("lista").innerHTML = '<div class="empty"><strong>Não deu para carregar os dados</strong>' + esc(e && e.message ? e.message : e) + '</div>';
+  });
+})();
+</script>
+</body>
+</html>
