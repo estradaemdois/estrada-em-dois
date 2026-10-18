@@ -333,7 +333,7 @@
     if (USA_LEAFLET) {
       $("mapaWrap").innerHTML = '<div id="leaflet" role="application" aria-label="Mapa dos destinos"></div>';
       $("mapaHint").textContent = "Mapa do OpenStreetMap. O círculo mostra o raio escolhido. Toque em um ponto para ver o destino.";
-      mapa = L.map("leaflet", { scrollWheelZoom: false });
+      mapa = L.map("leaflet", { scrollWheelZoom: false }).setView([-20.82, -49.38], 8); // o Leaflet exige uma posição inicial antes de receber camadas
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "&copy; colaboradores do OpenStreetMap" }).addTo(mapa);
       camada = L.layerGroup().addTo(mapa);
     } else {
@@ -412,7 +412,7 @@
   function desenharLeaflet(est) {
     camada.clearLayers();
     var o = est.o;
-    var circ = L.circle([o.lat, o.lon], { radius: est.raio * 1000, color: "#07323a", weight: 1.5, dashArray: "4 6", fillColor: "#9fd0cf", fillOpacity: 0.12 }).addTo(camada);
+    L.circle([o.lat, o.lon], { radius: est.raio * 1000, color: "#07323a", weight: 1.5, dashArray: "4 6", fillColor: "#9fd0cf", fillOpacity: 0.12 }).addTo(camada);
     L.circleMarker([o.lat, o.lon], { radius: 7, color: "#07323a", weight: 2, fillColor: "#f4c26b", fillOpacity: 1 }).bindTooltip("Saída: " + o.nome).addTo(camada);
     est.itens.forEach(function (x) {
       var d = x.d;
@@ -429,7 +429,7 @@
       m.on("click", function () { selecionar(d.id); });
       m.addTo(camada);
     });
-    mapa.fitBounds(circ.getBounds(), { padding: [10, 10] });
+    mapa.fitBounds(L.latLng(o.lat, o.lon).toBounds(est.raio * 2000), { padding: [10, 10] });
   }
 
   function htmlAvaliacao(d, ponto) {
@@ -516,7 +516,12 @@
       $("lista").innerHTML = est.itens.map(function (x) { return cartao(x, est.o); }).join("");
     }
     if (!$("sorteio").hidden && !est.itens.some(function (x) { return x.d.id === ultimoSorteio; })) $("sorteio").hidden = true;
-    if (USA_LEAFLET) desenharLeaflet(est); else desenharSvg(est);
+    try {
+      if (USA_LEAFLET) desenharLeaflet(est); else desenharSvg(est);
+    } catch (e) {
+      // uma falha no mapa não pode esconder a lista de destinos
+      $("mapaHint").textContent = "Não foi possível desenhar o mapa agora. A lista de destinos continua funcionando.";
+    }
   }
 
   function mostrarResultado(x) {
