@@ -28,6 +28,16 @@ python3 -m http.server 8000                 # na raiz do repositório
 
 Abrir o `index.html` direto do disco não funciona, porque o navegador bloqueia a leitura dos JSON, e a marca e o ícone usam caminhos a partir da raiz do site. Use o servidor local acima.
 
+## Gasto da viagem (combustível e pedágios)
+
+Cada destino tem o botão "Calcular gasto da viagem". Ele pede o valor dos pedágios de um sentido e o número de pessoas, e mostra combustível, pedágios, total e valor por pessoa (ida e volta).
+
+Os pedágios dependem da rota, então a página não inventa valores: o campo vem vazio, com link para a rota do Google Maps, que mostra os pedágios do trajeto. Para pré-preencher trechos que você conferiu, preencha `config.pedagios` em `quicktrip/dados/destinos.json`, com a chave `origem>destino` e o valor de um sentido para carro de passeio:
+
+```json
+"pedagios": { "sjrp>olimpia": 12.5 }
+```
+
 ## Parceiros de hospedagem e comissão
 
 Cada destino tem dois espaços marcados como "Publicidade". Enquanto não houver parceiro, aparecem vagas de exemplo. Para ocupar uma vaga, adicione `parceiros` ao destino em `quicktrip/dados/destinos.json`:
