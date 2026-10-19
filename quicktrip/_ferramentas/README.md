@@ -28,13 +28,20 @@ python3 -m http.server 8000                 # na raiz do repositório
 
 Abrir o `index.html` direto do disco não funciona, porque o navegador bloqueia a leitura dos JSON, e a marca e o ícone usam caminhos a partir da raiz do site. Use o servidor local acima.
 
-## Monte meu fim de semana
+## Monte seu fim de semana (assistente)
 
-A primeira tela pergunta origem, tempo, clima (os interesses de `tags`) e com quem a pessoa vai. "Me surpreenda" limpa os filtros e sorteia um destino. Os resultados saem agrupados em Bate-volta, 1 noite e 2 noites ou mais, cada um com combustível, pedágios (valor da base ou link para a rota) e alimentação/hospedagem "conforme escolha", sem misturar custo conhecido com incerto.
+A página abre com um assistente em 8 etapas, uma por vez. Cada etapa obrigatória só libera o botão "Continuar" depois de respondida:
 
-- Favoritos ficam só no navegador da pessoa (localStorage), sem cadastro.
-- "Enviar para alguém" usa o compartilhamento do celular ou o WhatsApp. O link `?origem=sjrp&destino=olimpia` abre já no destino.
-- Os climas disponíveis vêm das `tags` dos destinos. Para oferecer "Serra e frio", "Romance e descanso" ou "Aventura e trilhas", adicione destinos com essas tags.
+1. Saída (cidade de origem), 2. Tempo (bate-volta, 1 noite, 2 noites ou mais), 3. Companhia, 4. Clima (os interesses de `tags`, ou "Tanto faz"),
+5. Transporte e consumo/preço do litro (opcional; "Pular" usa valores de exemplo), 6. Seu destino, 7. Custos, 8. Onde ficar (última etapa, com hospedagem).
+
+A ferramenta escolhe o destino e os lugares do roteiro: pontua os destinos dentro do tempo escolhido por interesses e companhia, e sorteia entre os melhores. "Escolher outro destino" passa para o próximo da lista. "Me surpreenda" (etapa 1) preenche o resto e vai direto ao resultado. A lista completa com mapa continua disponível em "Prefiro ver todos os destinos".
+
+- Roteiro: bate-volta usa até 3 lugares, 1 noite até 5 em 2 dias, 2 noites ou mais distribui todos em 3 dias. Os lugares vêm de `pontos`, na ordem do arquivo (coloque os principais primeiro).
+- Se nenhum destino cabe no tempo ou nos interesses, o assistente avisa e escolhe o mais próximo, sem beco sem saída.
+- Transporte: carro e moto calculam combustível; "Ônibus ou outro" pede o valor da passagem.
+- Favoritos ficam só no navegador (localStorage). O link `?origem=sjrp&destino=olimpia` abre direto na etapa do destino.
+- Os climas disponíveis vêm das `tags` dos destinos. Para oferecer "Serra e frio" ou "Romance", adicione destinos com essas tags.
 
 ## Gasto da viagem (combustível e pedágios)
 

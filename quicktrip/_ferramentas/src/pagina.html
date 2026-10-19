@@ -136,6 +136,40 @@
   .btn.alt:hover { background: var(--soft); filter: none; }
   .btn.big { font-size: 14px; padding: 15px 24px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  [hidden] { display: none !important; }
+  .asst { margin-bottom: 18px; gap: 16px; }
+  #asstBody { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .prog-txt { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+  .prog { height: 6px; border-radius: 999px; background: var(--soft); overflow: hidden; }
+  .prog span { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .25s; }
+  .passo { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .perg { font-size: clamp(22px, 4.5vw, 30px); line-height: 1.15; font-weight: 800; letter-spacing: -.01em; margin: 0; }
+  .perg small { font-size: 14px; font-weight: 400; color: var(--muted); }
+  .perg:focus { outline: none; }
+  .perg:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+  .opcoes { display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 560px) { .opcoes { grid-template-columns: 1fr 1fr; } }
+  .opc { position: relative; display: block; }
+  .opc input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .opc span { display: flex; flex-direction: column; gap: 3px; padding: 14px 16px; border-radius: 14px; background: var(--soft); border: 1px solid var(--line); min-height: 58px; justify-content: center; }
+  .opc small { font-size: 13px; color: var(--muted); }
+  .opc input:checked + span { background: var(--btn-bg); color: var(--btn-ink); border-color: var(--btn-bg); }
+  .opc input:checked + span small { color: inherit; opacity: .85; }
+  .opc input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+  .nav .btn { flex: 1 1 140px; }
+  @media (min-width: 560px) { .nav .btn { flex: 0 0 auto; } }
+  .btn:disabled { opacity: .45; cursor: not-allowed; filter: none; }
+  .asst .foto img { height: 220px; }
+  .roteiro { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .roteiro > li > b { color: var(--accent); }
+  .roteiro ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 4px; }
+  .roteiro .mov { color: var(--muted); font-size: 14px; list-style: none; margin-left: -20px; }
+  .porque { color: var(--accent); font-weight: 600; }
+  .aviso { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 10px; font-size: 14px; color: var(--muted); }
+  .sub { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .explorar-bar { margin-bottom: 24px; }
+  .actions.fim { margin-top: 6px; }
   .wiz { margin-bottom: 24px; }
   .wiz h2 { font-size: 22px; line-height: 1.2; }
   .wiz-grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
@@ -220,11 +254,18 @@
 
   <header class="top">
     <h1>Para onde ir neste fim de semana?</h1>
-    <p class="lede">Responda três perguntas e veja destinos de fim de semana dentro do raio, com custo de estrada, pontos turísticos, eventos, hospedagem e rota. Sem ideia? Clique em “Me surpreenda”.</p>
+    <p class="lede">Responda poucas perguntas e a gente escolhe o destino, os lugares para visitar e onde ficar. Sem indecisão.</p>
   </header>
 
+  <section class="box asst" id="assistente" aria-label="Monte seu fim de semana">
+    <div id="asstBody"></div>
+  </section>
+
+  <div class="explorar-bar"><button type="button" class="btn alt" id="btnExplorar" aria-expanded="false" aria-controls="explorar">Prefiro ver todos os destinos</button></div>
+
+  <div id="explorar" hidden>
   <section class="box wiz" aria-labelledby="wizT">
-    <h2 id="wizT">Monte meu fim de semana</h2>
+    <h2 id="wizT">Todos os destinos</h2>
     <div class="wiz-grid">
       <div class="field">
         <label for="origem">De onde você vai sair?</label>
@@ -257,10 +298,6 @@
         </div>
         <p class="hint">Define quantas pessoas entram na divisão do gasto e, para famílias, mostra primeiro os destinos para crianças.</p>
       </fieldset>
-    </div>
-    <div class="actions">
-      <button type="button" class="btn big" id="btnMontar">Montar minha ideia de viagem</button>
-      <button type="button" class="btn alt big" id="btnSurpresa">Me surpreenda</button>
     </div>
   </section>
 
@@ -318,8 +355,10 @@
     </section>
   </div>
 
+  </div>
+
   <footer class="foot">
-    <p>Distâncias em linha reta (fórmula de Haversine). A estrada é estimada em 25% a mais e a velocidade média em 75 km/h. Pedágios não entram na conta. Para o trajeto real, use o botão de rota de cada destino.</p>
+    <p>Distâncias em linha reta (fórmula de Haversine). A estrada é estimada em 25% a mais e a velocidade média em 75 km/h. Pedágios só entram na conta se você informar o valor na etapa de custos. Para o trajeto real, use o botão de rota do destino.</p>
     <p>Alguns links de hospedagem são de afiliados e podem render comissão ao QuickTrip, sem custo extra para você. Espaços marcados como Publicidade são ocupados por parceiros.</p>
     <p>A base de destinos vem de matérias e diretórios de turismo, como <a href="https://www.gazetasp.com.br/turismo/muito-alem-da-festa-do-peao-de-barretos-7-cidades-da-regiao-com-praias-festas-e-parques-aquaticos/" target="_blank" rel="noopener">Gazeta SP</a>, <a href="https://quantocustaviajar.com/blog/?p=88732" target="_blank" rel="noopener">Quanto Custa Viajar</a> e <a href="https://www.buser.com.br/destinos/pontos-turisticos/sp/catanduva/todos" target="_blank" rel="noopener">Buser</a>. Confira horários, preços e disponibilidade nos sites oficiais antes de viajar.</p>
     <!--NOTA_ARTEFATO-->
@@ -352,9 +391,9 @@
   function categoria(min) { return min <= 90 ? "Bate-volta" : (min <= 135 ? "1 noite" : "2 dias"); }
   function reduzMovimento() { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
 
-  function linkRota(o, d) {
+  function linkRota(o, d, modo) {
     return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(o.nome + ", SP, Brasil") +
-      "&destination=" + encodeURIComponent(d.nome + ", SP, Brasil") + "&travelmode=driving";
+      "&destination=" + encodeURIComponent(d.nome + ", SP, Brasil") + "&travelmode=" + (modo || "driving");
   }
   function linkAvaliacoes(ponto, d) {
     return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ponto + ", " + d.nome + ", SP");
@@ -414,19 +453,11 @@
     $("lista").addEventListener("click", aoClicarLista);
     $("soFav").addEventListener("change", render);
     Array.prototype.forEach.call(document.querySelectorAll('input[name="quem"]'), function (i) { i.addEventListener("change", render); });
-    $("btnMontar").addEventListener("click", function () { render(); $("resumo").scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "start" }); });
-    $("btnSurpresa").addEventListener("click", function () {
-      Array.prototype.forEach.call(document.querySelectorAll('input[name="tag"]'), function (i) { i.checked = false; });
-      document.querySelector('input[name="dur"][value="dois"]').checked = true;
-      $("soFav").checked = false;
-      render(); sortear();
-      $("sorteio").scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "center" });
-    });
     $("btnSortear").addEventListener("click", sortear);
     $("sorteioDeNovo").addEventListener("click", sortear);
     $("sorteioVer").addEventListener("click", function () { if (ultimoSorteio) selecionar(ultimoSorteio); });
     render();
-    if (destLink) { var cl = document.getElementById("c-" + destLink); if (cl) setTimeout(function () { selecionar(destLink); }, 300); }
+    iniciarAssistente(qo && DADOS.origens.some(function (x) { return x.id === qo; }) ? qo : "", destLink);
   }
 
   function calcular() {
@@ -578,6 +609,293 @@
       '<figcaption>Foto: ' + esc(f.autor || "autor não informado") + (lic ? ', ' + lic : '') + ' · <a href="' + esc(pagina) + '" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>';
   }
 
+  // ===== assistente passo a passo =====
+  var NOMES_PASSOS = ["Saída", "Tempo", "Companhia", "Clima", "Transporte", "Seu destino", "Custos", "Onde ficar"];
+  var W = { passo: 0, origem: "", tempo: "", quem: "", tags: [], semPref: false, meio: "carro", consumo: "", preco: "", ranking: [], idx: 0, aviso: "", gasto: {} };
+  var TEMPOS = [
+    ["bv", "Bate-volta", "Ida e volta no mesmo dia, até 1h30 de carro"],
+    ["noite", "1 noite", "Até 2h15 de carro"],
+    ["dois", "2 noites ou mais", "Sem limite de tempo, dentro de 200 km"]
+  ];
+  var QUEMS = [["sozinho", "Sozinho"], ["casal", "Casal"], ["amigos", "Amigos"], ["familia", "Família com crianças"]];
+  var MEIOS = [["carro", "Carro", "Carro próprio ou alugado"], ["moto", "Moto", "Consumo de moto"], ["onibus", "Ônibus ou outro", "Passagem, sem combustível"]];
+  var PADRAO = { carro: 12, moto: 30 }, PRECO_PADRAO = 6.2;
+
+  function origemObj() { return DADOS.origens.filter(function (o) { return o.id === W.origem; })[0] || DADOS.origens[0]; }
+  function consumoW() { return +W.consumo > 0 ? +W.consumo : (PADRAO[W.meio] || PADRAO.carro); }
+  function precoW() { return +W.preco > 0 ? +W.preco : PRECO_PADRAO; }
+  function modoRota() { return W.meio === "moto" ? "two-wheeler" : (W.meio === "onibus" ? "transit" : "driving"); }
+  function montarItem(o, d) {
+    var dist = km(o.lat, o.lon, d.lat, d.lon), estrada = dist * FATOR_ESTRADA;
+    return { d: d, dist: dist, estrada: estrada, min: estrada / VEL_MEDIA * 60, custo: (estrada * 2 / consumoW()) * precoW() };
+  }
+  function dividir(arr, k) {
+    var out = [], i = 0, base = Math.floor(arr.length / k), resto = arr.length % k;
+    for (var n = 0; n < k; n++) { var t = base + (n < resto ? 1 : 0); out.push(arr.slice(i, i + t)); i += t; }
+    return out;
+  }
+
+  function escolherDestinos() {
+    var o = origemObj(), tags = W.semPref ? [] : W.tags, aviso = "";
+    var maxMin = { bv: 90, noite: 135, dois: Infinity }[W.tempo];
+    var todos = DADOS.destinos.map(function (d) { return montarItem(o, d); }).filter(function (x) { return x.dist > 8 && x.dist <= 200; });
+    var dentro = todos.filter(function (x) { return x.min <= maxMin; });
+    if (!dentro.length) {
+      dentro = todos.slice().sort(function (a, b) { return a.min - b.min; }).slice(0, 3);
+      aviso = "Nenhum destino da base cabe nesse tempo a partir de " + o.nome + ", então escolhi os mais próximos. ";
+    }
+    dentro.forEach(function (x) {
+      x.casa = tags.length ? x.d.tags.filter(function (t) { return tags.indexOf(t) > -1; }) : [];
+      x.score = x.casa.length * 3 + (W.quem === "familia" && x.d.tags.indexOf("Família") > -1 ? 2 : 0) +
+        (W.tempo === "dois" ? x.dist / 100 : 0) - (W.tempo === "bv" ? x.dist / 200 : 0) + Math.random();
+    });
+    dentro.sort(function (a, b) { return b.score - a.score; });
+    if (tags.length && dentro.length && !dentro[0].casa.length) aviso += "Nenhum destino bate com os interesses escolhidos nesse tempo, então escolhi o que mais se aproxima. ";
+    W.ranking = dentro; W.idx = 0; W.aviso = aviso.trim(); W.gasto = {};
+  }
+
+  function atual() { return W.ranking[W.idx] || null; }
+
+  function passoValido() {
+    if (W.passo === 0) return !!W.origem;
+    if (W.passo === 1) return !!W.tempo;
+    if (W.passo === 2) return !!W.quem;
+    if (W.passo === 3) return W.semPref || W.tags.length > 0;
+    return true;
+  }
+
+  function htmlOpcoes(nome, lista, valor, comDica) {
+    return '<div class="opcoes" role="radiogroup" aria-labelledby="asstH">' + lista.map(function (it) {
+      return '<label class="opc"><input type="radio" name="' + nome + '" value="' + esc(it[0]) + '"' + (valor === it[0] ? " checked" : "") + '><span><b>' + esc(it[1]) + '</b>' + (comDica && it[2] ? '<small>' + esc(it[2]) + '</small>' : "") + '</span></label>';
+    }).join("") + '</div>';
+  }
+
+  function htmlRoteiro(x, o) {
+    var d = x.d, pts = (d.pontos || []).slice(), dias;
+    if (!pts.length) pts = ["Centro da cidade"];
+    if (W.tempo === "bv") dias = [pts.slice(0, 3)];
+    else if (W.tempo === "noite") dias = dividir(pts.slice(0, 5), 2);
+    else dias = dividir(pts, 3);
+    return '<ol class="roteiro">' + dias.map(function (lista, i) {
+      var ultimo = i === dias.length - 1;
+      return '<li><b>Dia ' + (i + 1) + '</b><ul>' +
+        (i === 0 ? '<li class="mov">Saída de ' + esc(o.nome) + ', cerca de ' + esc(fmtTempo(x.min)) + ' de estrada</li>' : "") +
+        lista.map(function (p) { return '<li>' + esc(p) + htmlAvaliacao(d, p) + '</li>'; }).join("") +
+        (ultimo ? '<li class="mov">Volta para ' + esc(o.nome) + '</li>' : "") + '</ul></li>';
+    }).join("") + '</ol>';
+  }
+
+  function botoesAcao(x, o) {
+    var d = x.d, fav = favoritos.indexOf(d.id) > -1;
+    return '<div class="actions">' +
+      '<button type="button" class="btn alt" data-w="fav" aria-pressed="' + (fav ? "true" : "false") + '">' + (fav ? "♥ Quero conhecer" : "♡ Quero conhecer") + '</button>' +
+      '<button type="button" class="btn alt" data-w="share">Enviar para alguém</button></div>';
+  }
+
+  function htmlPasso() {
+    var o = origemObj(), x = atual(), s = W.passo;
+    if (s === 0) {
+      return '<label class="perg" for="w-origem" id="asstH" tabindex="-1">De onde você vai sair?</label>' +
+        '<select id="w-origem"><option value="">Escolha a cidade de saída</option>' +
+        DADOS.origens.map(function (c) { return '<option value="' + esc(c.id) + '"' + (W.origem === c.id ? " selected" : "") + '>' + esc(c.nome) + '</option>'; }).join("") + '</select>' +
+        '<p class="hint">A distância e o tempo de viagem partem daqui.</p>';
+    }
+    if (s === 1) return '<h3 class="perg" id="asstH" tabindex="-1">Quanto tempo você tem?</h3>' + htmlOpcoes("w-tempo", TEMPOS, W.tempo, true);
+    if (s === 2) return '<h3 class="perg" id="asstH" tabindex="-1">Com quem você vai?</h3>' + htmlOpcoes("w-quem", QUEMS, W.quem, false) +
+      '<p class="hint">Define quantas pessoas dividem o gasto. Com crianças, damos preferência a destinos para família.</p>';
+    if (s === 3) {
+      return '<h3 class="perg" id="asstH" tabindex="-1">Qual é o clima da viagem?</h3><p class="hint">Marque quantos quiser.</p>' +
+        '<div class="chips" role="group" aria-labelledby="asstH">' + DADOS.tags.map(function (t, i) {
+          return '<label class="chip"><input type="checkbox" name="w-tag" value="' + esc(t) + '"' + (W.tags.indexOf(t) > -1 ? " checked" : "") + '><span>' + esc(EMOJI[t] || "") + esc(t) + '</span></label>';
+        }).join("") +
+        '<label class="chip"><input type="checkbox" id="w-sempref"' + (W.semPref ? " checked" : "") + '><span>✨ Tanto faz, me surpreenda</span></label></div>';
+    }
+    if (s === 4) {
+      var comb = W.meio !== "onibus";
+      return '<h3 class="perg" id="asstH" tabindex="-1">Como você vai viajar? <small>(opcional)</small></h3>' + htmlOpcoes("w-meio", MEIOS, W.meio, true) +
+        '<div class="two" id="w-combustivel"' + (comb ? "" : " hidden") + '>' +
+          '<div><label class="hint" for="w-consumo">Consumo (km/l)</label><input type="number" id="w-consumo" value="' + esc(W.consumo) + '" min="1" step="0.5" inputmode="decimal" placeholder="' + (PADRAO[W.meio] || 12) + '"></div>' +
+          '<div><label class="hint" for="w-preco">Litro (R$)</label><input type="number" id="w-preco" value="' + esc(W.preco) + '" min="1" step="0.05" inputmode="decimal" placeholder="6,20"></div>' +
+        '</div><p class="hint" id="w-dica4">' + (comb ? "Se você não preencher, usamos valores de exemplo e avisamos na etapa de custos." : "Sem combustível: na etapa de custos você informa o valor da passagem.") + '</p>';
+    }
+    if (!x) return '<h3 class="perg" id="asstH" tabindex="-1">Não encontramos um destino</h3><p>Volte e tente outro tempo ou outra cidade de saída.</p>';
+    var d = x.d;
+    if (s === 5) {
+      var porque = x.casa && x.casa.length ? "Combina com: " + x.casa.join(", ") + "." : (W.semPref ? "Escolhido para você." : "");
+      return '<h3 class="perg" id="asstH" tabindex="-1">Seu destino: ' + esc(d.nome) + '</h3>' +
+        htmlFoto(d) +
+        '<p class="meta">' + Math.round(x.dist) + ' km em linha reta · estrada ≈ ' + Math.round(x.estrada) + ' km · ≈ ' + esc(fmtTempo(x.min)) + ' de viagem (ida) · ' + esc(categoria(x.min)) + '</p>' +
+        (porque ? '<p class="porque">' + esc(porque) + '</p>' : "") +
+        (W.aviso ? '<p class="aviso" role="note">' + esc(W.aviso) + '</p>' : "") +
+        '<h4 class="sub">Seu roteiro</h4>' + htmlRoteiro(x, o) +
+        '<div class="actions"><a class="btn" href="' + esc(linkRota(o, d, modoRota())) + '" target="_blank" rel="noopener">Traçar rota de ' + esc(o.nome) + '</a>' +
+          (W.ranking.length > 1 ? '<button type="button" class="btn alt" data-w="outro">Escolher outro destino</button>' : "") + '</div>' +
+        htmlEventos(d) + (d.nota ? '<p class="nota">' + esc(d.nota) + '</p>' : "");
+    }
+    if (s === 6) return '<h3 class="perg" id="asstH" tabindex="-1">Quanto vai custar</h3>' + htmlCustosW(x, o);
+    if (s === 7) {
+      var hosp = linkHospedagem(d), fic = d.ficar && d.ficar.length ? '<ul>' + d.ficar.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") + '</ul>' : "";
+      var bv = W.tempo === "bv";
+      return '<h3 class="perg" id="asstH" tabindex="-1">' + (bv ? "Quer dormir em " : "Onde ficar em ") + esc(d.nome) + (bv ? "?" : "") + '</h3>' +
+        (bv ? '<p class="hint">Você escolheu bate-volta, então hospedagem é opcional. Se quiser esticar a viagem, veja as opções.</p>' : "") +
+        '<div class="sec stay"><p class="hint">' + esc(d.tipo || "") + '</p>' + fic +
+        '<a class="btn" href="' + esc(hosp.url) + '" target="_blank" rel="' + (hosp.afiliado ? "sponsored " : "") + 'noopener">Ver hospedagens' + (hosp.afiliado ? " (afiliado)" : "") + '</a>' +
+        htmlParceiros(d) + '</div>' + botoesAcao(x, o) +
+        '<div class="actions fim"><button type="button" class="btn alt" data-w="reiniciar">Montar outro fim de semana</button>' +
+        '<button type="button" class="btn alt" data-w="explorar">Ver todos os destinos</button></div>';
+    }
+    return "";
+  }
+
+  function htmlCustosW(x, o) {
+    var g = W.gasto, ref = pedagioReferencia(o, x.d), pess = g.pess || PESSOAS[W.quem] || 1, onibus = W.meio === "onibus";
+    var h = '';
+    if (!onibus) {
+      h += '<dl class="custos"><div><dt>Combustível, ida e volta</dt><dd>≈ ' + fmtReais(x.custo) + '</dd></div></dl>';
+      if (W.consumo === "" || W.preco === "") h += '<p class="hint">Usamos valores de exemplo (' + consumoW() + ' km/l e R$ ' + precoW().toLocaleString("pt-BR", { minimumFractionDigits: 2 }) + ' por litro). Para ajustar, volte à etapa Transporte.</p>';
+    }
+    h += '<div class="gasto-form"><div class="two">' +
+      (onibus
+        ? '<div><label class="hint" for="g-fare">Passagem, só ida, por pessoa (R$)</label><input type="number" id="g-fare" value="' + esc(g.fare != null ? g.fare : "") + '" min="0" step="0.5" inputmode="decimal" placeholder="0"></div>'
+        : '<div><label class="hint" for="g-ped">Pedágios, só ida (R$)</label><input type="number" id="g-ped" value="' + esc(g.ped != null ? g.ped : (ref != null ? ref : "")) + '" min="0" step="0.5" inputmode="decimal" placeholder="0"></div>') +
+      '<div><label class="hint" for="g-pess">Pessoas</label><input type="number" id="g-pess" value="' + esc(pess) + '" min="1" step="1" inputmode="numeric"></div></div>' +
+      '<p class="hint">' + (onibus ? "Consulte o valor da passagem na rota do Google Maps: " : (ref != null ? "Pedágio de referência para carro de passeio, confira antes de viajar. " : "Sem valor de pedágio na base para este trecho. ") + "A rota do Google Maps mostra os pedágios: ") +
+      '<a href="' + esc(linkRota(o, x.d, modoRota())) + '" target="_blank" rel="noopener">abrir rota</a>. A volta usa o mesmo valor da ida.</p>' +
+      '<div class="actions"><button type="button" class="btn" data-w="calc">Calcular gasto</button></div>';
+    if (g.calc) {
+      var c = g.calc, tot, linhas;
+      if (onibus) { var pas = c.fare * 2 * c.pess; tot = pas; linhas = '<div><dt>Passagens (ida e volta, ' + c.pess + ')</dt><dd>' + fmtReais(pas) + '</dd></div>'; }
+      else { var ped2 = c.ped * 2; tot = x.custo + ped2; linhas = '<div><dt>Combustível (ida e volta)</dt><dd>' + fmtReais(x.custo) + '</dd></div><div><dt>Pedágios (ida e volta)</dt><dd>' + fmtReais(ped2) + '</dd></div>'; }
+      h += '<dl class="gasto-res" role="status">' + linhas + '<div class="tot"><dt>Total</dt><dd>' + fmtReais(tot) + '</dd></div>' +
+        (c.pess > 1 ? '<div><dt>Por pessoa (' + c.pess + ')</dt><dd>' + fmtReais(tot / c.pess) + '</dd></div>' : "") + '</dl>' +
+        '<p class="hint">Não inclui alimentação, hospedagem nem estacionamento. Estrada estimada em linha reta × ' + FATOR_ESTRADA + '.</p>';
+    }
+    return h + '</div><dl class="custos"><div class="inc"><dt>Alimentação e hospedagem</dt><dd>Conforme escolha</dd></div></dl>';
+  }
+
+  function nomeBotaoAvancar() { return ["Continuar", "Continuar", "Continuar", "Continuar", "Ver meu destino", "Ver os custos", "Ver onde ficar", ""][W.passo]; }
+
+  function renderAssistente() {
+    var s = W.passo, pct = Math.round((s + 1) / NOMES_PASSOS.length * 100);
+    var nav = '<div class="nav">' +
+      (s > 0 ? '<button type="button" class="btn alt" data-w="voltar">Voltar</button>' : "") +
+      (s === 0 ? '<button type="button" class="btn alt" data-w="surpresa" id="w-surpresa">Me surpreenda</button>' : "") +
+      (s === 4 ? '<button type="button" class="btn alt" data-w="pular">Pular</button>' : "") +
+      (s < NOMES_PASSOS.length - 1 ? '<button type="button" class="btn" data-w="avancar" id="w-avancar">' + nomeBotaoAvancar() + '</button>' : "") + '</div>';
+    $("asstBody").innerHTML =
+      '<div class="prog-txt"><span class="hand">Monte seu fim de semana</span><span>Etapa ' + (s + 1) + ' de ' + NOMES_PASSOS.length + ' · ' + esc(NOMES_PASSOS[s]) + '</span></div>' +
+      '<div class="prog" role="progressbar" aria-valuemin="1" aria-valuemax="' + NOMES_PASSOS.length + '" aria-valuenow="' + (s + 1) + '" aria-label="Progresso"><span style="width:' + pct + '%"></span></div>' +
+      '<div class="passo">' + htmlPasso() + '</div>' + nav;
+    atualizarNav();
+  }
+
+  function atualizarNav() {
+    var ok = passoValido(), a = $("w-avancar"), b = $("w-surpresa");
+    if (a) a.disabled = !ok;
+    if (b) b.disabled = !W.origem;
+  }
+
+  function irPara(n, foco) {
+    W.passo = Math.max(0, Math.min(NOMES_PASSOS.length - 1, n));
+    renderAssistente();
+    var h = $("asstH");
+    if (foco !== false && h) { h.focus({ preventScroll: true }); $("assistente").scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "start" }); }
+  }
+
+  function sincronizarCustos() {
+    if ($("consumo")) $("consumo").value = W.consumo !== "" ? W.consumo : "12";
+    if ($("preco")) $("preco").value = W.preco !== "" ? W.preco : "6.20";
+  }
+
+  function aoMudarAssistente(e) {
+    var t = e.target, n = t.name || t.id;
+    if (n === "w-origem") W.origem = t.value;
+    else if (n === "w-tempo") W.tempo = t.value;
+    else if (n === "w-quem") { W.quem = t.value; W.gasto = {}; }
+    else if (n === "w-tag") {
+      W.tags = Array.prototype.map.call(document.querySelectorAll('input[name="w-tag"]:checked'), function (i) { return i.value; });
+      if (W.tags.length) { W.semPref = false; $("w-sempref").checked = false; }
+    } else if (n === "w-sempref") {
+      W.semPref = t.checked;
+      if (t.checked) { W.tags = []; Array.prototype.forEach.call(document.querySelectorAll('input[name="w-tag"]'), function (i) { i.checked = false; }); }
+    } else if (n === "w-meio") {
+      W.meio = t.value; W.gasto = {};
+      var comb = W.meio !== "onibus";
+      $("w-combustivel").hidden = !comb;
+      $("w-consumo").placeholder = PADRAO[W.meio] || 12;
+      $("w-dica4").textContent = comb ? "Se você não preencher, usamos valores de exemplo e avisamos na etapa de custos." : "Sem combustível: na etapa de custos você informa o valor da passagem.";
+    } else if (n === "w-consumo") W.consumo = t.value;
+    else if (n === "w-preco") W.preco = t.value;
+    atualizarNav();
+  }
+
+  function definirPadroesSurpresa() {
+    if (!W.tempo) W.tempo = "noite";
+    if (!W.quem) W.quem = "casal";
+    if (!W.tags.length) W.semPref = true;
+  }
+
+  function aoClicarAssistente(e) {
+    var b = e.target.closest("[data-w]");
+    if (!b || b.disabled) return;
+    var a = b.getAttribute("data-w"), x = atual(), o = origemObj();
+    if (a === "avancar") {
+      if (!passoValido()) return;
+      if (W.passo === 4) { escolherDestinos(); sincronizarCustos(); }
+      irPara(W.passo + 1);
+    } else if (a === "voltar") irPara(W.passo - 1);
+    else if (a === "pular") { W.consumo = ""; W.preco = ""; escolherDestinos(); sincronizarCustos(); irPara(5); }
+    else if (a === "surpresa") { definirPadroesSurpresa(); escolherDestinos(); sincronizarCustos(); irPara(5); }
+    else if (a === "outro") { W.idx = (W.idx + 1) % W.ranking.length; W.gasto = {}; W.aviso = ""; renderAssistente(); $("asstH").focus({ preventScroll: true }); }
+    else if (a === "calc") {
+      var ped = $("g-ped"), fare = $("g-fare"), pess = Math.max(1, Math.floor(+$("g-pess").value) || 1);
+      W.gasto = { pess: pess, ped: ped ? Math.max(0, parseFloat(ped.value) || 0) : 0, fare: fare ? Math.max(0, parseFloat(fare.value) || 0) : 0 };
+      W.gasto.calc = { ped: W.gasto.ped, fare: W.gasto.fare, pess: pess };
+      renderAssistente();
+      var bc = document.querySelector('[data-w="calc"]'); if (bc) bc.focus({ preventScroll: true });
+    } else if (a === "fav" && x) {
+      var pos = favoritos.indexOf(x.d.id);
+      if (pos > -1) favoritos.splice(pos, 1); else favoritos.push(x.d.id);
+      gravarFav(); b.setAttribute("aria-pressed", pos > -1 ? "false" : "true"); b.textContent = pos > -1 ? "♡ Quero conhecer" : "♥ Quero conhecer";
+      if (estAtual) render();
+    } else if (a === "share" && x) compartilhar(x.d.id, o, x);
+    else if (a === "reiniciar") { W.passo = 0; W.tempo = ""; W.quem = ""; W.tags = []; W.semPref = false; W.ranking = []; W.gasto = {}; irPara(0); }
+    else if (a === "explorar") abrirExplorar(true);
+  }
+
+  function abrirExplorar(rolar) {
+    var painel = $("explorar"), abrir = painel.hidden;
+    painel.hidden = !abrir;
+    $("btnExplorar").setAttribute("aria-expanded", abrir ? "true" : "false");
+    $("btnExplorar").textContent = abrir ? "Esconder a lista de destinos" : "Prefiro ver todos os destinos";
+    if (abrir) {
+      if (W.origem) $("origem").value = W.origem;
+      if (W.tempo) { var r = document.querySelector('input[name="dur"][value="' + W.tempo + '"]'); if (r) r.checked = true; }
+      if (W.quem) { var q = document.querySelector('input[name="quem"][value="' + W.quem + '"]'); if (q) q.checked = true; }
+      sincronizarCustos();
+      render();
+      if (mapa) { mapa.invalidateSize(false); }
+      if (rolar) painel.scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  function iniciarAssistente(origemLink, destLink) {
+    $("asstBody").addEventListener("change", aoMudarAssistente);
+    $("asstBody").addEventListener("input", function (e) { if (e.target.id === "w-consumo" || e.target.id === "w-preco") aoMudarAssistente(e); });
+    $("asstBody").addEventListener("click", aoClicarAssistente);
+    $("btnExplorar").addEventListener("click", function () { abrirExplorar(true); });
+    if (origemLink) W.origem = origemLink;
+    if (destLink) {
+      var d = DADOS.destinos.filter(function (z) { return z.id === destLink; })[0], o = origemObj();
+      W.origem = o.id; W.quem = "casal"; W.semPref = true;
+      var it = montarItem(o, d); it.casa = [];
+      W.tempo = it.min <= 90 ? "bv" : (it.min <= 135 ? "noite" : "dois");
+      W.ranking = [it]; W.idx = 0; W.aviso = "Este destino foi indicado por um link. Volte às etapas anteriores para personalizar.";
+      W.passo = 5;
+    }
+    renderAssistente();
+  }
+
   function htmlCustos(x, o) {
     var ref = pedagioReferencia(o, x.d);
     var ped = ref != null ? '<dd>' + fmtReais(ref * 2) + '</dd>' : '<dd><a href="' + esc(linkRota(o, x.d)) + '" target="_blank" rel="noopener">Consultar rota</a></dd>';
@@ -627,8 +945,8 @@
     return out + '</div>';
   }
 
-  function compartilhar(id) {
-    var o = estAtual.o, x = estAtual.itens.filter(function (i) { return i.d.id === id; })[0];
+  function compartilhar(id, oPar, xPar) {
+    var o = oPar || estAtual.o, x = xPar || estAtual.itens.filter(function (i) { return i.d.id === id; })[0];
     if (!x) return;
     var url = location.origin + location.pathname + "?origem=" + encodeURIComponent(o.id) + "&destino=" + encodeURIComponent(id);
     var texto = "Olha essa ideia de fim de semana: " + x.d.nome + ", a " + Math.round(x.estrada) + " km de estrada de " + o.nome + ". Combustível ida e volta ≈ " + fmtReais(x.custo) + ".";
