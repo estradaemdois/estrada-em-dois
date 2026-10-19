@@ -1,0 +1,11 @@
+SITE NOVO – ESTRADA EM DOIS
+Como subir no GitHub:
+1. Copie todos estes arquivos para a raiz do repositório (substituindo index.html e midia-kit.html).
+2. A pasta assets/ só ADICIONA arquivos novos (estilo.css, site.js, logos, ícones). Suas fotos atuais continuam sendo usadas.
+3. Falta uma foto: assets/morro-do-fogao.webp (para o post do Morro do Fogão). Sem ela aparece um fundo verde de montanhas.
+4. As páginas chile.html, argentina.html, brasil.html, documentos-argentina-de-carro.html,
+   argentina-atacama-de-carro.html e valle-de-la-luna.html foram refeitas: substitua as antigas.
+   el-tatio.html agora só redireciona para geysers-del-tatio.html.
+   A pasta quicktrip/ NÃO está no zip: deixe como está no repositório.
+5. Depois de publicar: cadastre o site no Google Search Console e envie https://estradaemdois.com.br/sitemap.xml
+6. A newsletter saiu do site. No lugar, as páginas terminam com o convite "Acompanhe a viagem" (YouTube e Instagram).
