@@ -165,6 +165,10 @@
   .custos dt { color: var(--muted); }
   .custos .inc dd { color: var(--muted); }
   .btn[aria-pressed="true"] { background: var(--btn-bg); color: var(--btn-ink); border-color: var(--btn-bg); }
+  .foto { margin: -2px -2px 0; display: grid; gap: 6px; }
+  .foto img { display: block; width: 100%; height: 190px; object-fit: cover; border-radius: 14px; background: var(--soft); }
+  .foto figcaption { font-size: 12px; color: var(--muted); }
+  .foto figcaption a { color: inherit; }
   .gasto { display: grid; gap: 10px; }
   .gasto-form { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
   .gasto-form .two { align-items: end; }
@@ -581,6 +585,16 @@
     return s + '</div>';
   }
 
+  function htmlFoto(d) {
+    var f = d.foto;
+    if (!f || !f.arquivo) return "";
+    var src = "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f.arquivo) + "?width=800";
+    var pagina = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(String(f.arquivo).replace(/ /g, "_"));
+    var lic = f.licenca_url ? '<a href="' + esc(urlSegura(f.licenca_url)) + '" target="_blank" rel="noopener license">' + esc(f.licenca) + '</a>' : esc(f.licenca || "");
+    return '<figure class="foto"><img src="' + esc(src) + '" alt="Foto de ' + esc(d.nome) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'figure\').hidden=true">' +
+      '<figcaption>Foto: ' + esc(f.autor || "autor não informado") + (lic ? ', ' + lic : '') + ' · <a href="' + esc(pagina) + '" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>';
+  }
+
   function htmlCustos(x, o) {
     var ref = pedagioReferencia(o, x.d);
     var ped = ref != null ? '<dd>' + fmtReais(ref * 2) + '</dd>' : '<dd><a href="' + esc(linkRota(o, x.d)) + '" target="_blank" rel="noopener">Consultar rota</a></dd>';
@@ -674,6 +688,7 @@
     var ficar = d.ficar && d.ficar.length ? '<ul>' + d.ficar.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") + '</ul>' : "";
     var hosp = linkHospedagem(d);
     return '<article class="card' + (selecionado === d.id ? ' sel' : '') + '" id="c-' + esc(d.id) + '">' +
+      htmlFoto(d) +
       '<div class="card-head">' +
         '<div class="sign" role="img" aria-label="' + Math.round(x.dist) + ' quilômetros em linha reta"><b>' + Math.round(x.dist) + '</b><i>km</i></div>' +
         '<div class="head"><h3>' + esc(d.nome) + '</h3>' +
