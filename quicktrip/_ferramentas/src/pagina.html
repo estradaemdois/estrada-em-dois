@@ -136,6 +136,20 @@
   .btn.alt:hover { background: var(--soft); filter: none; }
   .btn.big { font-size: 14px; padding: 15px 24px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .wiz { margin-bottom: 24px; }
+  .wiz h2 { font-size: 22px; line-height: 1.2; }
+  .wiz-grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 760px) { .wiz-grid { grid-template-columns: 1fr 1fr; } }
+  .custos-det summary { cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .custos-det[open] summary { margin-bottom: 10px; }
+  .grupo { font-size: 18px; margin: 10px 0 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .grupo small { font-size: 13px; font-weight: 400; color: var(--muted); }
+  .custos { margin: 4px 0 0; display: grid; gap: 3px; font-size: 14px; }
+  .custos div { display: flex; justify-content: space-between; gap: 12px; }
+  .custos dt, .custos dd { margin: 0; }
+  .custos dt { color: var(--muted); }
+  .custos .inc dd { color: var(--muted); }
+  .btn[aria-pressed="true"] { background: var(--btn-bg); color: var(--btn-ink); border-color: var(--btn-bg); }
   .gasto { display: grid; gap: 10px; }
   .gasto-form { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
   .gasto-form .two { align-items: end; }
@@ -202,40 +216,61 @@
 
   <header class="top">
     <h1>Para onde ir neste fim de semana?</h1>
-    <p class="lede">Diga de onde você sai e até onde topa dirigir. O QuickTrip lista destinos dentro do raio, com pontos turísticos, eventos, ideias de hospedagem, custo de combustível e rota no Google Maps. Sem ideia? Sorteie um.</p>
+    <p class="lede">Responda três perguntas e veja destinos de fim de semana dentro do raio, com custo de estrada, pontos turísticos, eventos, hospedagem e rota. Sem ideia? Clique em “Me surpreenda”.</p>
   </header>
 
-  <div class="layout">
-    <aside class="panel" aria-label="Filtros">
-      <div class="box">
-        <div class="field">
-          <label for="origem">Saindo de</label>
-          <select id="origem"></select>
-        </div>
+  <section class="box wiz" aria-labelledby="wizT">
+    <h2 id="wizT">Monte meu fim de semana</h2>
+    <div class="wiz-grid">
+      <div class="field">
+        <label for="origem">De onde você vai sair?</label>
+        <select id="origem"></select>
+      </div>
 
+      <fieldset class="field">
+        <legend>Quanto tempo você tem?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="dur" value="bv"><span>Bate-volta</span></label>
+          <label class="chip"><input type="radio" name="dur" value="noite"><span>1 noite</span></label>
+          <label class="chip"><input type="radio" name="dur" value="dois" checked><span>2 noites ou mais</span></label>
+        </div>
+        <p class="hint">Bate-volta: até 1h30 de carro. 1 noite: até 2h15. 2 noites ou mais: sem limite de tempo dentro do raio.</p>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Qual é o clima da viagem?</legend>
+        <div class="chips" id="tagChips"></div>
+        <p class="hint">Sem nenhum marcado, mostramos tudo.</p>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Com quem você vai?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="quem" value="sozinho"><span>Sozinho</span></label>
+          <label class="chip"><input type="radio" name="quem" value="casal" checked><span>Casal</span></label>
+          <label class="chip"><input type="radio" name="quem" value="amigos"><span>Amigos</span></label>
+          <label class="chip"><input type="radio" name="quem" value="familia"><span>Família com crianças</span></label>
+        </div>
+        <p class="hint">Define quantas pessoas entram na divisão do gasto e, para famílias, mostra primeiro os destinos para crianças.</p>
+      </fieldset>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn big" id="btnMontar">Montar minha ideia de viagem</button>
+      <button type="button" class="btn alt big" id="btnSurpresa">Me surpreenda</button>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside class="panel" aria-label="Ajustes">
+      <div class="box">
         <div class="field">
           <label for="raio">Raio máximo</label>
           <div class="rangeline"><output id="raioVal" for="raio">160 km</output><span class="hint">em linha reta</span></div>
           <input type="range" id="raio" min="40" max="200" step="10" value="160">
         </div>
 
-        <fieldset class="field">
-          <legend>Duração da viagem</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="dur" value="bv"><span>Bate-volta</span></label>
-            <label class="chip"><input type="radio" name="dur" value="noite"><span>1 noite</span></label>
-            <label class="chip"><input type="radio" name="dur" value="dois" checked><span>2 dias</span></label>
-          </div>
-          <p class="hint">Bate-volta: até 1h30 de carro. 1 noite: até 2h15. 2 dias: sem limite de tempo dentro do raio.</p>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend>Interesses</legend>
-          <div class="chips" id="tagChips"></div>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend>Seu carro</legend>
+        <details class="field custos-det">
+          <summary>Personalizar custos</summary>
           <div class="two">
             <div>
               <label class="hint" for="consumo">Consumo (km/l)</label>
@@ -247,7 +282,7 @@
             </div>
           </div>
           <p class="hint">Valores de exemplo para estimar o combustível. Ajuste para o seu carro e o preço do posto.</p>
-        </fieldset>
+        </details>
       </div>
 
       <div class="box mapbox">
@@ -259,7 +294,8 @@
     <section class="results" aria-label="Resultados">
       <div class="resbar">
         <p class="summary" id="resumo" aria-live="polite"></p>
-        <button type="button" class="btn big" id="btnSortear">Sortear um destino →</button>
+        <div class="actions"><label class="chip"><input type="checkbox" id="soFav"><span id="soFavTxt">♥ Só favoritos</span></label>
+          <button type="button" class="btn big" id="btnSortear">Sortear um destino →</button></div>
       </div>
 
       <div class="sorteio" id="sorteio" hidden>
@@ -293,7 +329,7 @@
   var INLINE = /*INLINE*/null;
   var DADOS = { tags: [], origens: [], destinos: [], config: {} }, EVENTOS = { atualizado_em: null, eventos: [] }, AVAL = { atualizado_em: null, lugares: {} };
   var USA_LEAFLET = typeof window.L !== "undefined";
-  var gastos = {}, selecionado = null, mapa = null, camada = null, estAtual = null, estEnquadre = null, ultimoSorteio = null, timer = null;
+  var gastos = {}, favoritos = [], selecionado = null, mapa = null, camada = null, estAtual = null, estEnquadre = null, ultimoSorteio = null, timer = null;
 
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -303,6 +339,12 @@
   function fmtReais(v) { return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }); }
   function fmtData(iso) { var d = new Date(String(iso) + "T12:00:00"); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }).replace(".", ""); }
   function fmtDataLonga(iso) { var d = new Date(String(iso)); return isNaN(d) ? "" : d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }); }
+  var EMOJI = { "Natureza e rios": "🌿 ", "Água e parques": "💦 ", "Cultura e museus": "🏛️ ", "Família": "👨‍👩‍👧 ", "Festas e eventos": "🎉 " };
+  var PESSOAS = { sozinho: 1, casal: 2, amigos: 3, familia: 4 };
+  var DICA_GRUPO = { "Bate-volta": "até 1h30 de carro", "1 noite": "até 2h15 de carro", "2 dias": "mais de 2h15 de carro" };
+  function quem() { var r = document.querySelector('input[name="quem"]:checked'); return r ? r.value : "casal"; }
+  function lerFav() { try { var v = JSON.parse(localStorage.getItem("quicktrip:fav") || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  function gravarFav() { try { localStorage.setItem("quicktrip:fav", JSON.stringify(favoritos)); } catch (e) {} }
   function categoria(min) { return min <= 90 ? "Bate-volta" : (min <= 135 ? "1 noite" : "2 dias"); }
   function reduzMovimento() { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
 
@@ -334,8 +376,13 @@
     var oSel = $("origem");
     DADOS.origens.forEach(function (o) { var op = document.createElement("option"); op.value = o.id; op.textContent = o.nome; oSel.appendChild(op); });
     $("tagChips").innerHTML = DADOS.tags.map(function (t, i) {
-      return '<label class="chip"><input type="checkbox" name="tag" value="' + esc(t) + '" id="tag' + i + '"><span>' + esc(t) + '</span></label>';
+      return '<label class="chip"><input type="checkbox" name="tag" value="' + esc(t) + '" id="tag' + i + '"><span>' + esc(EMOJI[t] || "") + esc(t) + '</span></label>';
     }).join("");
+    favoritos = lerFav();
+    var qs = new URLSearchParams(location.search), qo = qs.get("origem"), qd = qs.get("destino");
+    if (qo && DADOS.origens.some(function (x) { return x.id === qo; })) oSel.value = qo;
+    var destLink = qd && DADOS.destinos.some(function (x) { return x.id === qd; }) ? qd : null;
+    if (destLink) $("raio").value = $("raio").max;
 
     if (USA_LEAFLET) {
       $("mapaWrap").innerHTML = '<div id="leaflet" role="application" aria-label="Mapa dos destinos"></div>';
@@ -361,10 +408,21 @@
     ["origem", "raio", "consumo", "preco"].forEach(function (id) { $(id).addEventListener("input", render); });
     Array.prototype.forEach.call(document.querySelectorAll('input[name="dur"], input[name="tag"]'), function (i) { i.addEventListener("change", render); });
     $("lista").addEventListener("click", aoClicarLista);
+    $("soFav").addEventListener("change", render);
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="quem"]'), function (i) { i.addEventListener("change", render); });
+    $("btnMontar").addEventListener("click", function () { render(); $("resumo").scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "start" }); });
+    $("btnSurpresa").addEventListener("click", function () {
+      Array.prototype.forEach.call(document.querySelectorAll('input[name="tag"]'), function (i) { i.checked = false; });
+      document.querySelector('input[name="dur"][value="dois"]').checked = true;
+      $("soFav").checked = false;
+      render(); sortear();
+      $("sorteio").scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "center" });
+    });
     $("btnSortear").addEventListener("click", sortear);
     $("sorteioDeNovo").addEventListener("click", sortear);
     $("sorteioVer").addEventListener("click", function () { if (ultimoSorteio) selecionar(ultimoSorteio); });
     render();
+    if (destLink) { var cl = document.getElementById("c-" + destLink); if (cl) setTimeout(function () { selecionar(destLink); }, 300); }
   }
 
   function calcular() {
@@ -372,6 +430,8 @@
     var raio = +$("raio").value;
     var modo = document.querySelector('input[name="dur"]:checked').value;
     var maxMin = { bv: 90, noite: 135, dois: Infinity }[modo];
+    var soFav = $("soFav") && $("soFav").checked;
+    $("soFavTxt").textContent = "♥ Só favoritos (" + favoritos.length + ")";
     var tags = Array.prototype.map.call(document.querySelectorAll('input[name="tag"]:checked'), function (i) { return i.value; });
     var consumo = +$("consumo").value > 0 ? +$("consumo").value : 12;
     var preco = +$("preco").value > 0 ? +$("preco").value : 6.2;
@@ -386,7 +446,8 @@
       return { d: d, dist: dist, estrada: estrada, min: min, custo: (estrada * 2 / consumo) * preco, ang: Math.atan2(dx, dy) };
     }).filter(function (x) {
       return x.dist > 8 && x.dist <= raio && x.min <= maxMin &&
-        (!tags.length || x.d.tags.some(function (t) { return tags.indexOf(t) > -1; }));
+        (!tags.length || x.d.tags.some(function (t) { return tags.indexOf(t) > -1; })) &&
+        (!soFav || favoritos.indexOf(x.d.id) > -1);
     }).sort(function (a, b) { return a.dist - b.dist; });
 
     return { o: o, raio: raio, itens: itens };
@@ -503,6 +564,16 @@
     return s + '</div>';
   }
 
+  function htmlCustos(x, o) {
+    var ref = pedagioReferencia(o, x.d);
+    var ped = ref != null ? '<dd>' + fmtReais(ref * 2) + '</dd>' : '<dd><a href="' + esc(linkRota(o, x.d)) + '" target="_blank" rel="noopener">Consultar rota</a></dd>';
+    return '<p class="meta">Estrada ≈ ' + Math.round(x.estrada) + ' km · ≈ ' + fmtTempo(x.min) + ' de carro (ida)</p>' +
+      '<dl class="custos">' +
+      '<div><dt>Combustível, ida e volta</dt><dd>≈ ' + fmtReais(x.custo) + '</dd></div>' +
+      '<div><dt>Pedágios</dt>' + ped + '</div>' +
+      '<div class="inc"><dt>Alimentação e hospedagem</dt><dd>Conforme escolha</dd></div></dl>';
+  }
+
   function chaveGasto(o, d) { return o.id + ">" + d.id; }
 
   function pedagioReferencia(o, d) {
@@ -517,7 +588,7 @@
     var out = '<div class="gasto">' +
       '<div class="actions"><button type="button" class="btn alt" data-gasto-abrir="' + esc(k) + '" aria-expanded="' + (g.aberto ? "true" : "false") + '">Calcular gasto da viagem</button></div>';
     if (g.aberto) {
-      var ped = g.ped != null ? g.ped : (ref != null ? ref : ""), pess = g.pess || 1;
+      var ped = g.ped != null ? g.ped : (ref != null ? ref : ""), pess = g.pess || PESSOAS[quem()] || 1;
       out += '<div class="gasto-form">' +
         '<div class="two">' +
           '<div><label class="hint" for="ped-' + esc(d.id) + '">Pedágios, só ida (R$)</label>' +
@@ -542,9 +613,29 @@
     return out + '</div>';
   }
 
+  function compartilhar(id) {
+    var o = estAtual.o, x = estAtual.itens.filter(function (i) { return i.d.id === id; })[0];
+    if (!x) return;
+    var url = location.origin + location.pathname + "?origem=" + encodeURIComponent(o.id) + "&destino=" + encodeURIComponent(id);
+    var texto = "Olha essa ideia de fim de semana: " + x.d.nome + ", a " + Math.round(x.estrada) + " km de estrada de " + o.nome + ". Combustível ida e volta ≈ " + fmtReais(x.custo) + ".";
+    if (navigator.share) {
+      navigator.share({ title: "QuickTrip: " + x.d.nome, text: texto, url: url }).catch(function () {});
+    } else {
+      window.open("https://wa.me/?text=" + encodeURIComponent(texto + " " + url), "_blank", "noopener");
+    }
+  }
+
   function aoClicarLista(e) {
     var ab = e.target.closest("[data-gasto-abrir]"), ca = e.target.closest("[data-gasto-calc]");
-    if (ab) {
+    var fv = e.target.closest("[data-fav]"), sh = e.target.closest("[data-share]");
+    if (fv) {
+      var fid = fv.getAttribute("data-fav"), pos = favoritos.indexOf(fid);
+      if (pos > -1) favoritos.splice(pos, 1); else favoritos.push(fid);
+      gravarFav(); render();
+      var fb = document.querySelector('[data-fav="' + fid + '"]'); if (fb) fb.focus();
+    } else if (sh) {
+      compartilhar(sh.getAttribute("data-share"));
+    } else if (ab) {
       var k = ab.getAttribute("data-gasto-abrir"), g = gastos[k] = gastos[k] || {};
       g.aberto = !g.aberto;
       render();
@@ -569,12 +660,13 @@
       '<div class="card-head">' +
         '<div class="sign" role="img" aria-label="' + Math.round(x.dist) + ' quilômetros em linha reta"><b>' + Math.round(x.dist) + '</b><i>km</i></div>' +
         '<div class="head"><h3>' + esc(d.nome) + '</h3>' +
-          '<p class="meta">Estrada ≈ ' + Math.round(x.estrada) + ' km · ≈ ' + fmtTempo(x.min) + ' de carro</p>' +
-          '<p class="meta">Ida e volta: ≈ ' + fmtReais(x.custo) + ' de combustível (pedágio não incluído)</p></div>' +
+          htmlCustos(x, o) + '</div>' +
         '<span class="badge">' + categoria(x.min) + '</span>' +
       '</div>' +
       '<div class="actions"><a class="btn" href="' + esc(linkRota(o, d)) + '" target="_blank" rel="noopener">Traçar rota de ' + esc(o.nome) + '</a>' +
-        '<a class="btn alt" href="' + esc(linkAvaliacoes(d.nome, d)) + '" target="_blank" rel="noopener">★ Avaliações de ' + esc(d.nome) + '</a></div>' +
+        '<a class="btn alt" href="' + esc(linkAvaliacoes(d.nome, d)) + '" target="_blank" rel="noopener">★ Avaliações de ' + esc(d.nome) + '</a>' +
+        '<button type="button" class="btn alt" data-fav="' + esc(d.id) + '" aria-pressed="' + (favoritos.indexOf(d.id) > -1 ? "true" : "false") + '">' + (favoritos.indexOf(d.id) > -1 ? '♥ Quero conhecer' : '♡ Quero conhecer') + '</button>' +
+        '<button type="button" class="btn alt" data-share="' + esc(d.id) + '">Enviar para alguém</button></div>' +
       htmlGasto(x, o) +
       '<div class="tags">' + d.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join("") + '</div>' +
       '<div class="cols">' +
@@ -598,7 +690,15 @@
       $("lista").innerHTML = '<div class="empty"><strong>Nada na base com esses filtros</strong>Aumente o raio, tire algum interesse ou escolha outro tipo de viagem. A base cobre a região de Rio Preto, Barretos, Catanduva e Ribeirão Preto.</div>';
     } else {
       $("resumo").innerHTML = n + (n === 1 ? " destino" : " destinos") + " a até " + est.raio + " km de " + esc(est.o.nome) + '<small>Do mais perto para o mais longe.</small>';
-      $("lista").innerHTML = est.itens.map(function (x) { return cartao(x, est.o); }).join("");
+      var ordem = ["Bate-volta", "1 noite", "2 dias"], html = "";
+      ordem.forEach(function (gr) {
+        var lote = est.itens.filter(function (x) { return categoria(x.min) === gr; });
+        if (quem() === "familia") lote = lote.filter(function (x) { return x.d.tags.indexOf("Família") > -1; }).concat(lote.filter(function (x) { return x.d.tags.indexOf("Família") < 0; }));
+        if (!lote.length) return;
+        html += '<h3 class="grupo">' + esc(gr === "2 dias" ? "2 noites ou mais" : gr) + ' <small>' + esc(DICA_GRUPO[gr]) + '</small></h3>' +
+          lote.map(function (x) { return cartao(x, est.o); }).join("");
+      });
+      $("lista").innerHTML = html;
     }
     if (!$("sorteio").hidden && !est.itens.some(function (x) { return x.d.id === ultimoSorteio; })) $("sorteio").hidden = true;
     try {
