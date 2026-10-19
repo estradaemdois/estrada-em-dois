@@ -286,7 +286,7 @@
   var INLINE = /*INLINE*/null;
   var DADOS = { tags: [], origens: [], destinos: [], config: {} }, EVENTOS = { atualizado_em: null, eventos: [] }, AVAL = { atualizado_em: null, lugares: {} };
   var USA_LEAFLET = typeof window.L !== "undefined";
-  var selecionado = null, mapa = null, camada = null, estAtual = null, ultimoSorteio = null, timer = null;
+  var selecionado = null, mapa = null, camada = null, estAtual = null, estEnquadre = null, ultimoSorteio = null, timer = null;
 
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -336,6 +336,10 @@
       mapa = L.map("leaflet", { scrollWheelZoom: false }).setView([-20.81, -49.38], 8);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "&copy; colaboradores do OpenStreetMap" }).addTo(mapa);
       camada = L.layerGroup().addTo(mapa);
+      if (window.ResizeObserver) {
+        new ResizeObserver(function () { if (mapa) { mapa.invalidateSize(false); enquadrar(); } }).observe($("leaflet"));
+      }
+      window.addEventListener("load", function () { enquadrar(); });
     } else {
       $("mapaWrap").innerHTML = '<svg id="mapa" viewBox="0 0 360 360" role="img" aria-label="Mapa esquemático dos destinos ao redor da origem"></svg>';
       $("mapaHint").textContent = "Mapa esquemático: o centro é a origem, o norte fica para cima e os anéis marcam a distância em linha reta. Toque em um ponto para ir ao destino. O mapa real está na versão do projeto.";
@@ -429,7 +433,21 @@
       m.on("click", function () { selecionar(d.id); });
       m.addTo(camada);
     });
-    mapa.fitBounds(L.latLng(o.lat, o.lon).toBounds(est.raio * 2000), { padding: [10, 10] });
+    estEnquadre = est;
+    enquadrar();
+  }
+
+  // Enquadra o mapa no raio escolhido. Se o contêiner ainda não tem tamanho (acontece na primeira
+  // carga), o Leaflet calcularia o zoom máximo (18) e nunca mais corrigiria. Nesse caso espera
+  // o contêiner ganhar tamanho: o ResizeObserver (e o evento load) chamam esta função de novo.
+  function enquadrar() {
+    if (!mapa || !estEnquadre) return;
+    mapa.invalidateSize(false);
+    var t = mapa.getSize();
+    if (t.x < 50 || t.y < 50) return;
+    var o = estEnquadre.o;
+    mapa.fitBounds(L.latLng(o.lat, o.lon).toBounds(estEnquadre.raio * 2000), { padding: [10, 10], animate: false });
+    estEnquadre = null;
   }
 
   function htmlAvaliacao(d, ponto) {
@@ -516,7 +534,12 @@
       $("lista").innerHTML = est.itens.map(function (x) { return cartao(x, est.o); }).join("");
     }
     if (!$("sorteio").hidden && !est.itens.some(function (x) { return x.d.id === ultimoSorteio; })) $("sorteio").hidden = true;
-    if (USA_LEAFLET) desenharLeaflet(est); else desenharSvg(est);
+    try {
+      if (USA_LEAFLET) desenharLeaflet(est); else desenharSvg(est);
+    } catch (e) {
+      // uma falha no mapa não pode esconder a lista de destinos
+      $("mapaHint").textContent = "Não foi possível desenhar o mapa agora. A lista de destinos continua funcionando.";
+    }
   }
 
   function mostrarResultado(x) {
