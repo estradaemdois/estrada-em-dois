@@ -28,6 +28,14 @@ python3 -m http.server 8000                 # na raiz do repositório
 
 Abrir o `index.html` direto do disco não funciona, porque o navegador bloqueia a leitura dos JSON, e a marca e o ícone usam caminhos a partir da raiz do site. Use o servidor local acima.
 
+## Monte meu fim de semana
+
+A primeira tela pergunta origem, tempo, clima (os interesses de `tags`) e com quem a pessoa vai. "Me surpreenda" limpa os filtros e sorteia um destino. Os resultados saem agrupados em Bate-volta, 1 noite e 2 noites ou mais, cada um com combustível, pedágios (valor da base ou link para a rota) e alimentação/hospedagem "conforme escolha", sem misturar custo conhecido com incerto.
+
+- Favoritos ficam só no navegador da pessoa (localStorage), sem cadastro.
+- "Enviar para alguém" usa o compartilhamento do celular ou o WhatsApp. O link `?origem=sjrp&destino=olimpia` abre já no destino.
+- Os climas disponíveis vêm das `tags` dos destinos. Para oferecer "Serra e frio", "Romance e descanso" ou "Aventura e trilhas", adicione destinos com essas tags.
+
 ## Gasto da viagem (combustível e pedágios)
 
 Cada destino tem o botão "Calcular gasto da viagem". Ele pede o valor dos pedágios de um sentido e o número de pessoas, e mostra combustível, pedágios, total e valor por pessoa (ida e volta).
