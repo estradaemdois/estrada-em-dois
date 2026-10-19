@@ -416,3 +416,6 @@ section{padding:80px 0}
 @media (max-width:600px){.loja-faixa{flex-wrap:wrap}.loja-faixa .ir{margin-left:48px}}
 .produto.destaque .apoio{color:var(--ambar)}
 .produtos.dois .produto .capa-ebook{aspect-ratio:16/9}
+
+/* Filtro do blog: cards escondidos somem de verdade */
+[hidden]{display:none !important}
