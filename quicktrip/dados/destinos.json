@@ -16,6 +16,7 @@
     {
       "id": "olimpia", "nome": "Olímpia", "lat": -20.7364, "lon": -48.9150,
       "tags": ["Água e parques", "Família", "Festas e eventos", "Cultura e museus"],
+      "foto": {"arquivo": "Entrada do Thermas dos Laranjais, Olímpia - panoramio.jpg", "autor": "Marco Aurélio Esparz…", "licenca": "CC BY-SA 3.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0"},
       "pontos": ["Thermas dos Laranjais", "Hot Beach Olímpia", "Vale dos Dinossauros", "Museu de História e Folclore Maria Olímpia"],
       "ficar": ["Thermas Park Resort & Spa, ao lado do Thermas dos Laranjais", "Hot Beach Resort, dentro do complexo", "Hotel Villa Rebellato, perto do Thermas dos Laranjais", "Pousada Recanto Solar dos Pássaros, ambiente familiar"],
       "tipo": "Resorts com acesso aos parques ou hotéis e pousadas perto do centro.",
@@ -24,6 +25,7 @@
     {
       "id": "barretos", "nome": "Barretos", "lat": -20.5573, "lon": -48.5678,
       "tags": ["Festas e eventos", "Cultura e museus"],
+      "foto": {"arquivo": "PARQUE DO PEÃO - panoramio.jpg", "autor": "Rogério Rampazzo Bom…", "licenca": "CC BY-SA 3.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0"},
       "pontos": ["Parque do Peão", "Memorial do Peão", "Fábrica de Chapéus", "Catedral do Divino Espírito Santo", "Museu Sacro", "Parque dos Lagos"],
       "ficar": [],
       "tipo": "Hotéis no centro ou perto do Parque do Peão.",
@@ -32,6 +34,7 @@
     {
       "id": "catanduva", "nome": "Catanduva", "lat": -21.1378, "lon": -48.9728,
       "tags": ["Família", "Cultura e museus", "Natureza e rios"],
+      "foto": {"arquivo": "Praça da Catedral em Catanduva.jpg", "autor": "Luiz Henrique Jorge", "licenca": "CC BY-SA 4.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0"},
       "pontos": ["Zoológico Municipal de Catanduva", "Parque Ecológico dos Ipês", "Teatro Municipal Aniz Pachá", "Estação Cultura de Catanduva", "Sesc Catanduva"],
       "ficar": [],
       "tipo": "Hotéis na cidade. Perto o bastante para bate-volta.",
@@ -40,6 +43,7 @@
     {
       "id": "votuporanga", "nome": "Votuporanga", "lat": -20.4226, "lon": -49.9723,
       "tags": ["Natureza e rios", "Cultura e museus"],
+      "foto": {"arquivo": "Vista aérea Votuporanga geral 2020 (51691879675).jpg", "autor": "ASCOM Prefeitura de Votuporanga", "licenca": "Domínio público", "licenca_url": ""},
       "pontos": ["Ilha do Pescador", "Horto Florestal de Votuporanga", "Estação Ferroviária de Votuporanga", "Concha Acústica de Votuporanga", "Catedral Nossa Senhora Aparecida"],
       "ficar": [],
       "tipo": "Hotéis na cidade, que é polo regional.",
@@ -48,6 +52,7 @@
     {
       "id": "bebedouro", "nome": "Bebedouro", "lat": -20.9494, "lon": -48.4789,
       "tags": ["Cultura e museus", "Natureza e rios"],
+      "foto": {"arquivo": "Antiga Praça da Matriz de Bebedouro, atual Praça Cel. Lucena Maranhão e Paróquia de Santo Antônio de Pádua, RELU.jpg", "autor": "Grupo de Pesquisa Representações do Lugar (RELU)", "licenca": "CC BY-SA 4.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0"},
       "pontos": ["Lago Artificial João Valente Filho", "Museu de Bebedouro (Museu do Automóvel)", "Igreja Matriz de São João Batista"],
       "ficar": [],
       "tipo": "Hotéis e pousadas na cidade. Para poucos passeios, vale pensar em bate-volta.",
@@ -56,6 +61,7 @@
     {
       "id": "colina", "nome": "Colina", "lat": -20.7131, "lon": -48.5436,
       "tags": ["Cultura e museus"],
+      "foto": {"arquivo": "Entrada da cidade de Colina, com decoração em época natalina - panoramio.jpg", "autor": "Marco Aurélio Esparz…", "licenca": "CC BY-SA 3.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0"},
       "pontos": ["Museu Municipal do Cavalo", "Museu Histórico Municipal", "Igreja Matriz de São José", "Casa do Artesão Colinense"],
       "ficar": [],
       "tipo": "Cidade pequena. Consulte as opções de hospedagem antes de decidir.",
@@ -64,6 +70,7 @@
     {
       "id": "guaira", "nome": "Guaíra", "lat": -20.3189, "lon": -48.3106,
       "tags": ["Natureza e rios", "Família", "Cultura e museus"],
+      "foto": {"arquivo": "Panorâmica Guaira (SP).jpg", "autor": "Ric Aries", "licenca": "CC BY-SA 4.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0"},
       "pontos": ["Parque Ecológico Maracá", "Zoológico Municipal Joaquim Garcia Franco", "Museu Municipal Maria Carolina Alves Lellis"],
       "ficar": [],
       "tipo": "Hotéis e pousadas no centro.",
@@ -72,6 +79,7 @@
     {
       "id": "colombia", "nome": "Colômbia", "lat": -20.1767, "lon": -48.6856,
       "tags": ["Natureza e rios"],
+      "foto": {"arquivo": "Municipio de Colombia Vista Aeria 01 - panoramio.jpg", "autor": "misterx99", "licenca": "CC BY-SA 3.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0"},
       "pontos": ["Rio Grande (pesca esportiva)", "Orla Municipal", "Praça do Mirante"],
       "ficar": [],
       "tipo": "Para pesca, procure pousadas e ranchos às margens do Rio Grande.",
@@ -80,6 +88,7 @@
     {
       "id": "guaraci", "nome": "Guaraci", "lat": -20.4964, "lon": -48.9400,
       "tags": ["Natureza e rios", "Festas e eventos"],
+      "foto": {"arquivo": "Guaraci - São Paulo - panoramio.jpg", "autor": "Vanderlei Bissiato", "licenca": "CC BY-SA 3.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0"},
       "pontos": ["Rio Grande (pesca de tucunaré)", "Fonte Luminosa", "Encontro da Folia de Reis"],
       "ficar": [],
       "tipo": "Pousadas e ranchos perto do rio. Confirme disponibilidade.",
@@ -88,6 +97,7 @@
     {
       "id": "penapolis", "nome": "Penápolis", "lat": -21.4192, "lon": -50.0772,
       "tags": ["Cultura e museus", "Família", "Água e parques"],
+      "foto": {"arquivo": "Fazenda Figueira, Penápolis-SP, Vladimir Benincasa 8.jpg", "autor": "Vladimir Benincasa / Grupo de Pesquisa Patrimônio, Cidades e Territórios", "licenca": "CC BY-SA 4.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0"},
       "pontos": ["Museu do Sol", "Vinícola Ferracini", "Parque Santa Leonor", "Museu de Folclore", "Parque Aquático"],
       "ficar": [],
       "tipo": "Hotéis na cidade.",
@@ -96,6 +106,7 @@
     {
       "id": "taquaritinga", "nome": "Taquaritinga", "lat": -21.4064, "lon": -48.5050,
       "tags": ["Natureza e rios", "Família"],
+      "foto": {"arquivo": "Praça Santos Dumont em Taquaritinga-SP. Praça Santos Dumont em Taquaritinga-SP. Homenagem ao Pai da Aviação com dos dizeres na placa, SANTOS DUMONT - NO MEU LINDO \"BRASIL\" OU NO \"14 BIS\" NA ÁGIL \"LI - panoramio.jpg", "autor": "Marco Aurélio Esparz…", "licenca": "CC BY-SA 3.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0"},
       "pontos": ["Mirante Vale Taquaritinga", "Parque Municipal Prefeito Ernesto Salvagni", "Pesque Pague Guariroba", "Pesqueiro Tênis Park"],
       "ficar": [],
       "tipo": "Hotéis na cidade. Os pesqueiros combinam com passeio de um dia.",
@@ -104,6 +115,7 @@
     {
       "id": "jaboticabal", "nome": "Jaboticabal", "lat": -21.2548, "lon": -48.3228,
       "tags": ["Natureza e rios", "Cultura e museus"],
+      "foto": {"arquivo": "Fachada da Catedral Nossa Senhora do Carmo, Jaboticabal SP.jpg", "autor": "Ricardo", "licenca": "Domínio público", "licenca_url": ""},
       "pontos": ["Lago Municipal de Jaboticabal", "Museu Histórico de Jaboticabal", "Cine Teatro Municipal de Jaboticabal", "Mercado Municipal de Jaboticabal", "Pesqueiro Itaúna"],
       "ficar": [],
       "tipo": "Hotéis na cidade.",
@@ -112,6 +124,7 @@
     {
       "id": "fernandopolis", "nome": "Fernandópolis", "lat": -20.2840, "lon": -50.2466,
       "tags": ["Água e parques", "Família", "Cultura e museus"],
+      "foto": {"arquivo": "Avenida Expedicionários Brasileiros.jpg", "autor": "Luis Vinicyus", "licenca": "CC BY-SA 4.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0"},
       "pontos": ["Água Viva Thermas Clube", "Casa de Portugal (parque aquático)", "Museu Histórico de Fernandópolis", "Horto Florestal de Fernandópolis", "Galeria das Artes"],
       "ficar": [],
       "tipo": "Hotéis na cidade, que é polo regional.",
@@ -120,6 +133,7 @@
     {
       "id": "lins", "nome": "Lins", "lat": -21.6786, "lon": -49.7425,
       "tags": ["Água e parques", "Família", "Cultura e museus"],
+      "foto": {"arquivo": "Ruas da cidade de Lins, São Paulo, Brasil 01.jpg", "autor": "Sintegrity", "licenca": "CC BY-SA 4.0", "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0"},
       "pontos": ["Blue Tree Thermas de Lins", "Manitá Espaço e Lazer", "Casa da Cultura de Lins", "Horto Florestal de Lins"],
       "ficar": [],
       "tipo": "Hotéis na cidade, com opção de termas.",
@@ -128,6 +142,7 @@
     {
       "id": "ribeirao", "nome": "Ribeirão Preto", "lat": -21.1775, "lon": -47.8103,
       "tags": ["Cultura e museus", "Família"],
+      "foto": {"arquivo": "Vista aérea Ribeirão Preto 2025.jpg", "autor": "And Ribeirão 1980", "licenca": "CC0", "licenca_url": "https://creativecommons.org/publicdomain/zero/1.0/"},
       "pontos": ["Theatro Pedro II", "Zoológico Municipal de Ribeirão Preto", "Pinguim (Praça XV de Novembro)"],
       "ficar": [],
       "tipo": "Grande oferta de hotéis de rede e pousadas, em várias faixas de preço.",
