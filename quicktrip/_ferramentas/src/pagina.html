@@ -136,6 +136,13 @@
   .btn.alt:hover { background: var(--soft); filter: none; }
   .btn.big { font-size: 14px; padding: 15px 24px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .gasto { display: grid; gap: 10px; }
+  .gasto-form { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+  .gasto-form .two { align-items: end; }
+  .gasto-res { margin: 0; display: grid; gap: 4px; }
+  .gasto-res div { display: flex; justify-content: space-between; gap: 12px; }
+  .gasto-res .tot { border-top: 1px solid var(--line); padding-top: 6px; margin-top: 2px; font-weight: 700; }
+  .gasto-res dt, .gasto-res dd { margin: 0; }
 
   .sorteio { background: var(--raised); border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
   .sorteio .hand { font-size: 28px; }
@@ -286,7 +293,7 @@
   var INLINE = /*INLINE*/null;
   var DADOS = { tags: [], origens: [], destinos: [], config: {} }, EVENTOS = { atualizado_em: null, eventos: [] }, AVAL = { atualizado_em: null, lugares: {} };
   var USA_LEAFLET = typeof window.L !== "undefined";
-  var selecionado = null, mapa = null, camada = null, estAtual = null, estEnquadre = null, ultimoSorteio = null, timer = null;
+  var gastos = {}, selecionado = null, mapa = null, camada = null, estAtual = null, estEnquadre = null, ultimoSorteio = null, timer = null;
 
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -353,6 +360,7 @@
 
     ["origem", "raio", "consumo", "preco"].forEach(function (id) { $(id).addEventListener("input", render); });
     Array.prototype.forEach.call(document.querySelectorAll('input[name="dur"], input[name="tag"]'), function (i) { i.addEventListener("change", render); });
+    $("lista").addEventListener("click", aoClicarLista);
     $("btnSortear").addEventListener("click", sortear);
     $("sorteioDeNovo").addEventListener("click", sortear);
     $("sorteioVer").addEventListener("click", function () { if (ultimoSorteio) selecionar(ultimoSorteio); });
@@ -495,6 +503,64 @@
     return s + '</div>';
   }
 
+  function chaveGasto(o, d) { return o.id + ">" + d.id; }
+
+  function pedagioReferencia(o, d) {
+    var t = DADOS.config && DADOS.config.pedagios;
+    var v = t && t[chaveGasto(o, d)];
+    return typeof v === "number" && v >= 0 ? v : null;
+  }
+
+  function htmlGasto(x, o) {
+    var d = x.d, k = chaveGasto(o, d), g = gastos[k] || {};
+    var ref = pedagioReferencia(o, d);
+    var out = '<div class="gasto">' +
+      '<div class="actions"><button type="button" class="btn alt" data-gasto-abrir="' + esc(k) + '" aria-expanded="' + (g.aberto ? "true" : "false") + '">Calcular gasto da viagem</button></div>';
+    if (g.aberto) {
+      var ped = g.ped != null ? g.ped : (ref != null ? ref : ""), pess = g.pess || 1;
+      out += '<div class="gasto-form">' +
+        '<div class="two">' +
+          '<div><label class="hint" for="ped-' + esc(d.id) + '">Pedágios, só ida (R$)</label>' +
+            '<input type="number" id="ped-' + esc(d.id) + '" value="' + esc(ped) + '" min="0" step="0.5" inputmode="decimal" placeholder="0"></div>' +
+          '<div><label class="hint" for="pess-' + esc(d.id) + '">Pessoas no carro</label>' +
+            '<input type="number" id="pess-' + esc(d.id) + '" value="' + esc(pess) + '" min="1" step="1" inputmode="numeric"></div>' +
+        '</div>' +
+        '<p class="hint">' + (ref != null ? 'Valor de referência para carro de passeio; confira antes de viajar. ' : 'Sem valor de pedágio na base para este trecho. ') +
+          'A rota do Google Maps mostra os pedágios do trajeto: <a href="' + esc(linkRota(o, d)) + '" target="_blank" rel="noopener">abrir rota</a>. Digite o valor de um sentido; a volta usa o mesmo.</p>' +
+        '<div class="actions"><button type="button" class="btn" data-gasto-calc="' + esc(k) + '">Calcular</button></div>';
+      if (g.calc) {
+        var comb = x.custo, ped2 = (+g.calc.ped || 0) * 2, tot = comb + ped2, n = g.calc.pess || 1;
+        out += '<dl class="gasto-res" role="status">' +
+          '<div><dt>Combustível (ida e volta)</dt><dd>' + fmtReais(comb) + '</dd></div>' +
+          '<div><dt>Pedágios (ida e volta)</dt><dd>' + fmtReais(ped2) + '</dd></div>' +
+          '<div class="tot"><dt>Total</dt><dd>' + fmtReais(tot) + '</dd></div>' +
+          (n > 1 ? '<div><dt>Por pessoa (' + n + ')</dt><dd>' + fmtReais(tot / n) + '</dd></div>' : '') +
+          '</dl><p class="hint">Estimativa: estrada = linha reta × ' + FATOR_ESTRADA + ', consumo e litro conforme "Seu carro". Não inclui hospedagem, alimentação nem estacionamento.</p>';
+      }
+      out += '</div>';
+    }
+    return out + '</div>';
+  }
+
+  function aoClicarLista(e) {
+    var ab = e.target.closest("[data-gasto-abrir]"), ca = e.target.closest("[data-gasto-calc]");
+    if (ab) {
+      var k = ab.getAttribute("data-gasto-abrir"), g = gastos[k] = gastos[k] || {};
+      g.aberto = !g.aberto;
+      render();
+      var b = document.querySelector('[data-gasto-abrir="' + k + '"]');
+      if (b) b.focus();
+    } else if (ca) {
+      var k2 = ca.getAttribute("data-gasto-calc"), id = k2.split(">")[1], g2 = gastos[k2] = gastos[k2] || {};
+      var pedIn = document.getElementById("ped-" + id), pesIn = document.getElementById("pess-" + id);
+      var ped = Math.max(0, parseFloat(pedIn.value) || 0), pess = Math.max(1, Math.floor(+pesIn.value) || 1);
+      g2.ped = pedIn.value === "" ? "" : ped; g2.pess = pess; g2.aberto = true; g2.calc = { ped: ped, pess: pess };
+      render();
+      var b2 = document.querySelector('[data-gasto-calc="' + k2 + '"]');
+      if (b2) b2.focus();
+    }
+  }
+
   function cartao(x, o) {
     var d = x.d;
     var ficar = d.ficar && d.ficar.length ? '<ul>' + d.ficar.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") + '</ul>' : "";
@@ -504,11 +570,12 @@
         '<div class="sign" role="img" aria-label="' + Math.round(x.dist) + ' quilômetros em linha reta"><b>' + Math.round(x.dist) + '</b><i>km</i></div>' +
         '<div class="head"><h3>' + esc(d.nome) + '</h3>' +
           '<p class="meta">Estrada ≈ ' + Math.round(x.estrada) + ' km · ≈ ' + fmtTempo(x.min) + ' de carro</p>' +
-          '<p class="meta">Ida e volta: ≈ ' + fmtReais(x.custo) + ' de combustível, sem pedágio</p></div>' +
+          '<p class="meta">Ida e volta: ≈ ' + fmtReais(x.custo) + ' de combustível (pedágio não incluído)</p></div>' +
         '<span class="badge">' + categoria(x.min) + '</span>' +
       '</div>' +
       '<div class="actions"><a class="btn" href="' + esc(linkRota(o, d)) + '" target="_blank" rel="noopener">Traçar rota de ' + esc(o.nome) + '</a>' +
         '<a class="btn alt" href="' + esc(linkAvaliacoes(d.nome, d)) + '" target="_blank" rel="noopener">★ Avaliações de ' + esc(d.nome) + '</a></div>' +
+      htmlGasto(x, o) +
       '<div class="tags">' + d.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join("") + '</div>' +
       '<div class="cols">' +
         '<div class="sec tour"><h4>Pontos turísticos</h4><ul>' + d.pontos.map(function (p) { return '<li>' + esc(p) + htmlAvaliacao(d, p) + '</li>'; }).join("") + '</ul></div>' +
