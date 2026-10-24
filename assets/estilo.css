@@ -437,8 +437,8 @@ section{padding:80px 0}
 .marca img{width:72px;height:auto;margin-top:-4px}
 
 /* ===== Ajustes out/2026: menu, home e indicações ===== */
-.menu .btn-yt{color:var(--creme);border-color:rgba(244,235,221,.5);margin-left:12px}
-.menu .btn-yt:hover{color:var(--creme);background:rgba(255,255,255,.08);border-color:var(--creme)}
+.menu .btn.btn-yt{background:var(--creme);color:var(--verde-950);border-color:var(--creme);margin-left:12px}
+.menu .btn.btn-yt:hover{background:#fff;color:var(--verde-950);border-color:#fff}
 .menu .btn-yt .icone{fill:#FF5A50}
 .menu .btn-yt + .btn{margin-left:8px}
 @media (max-width:1180px){.menu .btn-yt{margin:12px 0 0}.menu .btn-yt + .btn{margin:8px 0 0}}
@@ -450,11 +450,6 @@ section{padding:80px 0}
 @media (max-width:760px){.qt.qt-com-form{grid-template-columns:1fr}.qt-form select{max-width:none}.qt-form .btn{width:100%}}
 .video .legenda .ler-post{display:inline-block;margin-top:6px;color:var(--ambar);font-weight:700;text-decoration:none;font-size:.95rem}
 .video .legenda .ler-post:hover{text-decoration:underline}
-.destino .cobre{position:absolute;inset:0;z-index:1;border-radius:var(--raio)}
-.destino .cobre:focus-visible{outline-offset:-4px}
-.destino .info{z-index:2;pointer-events:none}
-.destino .info a{pointer-events:auto;color:inherit;text-decoration:underline;text-decoration-color:rgba(242,179,61,.7);text-underline-offset:3px}
-.destino .info a:hover{color:var(--ambar)}
 .icone-produto{width:56px;height:56px;border-radius:16px;background:#FCEBD9;display:grid;place-items:center;margin-bottom:6px}
 .icone-produto svg{width:30px;height:30px;stroke:var(--laranja)}
 .indica{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;background:var(--papel);border:1px solid var(--linha);border-left:4px solid var(--laranja);border-radius:var(--raio);padding:18px 22px;margin:1.6em 0}
@@ -466,3 +461,23 @@ section{padding:80px 0}
 .indica .btn{flex:none}
 .texto .indica .btn{color:var(--verde-950);text-decoration:none}
 .texto .indica .btn-verde{color:var(--creme)}
+
+/* Indicações da home: seguro em faixa larga, lojinha e e-book lado a lado (sem vazios) */
+.indicacoes{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.indicacoes .produto{gap:8px}
+.indicacoes .produto .acoes{margin-top:6px;padding-top:6px}
+.indicacoes .seguro-largo{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px 48px;align-items:center;padding:32px 36px}
+.indicacoes .seguro-largo h3{font-size:1.6rem}
+.indicacoes .seguro-largo .acoes{margin-top:14px}
+.indicacoes .seguro-largo .aviso{margin-top:10px}
+.indicacoes .capa-ebook,.indicacoes .capa-loja{aspect-ratio:16/9;border-radius:var(--raio-sm);margin-bottom:10px}
+.capa-loja{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#FCEBD9,#F7D9BC)}
+.capa-loja svg{width:72px;height:72px;stroke:var(--laranja)}
+.capa-loja span{font-family:var(--titulo);font-weight:700;font-size:1.1rem;color:#7A3B1C}
+@media (max-width:760px){.indicacoes{grid-template-columns:1fr}.indicacoes .seguro-largo{grid-template-columns:1fr;padding:26px 24px}}
+
+/* Destinos: o cartão inteiro é o link, com botão visível */
+.destino{cursor:pointer}
+.destino .ir.btn{margin-top:4px;color:var(--verde-950);pointer-events:none}
+.destino:hover .ir.btn{background:#F6C25F;transform:translateY(-2px)}
+.destino:focus-visible{outline:3px solid var(--ambar);outline-offset:3px}
