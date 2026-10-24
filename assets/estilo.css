@@ -481,3 +481,10 @@ section{padding:80px 0}
 .destino .ir.btn{margin-top:4px;color:var(--verde-950);pointer-events:none}
 .destino:hover .ir.btn{background:#F6C25F;transform:translateY(-2px)}
 .destino:focus-visible{outline:3px solid var(--ambar);outline-offset:3px}
+
+/* Logo da Real Seguro Viagem numa plaquinha clara (o logo é roxo e some no verde) */
+.placa-real{display:flex;width:fit-content;align-items:center;background:var(--creme-claro);border-radius:12px;padding:10px 16px;margin-bottom:16px}
+.placa-real img{width:120px;height:auto;display:block}
+.placa-real.pequena{padding:7px 12px;border-radius:10px;margin-bottom:10px}
+.placa-real.pequena img{width:84px}
+.indica .placa-real.pequena{margin:0;flex:none;background:#F3EAFE}
