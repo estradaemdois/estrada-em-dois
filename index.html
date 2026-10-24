@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/estilo.css">
+<link rel="stylesheet" href="assets/estilo.css?v=20261024c">
 <link rel="preload" as="image" href="assets/hero-casal.webp">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://estradaemdois.com.br/#org", "name": "Estrada em Dois", "url": "https://estradaemdois.com.br/", "logo": "https://estradaemdois.com.br/assets/icone-512.png", "email": "estradaemdois@gmail.com", "sameAs": ["https://www.youtube.com/@Estradaemdois", "https://www.instagram.com/estradaemdois.oficial", "https://www.tiktok.com/@estradaemdois"]}, {"@type": "WebSite", "@id": "https://estradaemdois.com.br/#site", "name": "Estrada em Dois", "url": "https://estradaemdois.com.br/", "inLanguage": "pt-BR", "publisher": {"@id": "https://estradaemdois.com.br/#org"}}]}</script>
 </head>
@@ -169,21 +169,18 @@
       <p>Cada país tem uma página com os lugares, roteiros e vídeos daquela viagem.</p>
     </div>
     <div class="destinos">
-      <div class="destino">
+      <a class="destino" href="chile.html">
         <div class="foto"><img src="assets/deserto-atacama.webp" alt="Deserto do Atacama, no Chile" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <a class="cobre" href="chile.html" aria-label="Ver Chile"></a>
-        <div class="info"><h3>Chile</h3><ul><li>San Pedro de Atacama</li><li><a href="valle-de-la-luna.html">Valle de la Luna</a></li><li><a href="geysers-del-tatio.html">Geysers del Tatio</a></li><li><a href="cerro-toco.html">Cerro Toco</a></li><li>Valle de la Muerte</li></ul><span class="ir">Ver Chile →</span></div>
-      </div>
-      <div class="destino">
+        <div class="info"><h3>Chile</h3><ul><li>San Pedro de Atacama</li><li>Valle de la Luna</li><li>Geysers del Tatio</li><li>Cerro Toco</li><li>Valle de la Muerte</li></ul><span class="ir btn btn-ambar btn-sm">Ver Chile →</span></div>
+      </a>
+      <a class="destino" href="argentina.html">
         <div class="foto"><img src="assets/salta-norte-argentino.webp" alt="Montanhas coloridas do norte da Argentina" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <a class="cobre" href="argentina.html" aria-label="Ver Argentina"></a>
-        <div class="info"><h3>Argentina</h3><ul><li>Salta e Cafayate</li><li>Purmamarca e Jujuy</li><li>Salinas Grandes</li><li><a href="argentina-atacama-de-carro.html">Roteiro até o Atacama</a></li><li><a href="documentos-argentina-de-carro.html">Documentos para entrar de carro</a></li></ul><span class="ir">Ver Argentina →</span></div>
-      </div>
-      <div class="destino">
+        <div class="info"><h3>Argentina</h3><ul><li>Salta e Cafayate</li><li>Purmamarca e Jujuy</li><li>Salinas Grandes</li><li>Roteiro até o Atacama</li><li>Documentos para entrar de carro</li></ul><span class="ir btn btn-ambar btn-sm">Ver Argentina →</span></div>
+      </a>
+      <a class="destino" href="brasil.html">
         <div class="foto"><img src="assets/brasil-cataratas.webp" alt="Cataratas do Iguaçu" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <a class="cobre" href="brasil.html" aria-label="Ver Brasil"></a>
-        <div class="info"><h3>Brasil</h3><ul><li><a href="foz-do-iguacu-em-1-dia.html">Foz do Iguaçu (PR)</a></li><li><a href="morro-do-fogao-itirapina.html">Morro do Fogão, Itirapina (SP)</a></li><li>Serra Negra e Águas de São Pedro (SP)</li><li>Lagoa Santa (GO)</li></ul><span class="ir">Ver Brasil →</span></div>
-      </div>
+        <div class="info"><h3>Brasil</h3><ul><li>Foz do Iguaçu (PR)</li><li>Morro do Fogão, Itirapina (SP)</li><li>Serra Negra e Águas de São Pedro (SP)</li><li>Lagoa Santa (GO)</li></ul><span class="ir btn btn-ambar btn-sm">Ver Brasil →</span></div>
+      </a>
     </div>
   </div>
 </section>
@@ -193,22 +190,25 @@
     <div class="cabecalho-secao">
       <div><span class="apoio">Indicações</span><h2 id="t-viagem">O que a gente usa e indica</h2></div>
     </div>
-    <div class="produtos">
-      <div class="produto destaque" id="seguro">
-        <span class="apoio">Seguro viagem</span>
-        <h3>Viaje com mais tranquilidade</h3>
-        <p>A Argentina passou a exigir seguro saúde de turistas. Use nosso cupom na Real Seguro Viagem.</p>
-        <div class="cupom"><code>ESTRADAEMDOIS</code><button class="btn btn-ambar btn-sm" type="button" data-copiar="ESTRADAEMDOIS">Copiar</button></div>
-        <div class="acoes"><a class="btn btn-contorno" href="https://seguroviagem.srv.br/?ag=kjpPH5KWjd" target="_blank" rel="sponsored noopener">Cotar seguro →</a></div>
-        <p class="aviso">Link de parceiro: podemos ganhar comissão, sem custo extra para você.</p>
+    <div class="indicacoes">
+      <div class="produto destaque seguro-largo" id="seguro">
+        <div>
+          <span class="apoio">Seguro viagem</span>
+          <h3>Viaje com mais tranquilidade</h3>
+          <p>A Argentina passou a exigir seguro saúde de turistas. Use nosso cupom na Real Seguro Viagem.</p>
+        </div>
+        <div>
+          <div class="cupom"><code>ESTRADAEMDOIS</code><button class="btn btn-ambar btn-sm" type="button" data-copiar="ESTRADAEMDOIS">Copiar</button></div>
+          <div class="acoes"><a class="btn btn-ambar" href="https://seguroviagem.srv.br/?ag=kjpPH5KWjd" target="_blank" rel="sponsored noopener">Cotar seguro →</a></div>
+          <p class="aviso">Link de parceiro: podemos ganhar comissão, sem custo extra para você.</p>
+        </div>
       </div>
       <div class="produto" id="lojinha">
-        <div class="icone-produto"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
+        <div class="capa-loja"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Lojinha Estrada em Dois</span></div>
         <span class="apoio">Lojinha na Shopee</span>
         <h3>Achadinhos que a gente usa na estrada</h3>
         <p>Itens de carro, camping e viagem que levamos nas nossas viagens, todos num lugar só.</p>
         <div class="acoes"><a class="btn btn-verde" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="sponsored noopener">Ver a lojinha →</a></div>
-        <p class="aviso">Link de parceiro: podemos ganhar comissão, sem custo extra para você.</p>
       </div>
       <div class="produto">
         <div class="foto capa-ebook"><img src="assets/ebook-foz-1-dia.webp" alt="Capa do e-book Foz do Iguaçu em 1 dia" width="800" height="600" loading="lazy" decoding="async"></div>
