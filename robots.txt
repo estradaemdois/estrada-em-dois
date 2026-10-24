@@ -1,4 +1,22 @@
+# Estrada em Dois: todo o conteúdo público pode ser lido por buscadores e por assistentes de IA.
 User-agent: *
+Allow: /
+
+# Buscadores e assistentes de IA (liberados de forma explícita)
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: DuckAssistBot
 Allow: /
 
 Sitemap: https://estradaemdois.com.br/sitemap.xml
