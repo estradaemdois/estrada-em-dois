@@ -1,6 +1,6 @@
 # Automação do Instagram — Estrada em Dois
 
-**Perfil do Instagram:** `@estradam2.oficial`
+**Perfil do Instagram:** `@estradaemdois.oficial`
 
 Este diretório reúne os arquivos da automação de conteúdo do Instagram.
 
@@ -21,4 +21,4 @@ Preparar uma publicação por dia (imagem ou vídeo, legenda e hashtags), solici
 
 ## Observação
 
-O perfil informado para esta automação é `@estradam2.oficial`. Confirme que esse é o nome de usuário exato antes de ativar qualquer publicação.
+O perfil informado para esta automação é `@estradaemdois.oficial`. Confirme que esse é o nome de usuário exato antes de ativar qualquer publicação.
