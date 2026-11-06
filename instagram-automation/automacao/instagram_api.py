@@ -84,13 +84,19 @@ class Instagram:
         return "desconhecido"
 
     def conectar(self):
-        """Descobre o tipo de token, valida e encontra o ID da conta do Instagram."""
+        """Descobre o tipo de token, valida e encontra o ID da conta do Instagram.
+
+        Tenta, nesta ordem: login do Instagram (graph.instagram.com), Páginas do
+        Facebook (me/accounts) e, por fim, as contas do Instagram que o próprio
+        token autorizou (debug_token). Esse último caminho funciona com tokens do
+        "login unificado", que não trazem permissões de Página.
+        """
         tipo = self.tipo_do_token()
         if tipo == "ausente":
             raise ErroInstagram("O segredo INSTAGRAM_ACCESS_TOKEN não está disponível nesta execução.")
-        tentativas = [tipo] if tipo in ("instagram", "facebook") else ["instagram", "facebook"]
-        ultimo_erro = None
-        for t in tentativas:
+        ordem = ["instagram", "facebook"] if tipo != "facebook" else ["facebook", "instagram"]
+        detalhes = []
+        for t in ordem:
             self.tipo = t
             try:
                 if t == "instagram":
@@ -101,9 +107,10 @@ class Instagram:
                     self._conectar_pelo_facebook()
                 break
             except ErroInstagram as e:
-                ultimo_erro = e
+                detalhes.append(str(e))
         else:
-            raise ErroInstagram(f"Token inválido ou expirado. Detalhe: {ultimo_erro}")
+            raise ErroInstagram("Não consegui encontrar a conta do Instagram com este token. "
+                                "Detalhes: " + " | ".join(detalhes))
         if self.usuario.lower() != self.usuario_esperado:
             raise ErroInstagram(
                 f"O token pertence à conta @{self.usuario}, mas a automação espera "
@@ -111,19 +118,40 @@ class Instagram:
         return {"tipo": self.tipo, "usuario": self.usuario, "conta_id": self.conta_id}
 
     def _conectar_pelo_facebook(self):
-        r = self._chamar("GET", "me/accounts",
-                         {"fields": "name,instagram_business_account{id,username}"})
-        for pagina in r.get("data", []):
-            conta = pagina.get("instagram_business_account") or {}
-            if conta.get("username", "").lower() == self.usuario_esperado:
-                self.conta_id, self.usuario = conta["id"], conta["username"]
+        candidatos = []
+        id_fixo = os.environ.get("INSTAGRAM_USER_ID", "").strip()
+        if id_fixo:
+            candidatos.append(id_fixo)
+        try:
+            r = self._chamar("GET", "me/accounts",
+                             {"fields": "name,instagram_business_account{id,username}"})
+            for pagina in r.get("data", []):
+                conta = pagina.get("instagram_business_account") or {}
+                if conta.get("id"):
+                    candidatos.append(conta["id"])
+        except ErroInstagram:
+            pass
+        try:
+            r = self._chamar("GET", "debug_token", {"input_token": self.token})
+            for escopo in (r.get("data") or {}).get("granular_scopes", []):
+                if escopo.get("scope", "").startswith("instagram_"):
+                    candidatos.extend(escopo.get("target_ids") or [])
+        except ErroInstagram:
+            pass
+        vistos = []
+        for cid in dict.fromkeys(str(c) for c in candidatos):
+            try:
+                usuario = self._chamar("GET", cid, {"fields": "username"}).get("username", "")
+            except ErroInstagram:
+                continue
+            vistos.append(usuario)
+            if usuario.lower() == self.usuario_esperado:
+                self.conta_id, self.usuario = cid, usuario
                 return
-        contas = [p.get("instagram_business_account", {}).get("username") for p in r.get("data", [])]
         raise ErroInstagram(
-            "Com este token não encontrei a conta do Instagram ligada a uma Página do Facebook. "
-            f"Contas encontradas: {[c for c in contas if c] or 'nenhuma'}. "
-            "Para esse tipo de token a Meta costuma exigir também as permissões "
-            "pages_show_list e pages_read_engagement.")
+            "o token do tipo Facebook foi aceito, mas não dá acesso à conta "
+            f"@{self.usuario_esperado} (contas encontradas: {vistos or 'nenhuma'}). "
+            "Ao gerar o token, marque a conta do Instagram do Estrada em Dois na janela de autorização")
 
     def limite_de_publicacao(self):
         try:
