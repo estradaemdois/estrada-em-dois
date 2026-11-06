@@ -1,0 +1,10 @@
+{
+  "usuario_instagram": "estradaemdois.oficial",
+  "versao_api": "v24.0",
+  "max_hashtags": 5,
+  "max_caracteres_legenda": 2200,
+  "url_site": "https://estradaemdois.com.br",
+  "pasta_fila": "instagram-automation/fila",
+  "largura_imagem": 1080,
+  "fuso_horario": "America/Sao_Paulo"
+}

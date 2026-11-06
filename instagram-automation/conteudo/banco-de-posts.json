@@ -1,0 +1,145 @@
+{
+  "observacao": "Cada post usa uma foto que já está no site e informações tiradas dos guias publicados. Nada aqui foi inventado: a página de origem está no campo 'fonte'. Para tirar um post da fila sem apagar, mude 'ativo' para false.",
+  "posts": [
+    {
+      "id": "morro-do-fogao-por-do-sol",
+      "titulo": "Morro do Fogão: pôr do sol e camping de graça",
+      "tipo": "IMAGEM",
+      "imagem": "assets/morro-do-fogao.webp",
+      "fonte": "https://estradaemdois.com.br/morro-do-fogao-itirapina.html",
+      "ativo": true,
+      "legenda": "Tem lugar no interior de SP onde dá para ver um pôr do sol desses e ainda dormir lá em cima sem pagar nada.\n\nÉ o Morro do Fogão, em Itirapina. Saindo de Rio Preto são uns 300 km, cerca de 3h30 de carro pela Washington Luís.\n\nO camping no alto do morro era gratuito quando fomos. A regra que vimos bem clara: não pode fazer fogueira. E leve agasalho, porque a madrugada esfria.\n\nO guia completo, com pedágios e estrutura, está no site: estradaemdois.com.br",
+      "hashtags": ["#MorroDoFogao", "#Itirapina", "#InteriorDeSP", "#CampingGratis", "#EstradaEmDois"]
+    },
+    {
+      "id": "geysers-del-tatio-14-graus",
+      "titulo": "-14°C nos Geysers del Tatio",
+      "tipo": "IMAGEM",
+      "imagem": "assets/el-tatio-casal.webp",
+      "fonte": "https://estradaemdois.com.br/geysers-del-tatio.html",
+      "ativo": true,
+      "legenda": "-14°C. Foi isso que o termômetro marcou no dia em que fomos aos Geysers del Tatio, no Atacama.\n\nO passeio sai de San Pedro entre 4h e 5h da manhã, porque é no frio do amanhecer que o vapor dos gêiseres aparece bem. E lá em cima são mais de 4.300 m de altitude.\n\nDica de quem passou frio: roupa em camadas, segunda pele, gorro e luva. Calça jeans não esquenta e demora para secar.\n\nNo site contamos tudo o que levar: estradaemdois.com.br",
+      "hashtags": ["#GeysersDelTatio", "#Atacama", "#SanPedroDeAtacama", "#Chile", "#EstradaEmDois"]
+    },
+    {
+      "id": "cerro-toco-tres-passos",
+      "titulo": "Cerro Toco: três passos e deita",
+      "tipo": "IMAGEM",
+      "imagem": "assets/cerro-toco-descanso.webp",
+      "fonte": "https://estradaemdois.com.br/cerro-toco.html",
+      "ativo": true,
+      "legenda": "Três passos e deita. Esse foi o ritmo da subida do Cerro Toco, um vulcão de 5.604 m no Atacama.\n\nCom o ar rarefeito, cada passo pesa. Tinha gelo no caminho, vento fortíssimo e um frio que não deixava tirar a luva.\n\nFoi a coisa mais difícil que a gente já fez numa viagem. Contamos tudo no site e no vídeo do canal.",
+      "hashtags": ["#CerroToco", "#Atacama", "#Vulcao", "#Altitude", "#EstradaEmDois"]
+    },
+    {
+      "id": "cerro-toco-voltamos",
+      "titulo": "Por que voltamos a 400 m do cume",
+      "tipo": "IMAGEM",
+      "imagem": "assets/cerro-toco-vista.webp",
+      "fonte": "https://estradaemdois.com.br/cerro-toco.html",
+      "ativo": true,
+      "legenda": "A gente não chegou ao cume do Cerro Toco. Voltamos a uns 400 m do topo.\n\nAntes de começar, combinamos um horário-limite. O vento estava aumentando, os dois já sentiam a altitude e estávamos sozinhos, sem guia. Então decidimos descer enquanto ainda tinha sol.\n\nE não nos arrependemos. De lá vimos a paisagem mais bonita das nossas vidas: um mar de vulcões e o altiplano até perder de vista.",
+      "hashtags": ["#CerroToco", "#Atacama", "#Altiplano", "#Chile", "#EstradaEmDois"]
+    },
+    {
+      "id": "cerro-toco-carro-4x2",
+      "titulo": "Até onde o carro 4x2 aguentou no Cerro Toco",
+      "tipo": "IMAGEM",
+      "imagem": "assets/cerro-toco-cume.webp",
+      "fonte": "https://estradaemdois.com.br/cerro-toco.html",
+      "ativo": true,
+      "legenda": "Fomos ao Cerro Toco com o nosso carro 4x2, sabendo que ele não ia até o fim.\n\nPor volta dos 4.800 m o pneu começou a patinar na estrada de terra cheia de pedras. Tiramos as pedras maiores do caminho, avançamos mais um pouco e depois seguimos a pé até o estacionamento usado pelos 4x4. O altímetro marcou 5.235 m.\n\nSe for de carro: saia de San Pedro com tanque cheio. Depois de ficar parado no frio, o nosso não pegou de primeira.",
+      "hashtags": ["#CerroToco", "#ViagemDeCarro", "#Atacama", "#Chile", "#EstradaEmDois"]
+    },
+    {
+      "id": "valle-de-la-luna-outro-planeta",
+      "titulo": "Valle de la Luna, a paisagem de outro planeta",
+      "tipo": "IMAGEM",
+      "imagem": "assets/valle-de-la-luna-panoramica.webp",
+      "fonte": "https://estradaemdois.com.br/valle-de-la-luna.html",
+      "ativo": true,
+      "legenda": "O Valle de la Luna foi um dos lugares que mais surpreenderam a gente no Atacama. Areia, paredões e formações de pedra e sal que parecem de outro planeta.\n\nFica pertinho do centro de San Pedro de Atacama e a entrada é paga.\n\nDica: faça antes dos Geysers del Tatio. O Valle é mais baixo e ajuda na aclimatação.",
+      "hashtags": ["#ValleDeLaLuna", "#Atacama", "#SanPedroDeAtacama", "#Chile", "#EstradaEmDois"]
+    },
+    {
+      "id": "foz-em-1-dia",
+      "titulo": "Foz do Iguaçu em 1 dia: Cataratas e Itaipu",
+      "tipo": "IMAGEM",
+      "imagem": "assets/brasil-cataratas.webp",
+      "fonte": "https://estradaemdois.com.br/foz-do-iguacu-em-1-dia.html",
+      "ativo": true,
+      "legenda": "Só tem um dia em Foz do Iguaçu? Dá para ver as Cataratas e a Usina de Itaipu no mesmo dia.\n\nO segredo é chegar cedo, ter os ingressos comprados e não tentar encaixar o lado argentino, que precisa de um dia inteiro só para ele.\n\nA gente fez esse roteiro e transformou o passo a passo no e-book Foz do Iguaçu em 1 dia. Os detalhes estão no site: estradaemdois.com.br",
+      "hashtags": ["#FozDoIguacu", "#CataratasDoIguacu", "#Itaipu", "#Parana", "#EstradaEmDois"]
+    },
+    {
+      "id": "foz-garganta-do-diabo",
+      "titulo": "Cataratas: prepare-se para molhar",
+      "tipo": "IMAGEM",
+      "imagem": "assets/brasil-cataratas-mirante.webp",
+      "fonte": "https://estradaemdois.com.br/foz-do-iguacu-em-1-dia.html",
+      "ativo": true,
+      "legenda": "Perto da Garganta do Diabo, o spray da água encharca mesmo.\n\nO que ajuda no lado brasileiro das Cataratas:\n- chegar logo na abertura, quando a passarela está mais vazia\n- levar capa de chuva ou roupa que possa molhar\n- proteger o celular num saquinho estanque\n- roupa leve e tênis confortável\n\nA trilha até a passarela tem cerca de 1 km e em poucas horas dá para ver tudo com calma.",
+      "hashtags": ["#CataratasDoIguacu", "#FozDoIguacu", "#GargantaDoDiabo", "#DicasDeViagem", "#EstradaEmDois"]
+    },
+    {
+      "id": "serra-negra-fontana",
+      "titulo": "Serra Negra e a réplica da Fontana di Trevi",
+      "tipo": "IMAGEM",
+      "imagem": "assets/brasil-serra-negra-casal.webp",
+      "fonte": "https://estradaemdois.com.br/brasil.html",
+      "ativo": true,
+      "legenda": "A gente na réplica da Fontana di Trevi, em Serra Negra, no interior de São Paulo.\n\nPassear pelo centro é de graça. Algumas atrações da cidade cobram entrada.\n\nO vídeo dessa viagem está no nosso canal do YouTube.",
+      "hashtags": ["#SerraNegra", "#InteriorDeSP", "#FontanaDiTrevi", "#ViagemDeCarro", "#EstradaEmDois"]
+    },
+    {
+      "id": "lagoa-santa-por-do-sol",
+      "titulo": "Pôr do sol na Lagoa Santa, em Goiás",
+      "tipo": "IMAGEM",
+      "imagem": "assets/brasil-lagoa-santa-por-do-sol.webp",
+      "fonte": "https://estradaemdois.com.br/brasil.html",
+      "ativo": true,
+      "legenda": "Pôr do sol refletido na Lagoa Santa, em Goiás.\n\nÉ uma lagoa de águas termais. Hóspedes do Hotel Thermas entram de graça e para quem não está hospedado tem day use pago (confirme o valor antes de ir).\n\nO vídeo está no nosso canal do YouTube.",
+      "hashtags": ["#LagoaSanta", "#Goias", "#AguasTermais", "#PorDoSol", "#EstradaEmDois"]
+    },
+    {
+      "id": "norte-argentino-roteiro",
+      "titulo": "Norte argentino de carro",
+      "tipo": "IMAGEM",
+      "imagem": "assets/salta-norte-argentino.webp",
+      "fonte": "https://estradaemdois.com.br/argentina-atacama-de-carro.html",
+      "ativo": true,
+      "legenda": "Nessa viagem o caminho vale mais que o destino.\n\nSaindo de Salta, a estrada passa por vinhedos em Cafayate, pelas montanhas coloridas de Purmamarca, pelo deserto de sal das Salinas Grandes e pelo altiplano, até chegar a San Pedro de Atacama.\n\nUma viagem, dois países. O roteiro parada por parada está no site: estradaemdois.com.br",
+      "hashtags": ["#NorteArgentino", "#Salta", "#Purmamarca", "#ViagemDeCarro", "#EstradaEmDois"]
+    },
+    {
+      "id": "documentos-argentina-carro",
+      "titulo": "Checklist: documentos para entrar de carro na Argentina",
+      "tipo": "IMAGEM",
+      "imagem": "assets/argentina-atacama.webp",
+      "fonte": "https://estradaemdois.com.br/documentos-argentina-de-carro.html",
+      "ativo": true,
+      "legenda": "Na fronteira, faltou documento, o carro não passa.\n\nO checklist que a gente usa para entrar de carro na Argentina:\n- RG físico ou passaporte (RG digital e CNH não valem na imigração)\n- CNH física e válida\n- CRLV original e em dia\n- Carta Verde impressa\n- seguro viagem com cobertura médica\n- kit obrigatório do carro: 2 triângulos, extintor, colete, macaco, estepe e kit de primeiros socorros (exigido em algumas rodovias)\n\nO checklist completo está no site. Salve este post para a próxima viagem.",
+      "hashtags": ["#ArgentinaDeCarro", "#CartaVerde", "#ViagemDeCarro", "#DicasDeViagem", "#EstradaEmDois"]
+    },
+    {
+      "id": "el-tatio-vapor-amanhecer",
+      "titulo": "Por que o Tatio é de madrugada",
+      "tipo": "IMAGEM",
+      "imagem": "assets/el-tatio-campo.webp",
+      "fonte": "https://estradaemdois.com.br/geysers-del-tatio.html",
+      "ativo": true,
+      "legenda": "Por que o passeio aos Geysers del Tatio sai de madrugada?\n\nCom o ar muito frio do amanhecer, o vapor que sai do chão fica bem visível e forma essas colunas brancas. Conforme o sol esquenta, o vapor diminui.\n\nUm cuidado: são mais de 4.300 m de altitude. Deixe o Tatio para o fim da viagem, depois de alguns dias aclimatando em San Pedro, e ande devagar lá em cima.",
+      "hashtags": ["#ElTatio", "#Atacama", "#Geiseres", "#Chile", "#EstradaEmDois"]
+    },
+    {
+      "id": "quem-somos",
+      "titulo": "Quem somos",
+      "tipo": "IMAGEM",
+      "imagem": "assets/hero-casal.jpg",
+      "fonte": "https://estradaemdois.com.br/sobre.html",
+      "ativo": true,
+      "legenda": "Somos a Andressa e o Guilherme, e a gente viaja de carro.\n\nSaímos de São José do Rio Preto, no interior de São Paulo, e já rodamos pelo Brasil, pela Argentina e pelo Chile.\n\nAqui você encontra o que a gente viveu de verdade: o caminho parada por parada, os gastos, os documentos da fronteira e os perrengues que quase ninguém conta.\n\nOs vídeos saem primeiro no YouTube e os guias ficam no site.",
+      "hashtags": ["#ViagemDeCasal", "#ViagemDeCarro", "#CasalViajante", "#RioPreto", "#EstradaEmDois"]
+    }
+  ]
+}
