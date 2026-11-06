@@ -1,3 +1,13 @@
 {
-  "registros": []
+  "registros": [
+    {
+      "post_id": "morro-do-fogao-por-do-sol",
+      "issue": 9,
+      "status": "aguardando",
+      "criado_em": "2026-11-06T14:46:52-03:00",
+      "atualizado_em": "2026-11-06T14:46:52-03:00",
+      "arquivo": "2026-11-06-morro-do-fogao-por-do-sol.jpg",
+      "origem": "assets/morro-do-fogao.webp"
+    }
+  ]
 }
