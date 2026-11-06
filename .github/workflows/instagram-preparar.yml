@@ -1,0 +1,38 @@
+# Prepara uma sugestão de post por dia e pede a sua aprovação. NUNCA publica.
+name: "Instagram · 1. Preparar sugestão do dia"
+
+on:
+  schedule:
+    # 11:00 UTC = 08:00 em São Paulo (America/Sao_Paulo, UTC-3, sem horário de verão).
+    # O GitHub pode atrasar alguns minutos nos horários de pico.
+    - cron: "0 11 * * *"
+  workflow_dispatch: {}   # botão "Run workflow" para preparar uma sugestão na hora
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: instagram-automacao
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r instagram-automation/requirements.txt
+      - name: Preparar sugestão
+        working-directory: instagram-automation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_PAUSADO: ${{ vars.INSTAGRAM_PAUSADO }}
+        run: python -m automacao.preparar

@@ -1,0 +1,31 @@
+# Confere se o token do Instagram funciona e qual conta ele acessa. NUNCA publica.
+name: "Instagram · 3. Verificar conexão"
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 12 * * 1"   # toda segunda-feira, 09:00 em São Paulo
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r instagram-automation/requirements.txt
+      - name: Verificar token e conta
+        working-directory: instagram-automation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+        run: python -m automacao.verificar
