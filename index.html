@@ -22,64 +22,105 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/estilo.css?v=20261024d">
+<link rel="stylesheet" href="assets/novo.css?v=20261114">
 <link rel="preload" as="image" href="assets/hero-casal.webp">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://estradaemdois.com.br/#org", "name": "Estrada em Dois", "url": "https://estradaemdois.com.br/", "logo": "https://estradaemdois.com.br/assets/icone-512.png", "email": "estradaemdois@gmail.com", "sameAs": ["https://www.youtube.com/@Estradaemdois", "https://www.instagram.com/estradaemdois.oficial", "https://www.tiktok.com/@estradaemdois"]}, {"@type": "WebSite", "@id": "https://estradaemdois.com.br/#site", "name": "Estrada em Dois", "url": "https://estradaemdois.com.br/", "inLanguage": "pt-BR", "publisher": {"@id": "https://estradaemdois.com.br/#org"}}]}</script>
 </head>
 <body>
-<a class="pular" href="#conteudo">Pular para o conteúdo</a>
-<header class="topo">
-  <div class="container">
-    <a class="marca" href="./"><img src="assets/logo-montanha-traco.png" alt="" width="72" height="22">Estrada em Dois</a>
-    <button class="abrir-menu" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
-    <nav class="menu" id="menu" aria-label="Principal">
-      <a href="./#destinos">Destinos</a>
-      <a href="quicktrip/">Para onde ir?</a>
+<a class="nv-pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="nv-topo">
+  <div class="nv-container">
+    <a class="nv-marca" href="./"><img src="assets/logo-montanha-traco.png" alt="" width="72" height="22"><span>Estrada em Dois</span></a>
+    <nav class="nv-menu" aria-label="Principal">
+      <div class="nv-sub">
+        <button type="button" aria-haspopup="true">Destinos ▾</button>
+        <div class="nv-painel">
+          <a href="chile.html"><img src="assets/deserto-atacama.webp" alt="" width="44" height="44" loading="lazy"><div><strong>Chile</strong><small>Atacama, Tatio, Valle de la Luna</small></div></a>
+          <a href="argentina.html"><img src="assets/salta-norte-argentino.webp" alt="" width="44" height="44" loading="lazy"><div><strong>Argentina</strong><small>Salta, Jujuy, Salinas Grandes</small></div></a>
+          <a href="brasil.html"><img src="assets/brasil-cataratas.webp" alt="" width="44" height="44" loading="lazy"><div><strong>Brasil</strong><small>Foz, Itirapina, Serra Negra</small></div></a>
+          <a href="argentina-atacama-de-carro.html"><img src="assets/argentina-atacama.webp" alt="" width="44" height="44" loading="lazy"><div><strong>Argentina ao Atacama de carro</strong><small>Nosso roteiro completo</small></div></a>
+        </div>
+      </div>
+      <div class="nv-sub">
+        <button type="button" aria-haspopup="true">Guias práticos ▾</button>
+        <div class="nv-painel">
+          <a href="documentos-argentina-de-carro.html"><div><strong>Documentos para a Argentina de carro</strong><small>Carta Verde, CRLV, itens obrigatórios</small></div></a>
+          <a href="seguro-viagem-argentina-chile.html"><div><strong>Seguro viagem é obrigatório?</strong><small>Argentina, Chile e Uruguai</small></div></a>
+          <a href="viajar-sem-seguro-viagem.html"><div><strong>Viajar sem seguro: o que acontece</strong><small>E por que contratar depois não cobre</small></div></a>
+        </div>
+      </div>
       <a href="blog.html">Blog</a>
-      <a href="./#viagem">Indicações</a>
+      <a href="quicktrip/">Fim de semana</a>
       <a href="sobre.html">Sobre nós</a>
-      <a class="btn btn-contorno btn-sm btn-yt" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg> Inscreva-se</a>
-      <a class="btn btn-ambar btn-sm" href="midia-kit.html">Seja parceiro</a>
     </nav>
+    <button class="nv-btn-busca" type="button" aria-label="Buscar no site" data-abrir-busca><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    <a class="nv-btn nv-btn-ambar nv-btn-sm nv-parceria-topo" href="midia-kit.html">Parcerias</a>
+    <button class="nv-abrir-menu" type="button" aria-label="Abrir menu" aria-expanded="false" data-abrir-gaveta><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
   </div>
 </header>
-<main id="conteudo">
-
-<section class="hero" aria-labelledby="t-hero">
-  <img src="assets/hero-casal.webp" alt="Andressa e Guilherme na estrada, com montanhas ao fundo" width="1600" height="900" fetchpriority="high">
-  <div class="container">
-    <span class="apoio">Casal que viaja de carro · Brasil · Argentina · Chile</span>
-    <h1 id="t-hero" class="h1-longo">Roteiros de viagem de carro pela Argentina, Chile e Brasil, contados por quem fez.</h1>
-    <p class="lead">Roteiros parada por parada, dicas de fronteira e vídeos de cada viagem. Tudo o que a gente queria ter lido antes de pegar a estrada.</p>
-    <div class="acoes">
-      <a class="btn btn-ambar" href="blog.html">Ver roteiros e guias →</a>
-      <a class="btn btn-contorno" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg> Inscreva-se no canal</a>
+<div class="nv-gaveta" id="nv-gaveta" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="nv-linha-topo"><span class="nv-marca"><img src="assets/logo-montanha-traco.png" alt="" width="72" height="22">Estrada em Dois</span><button class="nv-fechar" type="button" aria-label="Fechar menu" data-fechar-gaveta>×</button></div>
+  <button class="nv-campo-busca" type="button" data-abrir-busca style="width:100%;background:var(--nv-papel);cursor:pointer;text-align:left;color:var(--nv-tinta-suave);font:400 1rem var(--nv-corpo);padding:12px 18px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17302A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg> Buscar: Atacama, seguro, Foz…</button>
+  <div class="nv-grupo"><h4>Destinos</h4><a href="chile.html">Chile</a><a href="argentina.html">Argentina</a><a href="brasil.html">Brasil</a><a href="argentina-atacama-de-carro.html">Argentina ao Atacama de carro</a></div>
+  <div class="nv-grupo"><h4>Planejar</h4><a href="documentos-argentina-de-carro.html">Documentos para a Argentina</a><a href="seguro-viagem-argentina-chile.html">Seguro viagem</a><a href="quicktrip/">Para onde ir no fim de semana</a><a href="blog.html">Todos os posts</a></div>
+  <div class="nv-grupo"><h4>A gente</h4><a href="sobre.html">Sobre nós</a><a href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener">Vídeos no YouTube</a><a href="https://www.instagram.com/estradaemdois.oficial" target="_blank" rel="noopener">Instagram</a></div>
+  <a class="nv-destaque" href="midia-kit.html"><strong>É marca, pousada ou passeio?</strong>Veja o mídia kit e fale com a gente →</a>
+</div>
+<div class="nv-busca-modal" id="nv-busca" role="dialog" aria-modal="true" aria-label="Buscar no site">
+  <div class="nv-busca-caixa">
+    <div class="nv-campo-busca"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17302A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><label class="nv-sr" for="nv-busca-input">Buscar no site</label><input type="search" id="nv-busca-input" placeholder="O que você está planejando?" autocomplete="off"><button class="nv-btn nv-btn-sm nv-btn-verde" type="button" data-fechar-busca>Fechar</button></div>
+    <div class="nv-resultados" id="nv-busca-res" aria-live="polite"></div>
+  </div>
+</div>
+<main id="conteudo" class="nv">
+  <section class="nv-hero" aria-labelledby="t-hero">
+    <img src="assets/hero-casal.webp" alt="Andressa e Guilherme na estrada, com montanhas ao fundo" width="1600" height="900" fetchpriority="high">
+    <div class="nv-container">
+      <span class="nv-apoio" style="color:var(--nv-ambar)">Casal que viaja de carro · Brasil · Argentina · Chile</span>
+      <h1 id="t-hero" class="nv-h1-longo">Roteiros de viagem de carro pela Argentina, Chile e Brasil, contados por quem fez.</h1>
+      <p class="nv-sub-hero">Roteiros parada por parada, dicas de fronteira e vídeos de cada viagem. Tudo o que a gente queria ter lido antes de pegar a estrada.</p>
+      <button class="nv-campo-busca" type="button" data-abrir-busca style="width:100%;cursor:pointer;text-align:left"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17302A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span style="flex:1;color:var(--nv-tinta-suave);font:400 1.05rem var(--nv-corpo);padding:10px 0">O que você está planejando?</span><span class="nv-btn nv-btn-ambar nv-btn-sm">Buscar</span></button>
+      <div class="nv-chips">
+        <a class="nv-chip" href="documentos-argentina-de-carro.html" data-buscar="argentina">Argentina de carro</a>
+        <a class="nv-chip" href="chile.html" data-buscar="atacama">Atacama</a>
+        <a class="nv-chip" href="seguro-viagem-argentina-chile.html" data-buscar="seguro">Seguro viagem</a>
+        <a class="nv-chip" href="quicktrip/">Fim de semana</a>
+      </div>
     </div>
-    <div class="numeros" aria-label="Estrada em Dois em números">
-      <div><strong>6,4 mil</strong><span>inscritos no YouTube</span></div>
-      <div><strong>3 países</strong><span>rodados de carro</span></div>
-      <div><strong>13,1 mil</strong><span>views no YouTube em 28 dias</span></div>
+  </section>
+
+  <div class="nv-caminhos">
+    <div class="nv-container nv-grade">
+      <a class="nv-caminho" href="blog.html"><span class="nv-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#17302A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></span><h2 style="font-size:1.15rem;margin:0">Vou planejar uma viagem</h2><p>Roteiros, documentos, seguro e o que esperar de cada lugar.</p><span class="nv-ir">Ver guias e roteiros →</span></a>
+      <a class="nv-caminho" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener"><span class="nv-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="#17302A" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg></span><h2 style="font-size:1.15rem;margin:0">Quero ver os vídeos</h2><p>Cada viagem vira vídeo no YouTube: 6,4 mil inscritos e 61 mil views em 90 dias.</p><span class="nv-ir">Assistir no YouTube →</span></a>
+      <a class="nv-caminho nv-marca-c" href="midia-kit.html"><span class="nv-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#17302A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span><h2 style="font-size:1.15rem;margin:0">Sou marca, pousada ou passeio</h2><p>Números, formatos de parceria e contato direto.</p><span class="nv-ir">Ver mídia kit →</span></a>
     </div>
   </div>
-</section>
 
-<section class="sec-atalhos" aria-labelledby="t-atalhos">
-  <div class="container">
-    <h2 id="t-atalhos" class="sr-only">Comece por aqui</h2>
-    <div class="atalhos">
-      <a class="atalho" href="documentos-argentina-de-carro.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h14M6.5 16l1.5-5h8l1.5 5"/><circle cx="8" cy="17.5" r="1.5"/><circle cx="16" cy="17.5" r="1.5"/><path d="M4 16v2M20 16v2"/></svg><span class="pergunta">Vai de carro para a Argentina?</span><span class="resposta">Documentos, Carta Verde e itens obrigatórios.</span></a>
-      <a class="atalho" href="seguro-viagem-argentina-chile.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="pergunta">Seguro viagem é obrigatório?</span><span class="resposta">O que vale para Argentina e Chile.</span></a>
-      <a class="atalho" href="chile.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19l6-10 4 6 2-3 6 7z"/><circle cx="17" cy="6" r="2"/></svg><span class="pergunta">O que fazer no Atacama?</span><span class="resposta">Valle de la Luna, Tatio e mais.</span></a>
-      <a class="atalho" href="foz-do-iguacu-em-1-dia.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span class="pergunta">Foz do Iguaçu em 1 dia dá?</span><span class="resposta">Cataratas e Itaipu no mesmo dia.</span></a>
+  <section class="nv-sec" style="padding-top:40px" aria-labelledby="t-comece">
+    <div class="nv-container">
+      <div class="nv-cab-secao"><div><span class="nv-apoio">Comece por aqui</span><h2 id="t-comece">As dúvidas mais comuns</h2></div></div>
+      <div class="nv-guias">
+        <a class="nv-guia" href="documentos-argentina-de-carro.html"><span aria-hidden="true">🚗</span><div><strong>Vai de carro para a Argentina?</strong><small>Documentos e itens obrigatórios</small></div></a>
+        <a class="nv-guia" href="seguro-viagem-argentina-chile.html"><span aria-hidden="true">🛡️</span><div><strong>Seguro viagem é obrigatório?</strong><small>Argentina, Chile e Uruguai</small></div></a>
+        <a class="nv-guia" href="chile.html"><span aria-hidden="true">⛰️</span><div><strong>O que fazer no Atacama?</strong><small>Valle de la Luna, Tatio e mais</small></div></a>
+        <a class="nv-guia" href="foz-do-iguacu-em-1-dia.html"><span aria-hidden="true">💧</span><div><strong>Foz do Iguaçu em 1 dia dá?</strong><small>Cataratas e Itaipu no mesmo dia</small></div></a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section aria-labelledby="t-qt" style="padding:40px 0 0">
-  <div class="container"><div class="qt qt-com-form">
-  <svg class="qt-mapa" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" class="qt-r3"/><circle cx="60" cy="60" r="36" class="qt-r2"/><circle cx="60" cy="60" r="18" class="qt-r1"/><circle cx="60" cy="60" r="6" class="qt-c"/><circle cx="92" cy="34" r="5" class="qt-p"/><circle cx="28" cy="78" r="5" class="qt-p"/><circle cx="74" cy="96" r="5" class="qt-p"/></svg>
-  <div class="qt-txt"><span class="apoio">QuickTrip</span><h2 id="t-qt">Para onde ir neste fim de semana?</h2><p>Escolha de onde você sai e o QuickTrip monta o fim de semana: destino, passeios, hospedagem e custo de combustível. Por enquanto, saindo de Rio Preto e região.</p>
-    <form class="qt-form" action="quicktrip/" method="get">
-      <label class="sr-only" for="qt-origem">De onde você vai sair?</label>
+  <section class="nv-sec" style="padding-top:0" id="destinos" aria-labelledby="t-destinos">
+    <div class="nv-container">
+      <div class="nv-cab-secao"><div><span class="nv-apoio">Destinos</span><h2 id="t-destinos">Por onde já passamos</h2></div><p>Cada país tem uma página com os lugares, roteiros e vídeos daquela viagem.</p></div>
+      <div class="nv-destinos">
+        <a class="nv-destino" href="chile.html"><img src="assets/deserto-atacama.webp" alt="Deserto do Atacama, no Chile" width="800" height="1000" loading="lazy" decoding="async"><div><h3>Chile</h3><small>Atacama · Valle de la Luna · Tatio · Cerro Toco</small></div></a>
+        <a class="nv-destino" href="argentina.html"><img src="assets/salta-norte-argentino.webp" alt="Montanhas coloridas do norte da Argentina" width="800" height="1000" loading="lazy" decoding="async"><div><h3>Argentina</h3><small>Salta · Jujuy · Salinas Grandes · fronteira</small></div></a>
+        <a class="nv-destino" href="brasil.html"><img src="assets/brasil-cataratas.webp" alt="Cataratas do Iguaçu" width="800" height="1000" loading="lazy" decoding="async"><div><h3>Brasil</h3><small>Foz do Iguaçu · Itirapina · Serra Negra · Lagoa Santa</small></div></a>
+      </div>
+      <div class="nv-qt" style="margin-top:20px">
+        <div><span class="nv-apoio" style="color:var(--nv-ambar)">QuickTrip</span><h3 style="font-size:1.4rem">Para onde ir neste fim de semana?</h3><p style="margin:0;opacity:.88">Escolha de onde você sai e o QuickTrip monta o fim de semana: destino, passeios, hospedagem e custo de combustível. Por enquanto, saindo de Rio Preto e região.</p></div>
+        <form class="nv-qt-form" action="quicktrip/" method="get">
+      <label class="nv-sr" for="qt-origem">De onde você vai sair?</label>
       <select id="qt-origem" name="origem" required>
           <option value="">De onde você sai?</option>
           <option value="sjrp">São José do Rio Preto</option>
@@ -91,214 +132,98 @@
           <option value="bebedouro">Bebedouro</option>
           <option value="olimpia">Olímpia</option>
       </select>
-      <button class="btn btn-ambar" type="submit">Ver destinos →</button>
+      <button class="nv-btn nv-btn-ambar" type="submit">Ver destinos →</button>
     </form>
-  </div>
-</div></div>
-</section>
-
-<section aria-labelledby="t-recentes" style="padding-top:64px">
-  <div class="container">
-    <div class="cabecalho-secao">
-      <div><span class="apoio">No blog</span><h2 id="t-recentes">Posts recentes</h2></div>
-      <a class="link-seta" href="blog.html">Todos os posts →</a>
-    </div>
-    <div class="posts">
-<a class="post-card" href="cerro-toco.html" data-cats="chile">
-  <div class="foto "><img src="assets/cerro-toco-card.webp" alt="Vista do altiplano a partir da subida do Cerro Toco" width="800" height="500" loading="lazy" decoding="async"></div>
-  <div class="corpo">
-    <div class="meta"><span class="tag">Chile</span><span>7 min de leitura</span></div>
-    <h3>Cerro Toco: como foi tentar subir a pé um vulcão de 5.604 m</h3>
-    <p>O carro 4x2 não subiu, seguimos a pé e voltamos a uns 400 m do cume. Altitude, frio, AllTrails e dicas.</p>
-    <span class="ler">Ler →</span>
-  </div>
-</a>
-<a class="post-card" href="geysers-del-tatio.html" data-cats="chile">
-  <div class="foto "><img src="assets/el-tatio-campo.webp" alt="Campo de gêiseres do El Tatio soltando vapor ao amanhecer" width="800" height="500" loading="lazy" decoding="async"></div>
-  <div class="corpo">
-    <div class="meta"><span class="tag">Chile</span><span>7 min de leitura</span></div>
-    <h3>Geysers del Tatio: como é o passeio mais frio do Atacama</h3>
-    <p>Saída de madrugada, -14°C no dia em que fomos e gêiseres a mais de 4.300 m. O que levar e como se preparar.</p>
-    <span class="ler">Ler →</span>
-  </div>
-</a>
-<a class="post-card" href="seguro-viagem-argentina-chile.html" data-cats="guias argentina chile">
-  <div class="foto "><img src="assets/argentina-atacama.webp" alt="Estrada no deserto entre Argentina e Chile" width="800" height="500" loading="lazy" decoding="async"></div>
-  <div class="corpo">
-    <div class="meta"><span class="tag">Guia prático</span><span>6 min de leitura</span></div>
-    <h3>Seguro viagem para Argentina e Chile: é obrigatório?</h3>
-    <p>O que mudou na Argentina, o que vale para o Chile e o que conferir antes de contratar para uma viagem de carro.</p>
-    <span class="ler">Ler →</span>
-  </div>
-</a>
-    </div>
-  </div>
-</section>
-
-<section class="escuro" id="videos" aria-labelledby="t-videos">
-  <div class="container">
-    <div class="cabecalho-secao">
-      <div><span class="apoio">Nossos vídeos</span><h2 id="t-videos">Aperte o play e viaje com a gente</h2></div>
-      <a class="btn btn-ambar" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg> Inscreva-se no canal</a>
-    </div>
-    <div class="videos">
-      <div class="video">
-        <button class="video-player" data-id="qj8gFhJovNI" aria-label="Assistir: o carro não aguentou e seguimos a pé no Cerro Toco" style="background-image:url('https://i.ytimg.com/vi/qj8gFhJovNI/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button>
-        <div class="legenda"><span>Chile · Atacama</span><h3>Cerro Toco: o carro não aguentou e seguimos a pé</h3><a class="ler-post" href="cerro-toco.html">Ler o guia →</a></div>
-      </div>
-      <div class="video">
-        <button class="video-player" data-id="8o86PJfPpd8" aria-label="Assistir: -14°C nos Geysers del Tatio" style="background-image:url('https://i.ytimg.com/vi/8o86PJfPpd8/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button>
-        <div class="legenda"><span>Chile · Atacama</span><h3>-14°C nos Geysers del Tatio</h3><a class="ler-post" href="geysers-del-tatio.html">Ler o guia →</a></div>
-      </div>
-      <div class="video">
-        <button class="video-player" data-id="DAbAPlA8q4s" aria-label="Assistir: Pôr do sol no Morro do Fogão" style="background-image:url('https://i.ytimg.com/vi/DAbAPlA8q4s/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button>
-        <div class="legenda"><span>Brasil · Itirapina (SP)</span><h3>Pôr do sol no Morro do Fogão</h3><a class="ler-post" href="morro-do-fogao-itirapina.html">Ler o guia →</a></div>
-      </div>
-      <div class="video">
-        <button class="video-player" data-id="U79G_vCdXJ4" aria-label="Assistir: Cataratas do Iguaçu" style="background-image:url('https://i.ytimg.com/vi/U79G_vCdXJ4/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button>
-        <div class="legenda"><span>Brasil · Foz do Iguaçu (PR)</span><h3>Cataratas do Iguaçu</h3><a class="ler-post" href="foz-do-iguacu-em-1-dia.html">Ler o guia →</a></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="destinos" aria-labelledby="t-destinos">
-  <div class="container">
-    <div class="cabecalho-secao">
-      <div><span class="apoio">Destinos</span><h2 id="t-destinos">Por onde já passamos</h2></div>
-      <p>Cada país tem uma página com os lugares, roteiros e vídeos daquela viagem.</p>
+  <section class="nv-sec nv-creme" aria-labelledby="t-posts">
+    <div class="nv-container">
+      <div class="nv-cab-secao"><div><span class="nv-apoio">No blog</span><h2 id="t-posts">Posts recentes</h2></div><a class="nv-link-seta" href="blog.html">Todos os posts →</a></div>
+      <div class="nv-rolagem"><a class="nv-post-card" href="viajar-sem-seguro-viagem.html" data-cats="guias argentina chile"><div class="nv-foto"><img src="assets/argentina-atacama.webp" alt="Estrada no deserto entre Argentina e Chile" width="800" height="500" loading="lazy" decoding="async"></div><div class="nv-corpo"><div class="nv-meta"><span class="nv-tag">Guia prático</span><span>7 min de leitura</span></div><h3>Viajar sem seguro viagem ou contratar só quando passar mal: o que acontece?</h3><p>Quem paga o hospital, o que muda na Argentina e por que o seguro comprado depois de ficar doente não cobre.</p></div></a><a class="nv-post-card" href="cerro-toco.html" data-cats="chile"><div class="nv-foto"><img src="assets/cerro-toco-vista.webp" alt="Vista do altiplano e dos vulcões a partir da subida do Cerro Toco, no Atacama" width="800" height="500" loading="lazy" decoding="async"></div><div class="nv-corpo"><div class="nv-meta"><span class="nv-tag">Chile</span><span>7 min de leitura</span></div><h3>Cerro Toco: como foi tentar subir a pé um vulcão de 5.604 m</h3><p>O carro 4x2 não subiu, seguimos a pé e voltamos a uns 400 m do cume. Altitude, frio, AllTrails e dicas.</p></div></a><a class="nv-post-card" href="geysers-del-tatio.html" data-cats="chile"><div class="nv-foto"><img src="assets/el-tatio-campo.webp" alt="Campo de gêiseres do El Tatio soltando vapor ao amanhecer" width="800" height="500" loading="lazy" decoding="async"></div><div class="nv-corpo"><div class="nv-meta"><span class="nv-tag">Chile</span><span>7 min de leitura</span></div><h3>Geysers del Tatio: como é o passeio mais frio do Atacama</h3><p>Saída de madrugada, -14°C no dia em que fomos e gêiseres a mais de 4.300 m. O que levar e como se preparar.</p></div></a><a class="nv-post-card" href="seguro-viagem-argentina-chile.html" data-cats="guias argentina chile"><div class="nv-foto"><img src="assets/argentina-atacama.webp" alt="Estrada no deserto entre Argentina e Chile" width="800" height="500" loading="lazy" decoding="async"></div><div class="nv-corpo"><div class="nv-meta"><span class="nv-tag">Guia prático</span><span>8 min de leitura</span></div><h3>Seguro viagem para Argentina, Chile e Uruguai: é obrigatório e qual a cobertura mínima?</h3><p>O que cada país exige, qual seguro a Argentina aceita, quanto de cobertura médica contratar, se o seguro do cartão vale e como usar o cupom ESTRADAEMDOIS.</p></div></a><a class="nv-post-card" href="foz-do-iguacu-em-1-dia.html" data-cats="brasil"><div class="nv-foto"><img src="assets/brasil-cataratas.webp" alt="Cataratas do Iguaçu vistas do lado brasileiro" width="800" height="500" loading="lazy" decoding="async"></div><div class="nv-corpo"><div class="nv-meta"><span class="nv-tag">Brasil</span><span>5 min de leitura</span></div><h3>Foz do Iguaçu em 1 dia: dá para ver Cataratas e Itaipu?</h3><p>Dá, sim. Horários, ingressos e o que saber para encaixar os dois passeios no mesmo dia.</p></div></a><a class="nv-post-card" href="morro-do-fogao-itirapina.html" data-cats="brasil"><div class="nv-foto"><img src="assets/morro-do-fogao.webp" alt="Paredão de rocha do Morro do Fogão com vista para o vale" width="800" height="500" loading="lazy" decoding="async"></div><div class="nv-corpo"><div class="nv-meta"><span class="nv-tag">Brasil</span><span>5 min de leitura</span></div><h3>Morro do Fogão, em Itirapina: acampar de graça e ver o pôr do sol</h3><p>Como chegar saindo de Rio Preto, pedágios, estrutura e as regras para acampar no alto do morro.</p></div></a></div>
     </div>
-    <div class="destinos">
-      <a class="destino" href="chile.html">
-        <div class="foto"><img src="assets/deserto-atacama.webp" alt="Deserto do Atacama, no Chile" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <div class="info"><h3>Chile</h3><ul><li>San Pedro de Atacama</li><li>Valle de la Luna</li><li>Geysers del Tatio</li><li>Cerro Toco</li><li>Valle de la Muerte</li></ul><span class="ir btn btn-ambar btn-sm">Ver Chile →</span></div>
-      </a>
-      <a class="destino" href="argentina.html">
-        <div class="foto"><img src="assets/salta-norte-argentino.webp" alt="Montanhas coloridas do norte da Argentina" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <div class="info"><h3>Argentina</h3><ul><li>Salta e Cafayate</li><li>Purmamarca e Jujuy</li><li>Salinas Grandes</li><li>Roteiro até o Atacama</li><li>Documentos para entrar de carro</li></ul><span class="ir btn btn-ambar btn-sm">Ver Argentina →</span></div>
-      </a>
-      <a class="destino" href="brasil.html">
-        <div class="foto"><img src="assets/brasil-cataratas.webp" alt="Cataratas do Iguaçu" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <div class="info"><h3>Brasil</h3><ul><li>Foz do Iguaçu (PR)</li><li>Morro do Fogão, Itirapina (SP)</li><li>Serra Negra e Águas de São Pedro (SP)</li><li>Lagoa Santa (GO)</li></ul><span class="ir btn btn-ambar btn-sm">Ver Brasil →</span></div>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="viagem" aria-labelledby="t-viagem" style="padding-top:0">
-  <div class="container">
-    <div class="cabecalho-secao">
-      <div><span class="apoio">Indicações</span><h2 id="t-viagem">O que a gente usa e indica</h2></div>
+  <section class="nv-sec nv-escuro" aria-labelledby="t-videos">
+    <div class="nv-container">
+      <div class="nv-cab-secao"><div><span class="nv-apoio">Nossos vídeos</span><h2 id="t-videos">Aperte o play e viaje com a gente</h2></div><a class="nv-btn nv-btn-ambar nv-btn-sm" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener">Inscrever-se no canal</a></div>
+      <div class="nv-rolagem"><div class="nv-video"><button class="video-player" data-id="qj8gFhJovNI" aria-label="Assistir: Cerro Toco: o carro não aguentou e seguimos a pé" style="background-image:url('https://i.ytimg.com/vi/qj8gFhJovNI/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button><div class="nv-txt"><small>Chile · Atacama</small><strong>Cerro Toco: o carro não aguentou e seguimos a pé</strong><a href="cerro-toco.html">Ler o guia →</a></div></div><div class="nv-video"><button class="video-player" data-id="8o86PJfPpd8" aria-label="Assistir: -14°C nos Geysers del Tatio" style="background-image:url('https://i.ytimg.com/vi/8o86PJfPpd8/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button><div class="nv-txt"><small>Chile · Atacama</small><strong>-14°C nos Geysers del Tatio</strong><a href="geysers-del-tatio.html">Ler o guia →</a></div></div><div class="nv-video"><button class="video-player" data-id="DAbAPlA8q4s" aria-label="Assistir: Pôr do sol no Morro do Fogão" style="background-image:url('https://i.ytimg.com/vi/DAbAPlA8q4s/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button><div class="nv-txt"><small>Brasil · Itirapina (SP)</small><strong>Pôr do sol no Morro do Fogão</strong><a href="morro-do-fogao-itirapina.html">Ler o guia →</a></div></div><div class="nv-video"><button class="video-player" data-id="U79G_vCdXJ4" aria-label="Assistir: Cataratas do Iguaçu" style="background-image:url('https://i.ytimg.com/vi/U79G_vCdXJ4/hqdefault.jpg')"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5Z"/></svg></span></button><div class="nv-txt"><small>Brasil · Foz do Iguaçu (PR)</small><strong>Cataratas do Iguaçu</strong><a href="foz-do-iguacu-em-1-dia.html">Ler o guia →</a></div></div></div>
     </div>
-    <div class="indicacoes">
-      <div class="produto destaque seguro-largo" id="seguro">
-        <div>
-          <span class="placa-real"><img src="assets/logo-real-seguro.svg" alt="Real Seguro Viagem" width="120" height="38" loading="lazy"></span>
-          <span class="apoio">Seguro viagem</span>
-          <h3>Viaje com mais tranquilidade</h3>
-          <p>A Argentina passou a exigir seguro saúde de turistas. Use nosso cupom na Real Seguro Viagem.</p>
+  </section>
+
+  <section class="nv-sec" id="viagem" aria-labelledby="t-indica">
+    <div class="nv-container">
+      <div class="nv-cab-secao"><div><span class="nv-apoio">Indicações</span><h2 id="t-indica">O que a gente usa e indica</h2></div></div>
+      <div class="nv-indicacoes">
+        <div class="nv-indic nv-seguro">
+          <span class="nv-apoio">Seguro viagem · parceiro</span>
+          <h3>Real Seguro Viagem com desconto</h3>
+          <p>A Argentina exige seguro de turistas. Compare planos de várias seguradoras e use o nosso cupom.</p>
+          <div class="nv-cupom">ESTRADAEMDOIS <button class="nv-btn nv-btn-ambar nv-btn-sm" type="button" data-copiar="ESTRADAEMDOIS">Copiar</button></div>
+          <a class="nv-btn nv-btn-ambar" href="https://seguroviagem.srv.br/?ag=kjpPH5KWjd" target="_blank" rel="sponsored noopener">Cotar seguro →</a>
+          <span class="nv-fino">Link de parceiro: podemos ganhar comissão, sem custo extra para você.</span>
         </div>
-        <div>
-          <div class="cupom"><code>ESTRADAEMDOIS</code><button class="btn btn-ambar btn-sm" type="button" data-copiar="ESTRADAEMDOIS">Copiar</button></div>
-          <div class="acoes"><a class="btn btn-ambar" href="https://seguroviagem.srv.br/?ag=kjpPH5KWjd" target="_blank" rel="sponsored noopener">Cotar seguro →</a></div>
-          <p class="aviso">Link de parceiro: podemos ganhar comissão, sem custo extra para você.</p>
+        <div class="nv-indic">
+          <span class="nv-apoio">Lojinha na Shopee</span>
+          <h3>Achadinhos que a gente usa na estrada</h3>
+          <p>Itens de carro, camping e viagem que levamos, todos num lugar só.</p>
+          <a class="nv-btn nv-btn-verde nv-btn-sm" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="sponsored noopener">Ver a lojinha →</a>
+        </div>
+        <div class="nv-indic">
+          <span class="nv-apoio">E-book</span>
+          <h3>Foz do Iguaçu em 1 dia</h3>
+          <p>PDF de 8 páginas com a ordem dos passeios, gastos, horários e checklist.</p>
+          <a class="nv-btn nv-btn-verde nv-btn-sm" href="https://go.hotmart.com/U107773484C" target="_blank" rel="noopener">Quero o e-book →</a>
         </div>
       </div>
-      <div class="produto" id="lojinha">
-        <div class="capa-loja"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Lojinha Estrada em Dois</span></div>
-        <span class="apoio">Lojinha na Shopee</span>
-        <h3>Achadinhos que a gente usa na estrada</h3>
-        <p>Itens de carro, camping e viagem que levamos nas nossas viagens, todos num lugar só.</p>
-        <div class="acoes"><a class="btn btn-verde" href="https://collshp.com/estradaemdois?view=storefront" target="_blank" rel="sponsored noopener">Ver a lojinha →</a></div>
-      </div>
-      <div class="produto">
-        <div class="foto capa-ebook"><img src="assets/ebook-foz-1-dia.webp" alt="Capa do e-book Foz do Iguaçu em 1 dia" width="800" height="600" loading="lazy" decoding="async"></div>
-        <span class="apoio">E-book</span>
-        <h3>Foz do Iguaçu em 1 dia: Itaipu + Cataratas</h3>
-        <p>PDF de 8 páginas com a ordem dos passeios, gastos, horários e checklist.</p>
-        <div class="acoes"><a class="btn btn-verde" href="https://go.hotmart.com/U107773484C" target="_blank" rel="noopener">Quero o e-book →</a></div>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="escuro" id="parcerias" aria-labelledby="t-parcerias">
-  <div class="container parceria">
-    <div>
-      <span class="apoio">Para marcas, pousadas e passeios</span>
-      <h2 id="t-parcerias">Vamos mostrar o seu lugar para quem viaja de carro?</h2>
-      <p>Vídeos no YouTube, Reels, TikTok e guias aqui no site, com filmagens de drone. A gente vai, vive a experiência e conta do nosso jeito.</p>
-      <div class="acoes"><a class="btn btn-ambar" href="midia-kit.html">Ver mídia kit →</a><a class="btn btn-contorno" href="https://wa.me/5517997290389" target="_blank" rel="noopener">Falar no WhatsApp</a></div>
+  <section class="nv-sec nv-verde" aria-labelledby="t-parceria">
+    <div class="nv-container nv-parceria-faixa">
+      <div>
+        <span class="nv-apoio">Para marcas, pousadas e passeios</span>
+        <h2 id="t-parceria">Vamos mostrar o seu lugar para quem viaja de carro?</h2>
+        <p style="opacity:.88">Vídeos no YouTube, Reels, TikTok e guias aqui no site, com filmagens de drone. A gente vai, vive a experiência e conta do nosso jeito.</p>
+        <div class="nv-botoes"><a class="nv-btn nv-btn-ambar" href="midia-kit.html">Ver mídia kit →</a><a class="nv-btn nv-btn-contorno" href="https://wa.me/5517997290389" target="_blank" rel="noopener">Falar no WhatsApp</a></div>
+      </div>
+      <div class="nv-numeros">
+        <div class="nv-numero"><b>6,4 mil</b><span>inscritos no YouTube</span></div>
+        <div class="nv-numero"><b>61 mil</b><span>views no YouTube em 90 dias</span></div>
+        <div class="nv-numero"><b>19,4 mil</b><span>contas alcançadas no Instagram em 30 dias</span></div>
+        <div class="nv-numero"><b>3 países</b><span>Brasil, Argentina e Chile</span></div>
+      </div>
     </div>
-    <div class="cartoes-num">
-      <div class="cartao-num"><strong>6,4 mil</strong><span>inscritos no YouTube</span></div>
-      <div class="cartao-num"><strong>13,1 mil</strong><span>views no YouTube em 28 dias</span></div>
-      <div class="cartao-num"><strong>6,2 mil</strong><span>views no Short mais visto</span></div>
-      <div class="cartao-num"><strong>3 países</strong><span>Brasil, Argentina e Chile</span></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="creme" id="sobre" aria-labelledby="t-sobre">
-  <div class="container sobre">
-    <div class="foto "><img src="assets/el-tatio-casal.webp" alt="Andressa e Guilherme no El Tatio, no Chile, com -14°C" width="900" height="1125" loading="lazy" decoding="async"></div>
-    <div>
-      <img class="letreiro" src="assets/logo-letreiro.webp" alt="Estrada em Dois" width="340" height="147" loading="lazy">
-      <h2 id="t-sobre" class="sr-only">Sobre o Estrada em Dois</h2>
-      <p>A gente é a Andressa e o Guilherme. Viajamos de carro pelo Brasil, Argentina e Chile e contamos tudo: as paisagens, os quilômetros rodados e os perrengues que ninguém conta.</p>
-      <p>Cada destino sai primeiro no YouTube e no Instagram. Vem com a gente. <a href="sobre.html">Conheça a nossa história →</a></p>
-      <div class="acoes"><a class="btn btn-verde" href="https://www.youtube.com/@Estradaemdois?sub_confirmation=1" target="_blank" rel="noopener"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg> Inscrever-se no YouTube</a><a class="btn btn-contorno" href="https://www.instagram.com/estradaemdois.oficial" target="_blank" rel="noopener"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm4.9-8.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM12 3.6c2.7 0 3 0 4.1.1 2.7.1 4 1.4 4.1 4.1.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 2.7-1.4 4-4.1 4.1-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-2.7-.1-4-1.4-4.1-4.1C3.7 15 3.6 14.7 3.6 12s0-3 .1-4.1c.1-2.7 1.4-4 4.1-4.1 1.1-.1 1.4-.2 4.2-.2ZM12 2c-2.7 0-3.1 0-4.1.1C4.2 2.2 2.2 4.2 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-3.7-2.1-5.7-5.8-5.8C15.1 2 14.7 2 12 2Z"/></svg> Seguir no Instagram</a></div>
-      <p class="linha-marcas">É uma marca, pousada ou passeio? <a href="midia-kit.html">Conheça nossas parcerias →</a></p>
+  <section class="nv-sec nv-creme" aria-labelledby="t-sobre">
+    <div class="nv-container nv-sobre-curto">
+      <img src="assets/el-tatio-casal.webp" alt="Andressa e Guilherme no El Tatio, no Chile, com -14°C" width="900" height="1125" loading="lazy" decoding="async">
+      <div>
+        <span class="nv-apoio">Quem somos</span>
+        <h2 id="t-sobre">A gente é a Andressa e o Guilherme.</h2>
+        <p>Viajamos de carro pelo Brasil, Argentina e Chile e contamos tudo: as paisagens, os quilômetros rodados e os perrengues que ninguém conta.</p>
+        <div class="nv-botoes"><a class="nv-btn nv-btn-verde" href="sobre.html">Conheça a nossa história →</a><a class="nv-btn nv-btn-contorno" href="https://www.instagram.com/estradaemdois.oficial" target="_blank" rel="noopener">Seguir no Instagram</a></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 </main>
-<footer class="rodape">
-  <div class="container">
-    <div class="grade">
+<footer class="nv-rodape">
+  <div class="nv-container">
+    <div class="nv-grade">
       <div>
-        <img class="letreiro" src="assets/logo-letreiro-creme.webp" alt="Estrada em Dois: viagens, explorando, vivendo" width="230" height="100" loading="lazy">
+        <img src="assets/logo-letreiro-creme.webp" alt="Estrada em Dois: viagens, explorando, vivendo" width="200" height="87" loading="lazy" style="margin-bottom:14px">
         <p>Andressa e Guilherme, um casal que viaja de carro pelo Brasil, Argentina e Chile e conta tudo por aqui.</p>
-        <div class="redes">
-          <a href="https://www.youtube.com/@Estradaemdois" aria-label="YouTube" rel="me noopener" target="_blank"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg></a>
-          <a href="https://www.instagram.com/estradaemdois.oficial" aria-label="Instagram" rel="me noopener" target="_blank"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm4.9-8.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM12 3.6c2.7 0 3 0 4.1.1 2.7.1 4 1.4 4.1 4.1.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 2.7-1.4 4-4.1 4.1-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-2.7-.1-4-1.4-4.1-4.1C3.7 15 3.6 14.7 3.6 12s0-3 .1-4.1c.1-2.7 1.4-4 4.1-4.1 1.1-.1 1.4-.2 4.2-.2ZM12 2c-2.7 0-3.1 0-4.1.1C4.2 2.2 2.2 4.2 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-3.7-2.1-5.7-5.8-5.8C15.1 2 14.7 2 12 2Z"/></svg></a>
-          <a href="https://www.tiktok.com/@estradaemdois" aria-label="TikTok" rel="me noopener" target="_blank"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.3v13.2a2.8 2.8 0 1 1-2-2.7V9.1a6.1 6.1 0 1 0 5.3 6.1V8.6a7.6 7.6 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4Z"/></svg></a>
-        </div>
+        <div class="nv-redes"><a href="https://www.youtube.com/@Estradaemdois" aria-label="YouTube" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.2 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg></a><a href="https://www.instagram.com/estradaemdois.oficial" aria-label="Instagram" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm4.9-8.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM12 3.6c2.7 0 3 0 4.1.1 2.7.1 4 1.4 4.1 4.1.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 2.7-1.4 4-4.1 4.1-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-2.7-.1-4-1.4-4.1-4.1C3.7 15 3.6 14.7 3.6 12s0-3 .1-4.1c.1-2.7 1.4-4 4.1-4.1 1.1-.1 1.4-.2 4.2-.2ZM12 2c-2.7 0-3.1 0-4.1.1C4.2 2.2 2.2 4.2 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-3.7-2.1-5.7-5.8-5.8C15.1 2 14.7 2 12 2Z"/></svg></a><a href="https://www.tiktok.com/@estradaemdois" aria-label="TikTok" rel="me noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.3v13.2a2.8 2.8 0 1 1-2-2.7V9.1a6.1 6.1 0 1 0 5.3 6.1V8.6a7.6 7.6 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4Z"/></svg></a></div>
       </div>
-      <div>
-        <h4>Destinos</h4>
-        <ul>
-          <li><a href="chile.html">Chile</a></li>
-          <li><a href="argentina.html">Argentina</a></li>
-          <li><a href="brasil.html">Brasil</a></li>
-          <li><a href="argentina-atacama-de-carro.html">Argentina e Atacama de carro</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Conteúdo</h4>
-        <ul>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="documentos-argentina-de-carro.html">Documentos para a Argentina</a></li>
-          <li><a href="quicktrip/">Para onde ir no fim de semana</a></li>
-          <li><a href="https://collshp.com/estradaemdois?view=storefront" rel="noopener" target="_blank">Lojinha na Shopee</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contato</h4>
-        <ul>
-          <li><a href="mailto:estradaemdois@gmail.com">estradaemdois@gmail.com</a></li>
-          <li><a href="https://wa.me/5517997290389" rel="noopener" target="_blank">WhatsApp (17) 99729-0389</a></li>
-          <li><a href="sobre.html">Sobre nós</a></li>
-          <li><a href="midia-kit.html">Parcerias e mídia kit</a></li>
-        </ul>
-      </div>
+      <div><h4>Destinos</h4><ul><li><a href="chile.html">Chile</a></li><li><a href="argentina.html">Argentina</a></li><li><a href="brasil.html">Brasil</a></li><li><a href="argentina-atacama-de-carro.html">Argentina e Atacama de carro</a></li></ul></div>
+      <div><h4>Planejar</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="documentos-argentina-de-carro.html">Documentos para a Argentina</a></li><li><a href="seguro-viagem-argentina-chile.html">Seguro viagem</a></li><li><a href="quicktrip/">Para onde ir no fim de semana</a></li><li><a href="sobre.html">Sobre nós</a></li><li><a href="https://collshp.com/estradaemdois?view=storefront" rel="noopener" target="_blank">Lojinha na Shopee</a></li></ul></div>
+      <div class="nv-para-marcas"><h4>Para marcas</h4><p>Pousada, passeio ou produto? Veja números e formatos de parceria.</p><a class="nv-btn nv-btn-ambar nv-btn-sm" href="midia-kit.html">Ver mídia kit →</a><p style="margin:12px 0 0;font-size:.85rem"><a href="mailto:estradaemdois@gmail.com">estradaemdois@gmail.com</a><br><a href="https://wa.me/5517997290389" rel="noopener" target="_blank">WhatsApp (17) 99729-0389</a></p></div>
     </div>
-    <div class="base">
-      <span>© <span id="ano">2026</span> Estrada em Dois. Viagens · experiências · histórias.</span>
-      <span>Alguns links são de parceiros: podemos ganhar comissão, sem custo extra para você.</span>
-    </div>
+    <div class="nv-base"><span>© <span id="ano">2026</span> Estrada em Dois. Viagens · experiências · histórias.</span><span>Alguns links são de parceiros: podemos ganhar comissão, sem custo extra para você.</span></div>
   </div>
 </footer>
-<script src="assets/site.js" defer></script>
+<script src="assets/site.js?v=20261114" defer></script>
 </body>
 </html>
