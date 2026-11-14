@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Gera as duas versões da página a partir de src/pagina.html e dos JSON em quicktrip/dados.
+"""Gera a página do QuickTrip a partir de src/pagina.html e dos JSON em quicktrip/dados.
 
-  quicktrip/index.html                versão do site: marca e rodapé do Estrada em Dois, mapa real
-                                      (Leaflet + OpenStreetMap), lê dados/*.json
-  _ferramentas/artefato/escapadas.html  (só com --artefato) versão de arquivo único de demonstração (dados
-                                      embutidos, mapa esquemático em SVG)
+  quicktrip/index.html          versão do site: topo, menu, busca e rodapé do Estrada em Dois (copiados da
+                                página inicial, com links a partir da raiz), mapa real (Leaflet + OpenStreetMap),
+                                lê dados/*.json
+  _ferramentas/artefato/        (só com --artefato) prévia de arquivo único: dados e estilos embutidos,
+                                mapa esquemático em SVG e fotos locais em fotos/<id>.jpg
 
-Uso, a partir de qualquer pasta:  python3 quicktrip/_ferramentas/build.py
+Uso, a partir de qualquer pasta:  python3 quicktrip/_ferramentas/build.py [--artefato]
 """
 import argparse
 import json
@@ -15,6 +16,7 @@ import re
 
 RAIZ = pathlib.Path(__file__).resolve().parent  # quicktrip/_ferramentas
 PAGINA = RAIZ.parent  # quicktrip
+SITE_RAIZ = PAGINA.parent  # raiz do repositório
 DADOS = PAGINA / "dados"
 
 SITE = "https://estradaemdois.com.br"
@@ -24,6 +26,7 @@ DESCRICAO = (
     "dentro do raio, com pontos turísticos, eventos, hospedagem, custo de combustível e rota, "
     "e sorteia um destino para você."
 )
+V = "20261114b"
 
 # hashes SRI conferidos contra o pacote npm leaflet@1.9.4
 LEAFLET = (
@@ -34,7 +37,7 @@ LEAFLET = (
 )
 
 HEAD_SITE = f"""<meta name="description" content="{DESCRICAO}">
-<meta name="theme-color" content="#07343c">
+<meta name="theme-color" content="#17302A">
 <link rel="canonical" href="{SITE}/quicktrip/">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png"><link rel="apple-touch-icon" href="/assets/icon-180.png">
 <meta property="og:type" content="website">
@@ -45,20 +48,12 @@ HEAD_SITE = f"""<meta name="description" content="{DESCRICAO}">
 <meta property="og:image" content="{SITE}/assets/hero-casal.jpg">
 <meta property="og:locale" content="pt_BR">
 <meta name="robots" content="index, follow">
+<link rel="stylesheet" href="/assets/novo.css?v={V}">
 {LEAFLET}"""
 
-MARCA_SITE = (
-    '<a class="site-logo" href="/" aria-label="Estrada em Dois, página inicial">'
-    '<img src="/assets/logo-estrada-em-dois.webp" alt="Estrada em Dois" width="52" height="52"></a>'
-)
-VOLTAR_SITE = '<a class="voltar" href="/">← Estrada em Dois</a>'
-RODAPE_SITE = (
-    '<p>QuickTrip é um projeto do <a href="/">Estrada em Dois</a>. '
-    '© 2026 Estrada em Dois. Todos os direitos reservados.</p>'
-)
 NOTA_ARTEFATO = (
-    "<p>Esta é a versão de demonstração. O mapa é esquemático e as estrelas aparecem como links para o Google Maps. "
-    "A versão do projeto tem mapa real, avaliações e eventos atualizados por script. Os espaços de parceiros são vagas de exemplo.</p>"
+    "<p><strong>Prévia:</strong> o mapa aparece em versão esquemática e as fotos vêm embutidas. "
+    "No site, o mapa é o real (OpenStreetMap).</p>"
 )
 
 
@@ -71,39 +66,68 @@ def json_para_script(obj):
     return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/").replace("<!--", "<\\!--")
 
 
+def absolutizar(html):
+    """Links relativos da página inicial passam a partir da raiz do site (a página fica em /quicktrip/)."""
+    def troca(m):
+        attr, url = m.group(1), m.group(2)
+        if re.match(r"^(https?:|mailto:|tel:|#|/)", url):
+            return m.group(0)
+        if url in ("./", ""):
+            url = ""
+        return f'{attr}="/{url}"'
+    return re.sub(r'\b(href|src)="([^"]*)"', troca, html)
+
+
+def pecas_do_site():
+    """Topo (pular, cabeçalho, menu do celular e busca) e rodapé, iguais aos da página inicial."""
+    idx = (SITE_RAIZ / "index.html").read_text(encoding="utf-8")
+    i = idx.index("<body>") + len("<body>")
+    j = idx.index("<main", i)
+    topo = absolutizar(idx[i:j].strip())
+    topo = topo.replace('href="/quicktrip/">Fim de semana', 'href="/quicktrip/" aria-current="page">Fim de semana')
+    a = idx.index('<footer class="nv-rodape">')
+    b = idx.index("</footer>", a) + len("</footer>")
+    rodape = absolutizar(idx[a:b])
+    return topo, rodape
+
+
 def montar_site(modelo):
-    corte = modelo.index('<div class="wrap">')
-    cabeca, corpo = modelo[:corte], modelo[corte:]
-    cabeca = cabeca.replace('<meta name="claude:viewport-fit-sides" content="cover">\n', "")
-    cabeca = cabeca.replace("<title>QuickTrip</title>", f"<title>{TITULO_SITE}</title>")
-    cabeca = cabeca.replace("<!--EXTRA_HEAD-->", HEAD_SITE)
-    corpo = corpo.replace("/*INLINE*/null", "null").replace("<!--NOTA_ARTEFATO-->", "")
-    corpo = corpo.replace("<!--MARCA_SITE-->", MARCA_SITE).replace("<!--VOLTAR_SITE-->", VOLTAR_SITE)
-    corpo = corpo.replace("<!--RODAPE_SITE-->", RODAPE_SITE)
-    return '<!doctype html>\n<html lang="pt-BR">\n<head>\n' + cabeca + "</head>\n<body>\n" + corpo + "</body>\n</html>\n"
+    topo, rodape = pecas_do_site()
+    t = modelo.replace("<title>QuickTrip</title>", f"<title>{TITULO_SITE}</title>")
+    t = t.replace("<!--EXTRA_HEAD-->", HEAD_SITE)
+    t = t.replace("<!--TOPO_SITE-->", topo).replace("<!--RODAPE_SITE-->", rodape + f'\n<script src="/assets/site.js?v={V}" defer></script>')
+    t = t.replace("/*INLINE*/null", "null").replace("<!--NOTA_ARTEFATO-->", "")
+    fim_estilo = t.index("</style>") + len("</style>")
+    return '<!doctype html>\n<html lang="pt-BR">\n<head>\n' + t[:fim_estilo] + "\n</head>\n<body>\n" + t[fim_estilo:].lstrip() + "</body>\n</html>\n"
 
 
 def montar_artefato(modelo):
+    topo, rodape = pecas_do_site()
+    # imagens do topo/rodapé ficam junto da prévia
+    topo = topo.replace('src="/assets/', 'src="img/')
+    rodape = rodape.replace('src="/assets/', 'src="img/')
+    novo_css = (SITE_RAIZ / "assets" / "novo.css").read_text(encoding="utf-8")
+    js_site = (SITE_RAIZ / "assets" / "site.js").read_text(encoding="utf-8")
     texto = modelo.replace('<meta charset="utf-8">\n', "")
     texto = texto.replace('<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n', "")
-    texto = texto.replace("<!--EXTRA_HEAD-->\n", "")
+    texto = texto.replace("<!--EXTRA_HEAD-->\n", "<style>\n" + novo_css + "\n</style>\n")
     dados = {"destinos": ler("destinos.json"), "eventos": ler("eventos.json"), "avaliacoes": ler("avaliacoes.json")}
-    texto = texto.replace("/*INLINE*/null", json_para_script(dados))
-    texto = re.sub(r"[ \t]*<!--(MARCA_SITE|VOLTAR_SITE|RODAPE_SITE)-->\n?", "", texto)
+    texto = texto.replace("/*INLINE*/null", json_para_script(dados)).replace("/*FOTO_LOCAL*/false", "true")
+    texto = texto.replace("<!--TOPO_SITE-->", topo).replace("<!--RODAPE_SITE-->", rodape + "\n<script>\n" + js_site + "\n</script>")
     return texto.replace("<!--NOTA_ARTEFATO-->", NOTA_ARTEFATO)
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--artefato", action="store_true", help="gera também a versão de demonstração de arquivo único")
+    ap.add_argument("--artefato", action="store_true", help="gera também a prévia de arquivo único")
     args = ap.parse_args()
     modelo = (RAIZ / "src" / "pagina.html").read_text(encoding="utf-8")
     (PAGINA / "index.html").write_text(montar_site(modelo), encoding="utf-8")
     print("Gerado: quicktrip/index.html")
     if args.artefato:
         (RAIZ / "artefato").mkdir(exist_ok=True)
-        (RAIZ / "artefato" / "escapadas.html").write_text(montar_artefato(modelo), encoding="utf-8")
-        print("Gerado: quicktrip/_ferramentas/artefato/escapadas.html")
+        (RAIZ / "artefato" / "index.html").write_text(montar_artefato(modelo), encoding="utf-8")
+        print("Gerado: quicktrip/_ferramentas/artefato/index.html")
 
 
 if __name__ == "__main__":

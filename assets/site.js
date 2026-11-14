@@ -90,7 +90,7 @@
     var n = norm(q.trim());
     var lista = n ? PAGINAS.filter(function (p) { return norm(p.t + ' ' + p.d + ' ' + p.c + ' ' + p.g).indexOf(n) > -1; }) : PAGINAS.slice(0, 6);
     res.innerHTML = lista.length ? lista.map(function (p) {
-      return '<a href="' + esc(p.u) + '">' + (p.i ? '<img src="' + esc(p.i) + '" alt="" width="64" height="44" loading="lazy">' : '') + '<div><strong>' + esc(p.t) + '</strong><small>' + esc(p.g) + ' · ' + esc(p.d) + '</small></div></a>';
+      return '<a href="/' + esc(p.u) + '">' + (p.i ? '<img src="/' + esc(p.i) + '" alt="" width="64" height="44" loading="lazy">' : '') + '<div><strong>' + esc(p.t) + '</strong><small>' + esc(p.g) + ' · ' + esc(p.d) + '</small></div></a>';
     }).join('') : '<p style="padding:10px;margin:0">Nada encontrado. Tente "Atacama", "seguro" ou "Foz".</p>';
   }
   function abrirBusca(q) {

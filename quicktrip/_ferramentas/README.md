@@ -1,6 +1,6 @@
 # QuickTrip
 
-Página do Estrada em Dois que lista destinos de viagem curta num raio de até 200 km da cidade escolhida. Mostra pontos turísticos, ideias de hospedagem, eventos, estimativa de combustível e link para traçar a rota no Google Maps. Tem um botão que sorteia um destino dentro do raio e filtros por duração e interesse. O mapa é real (Leaflet + OpenStreetMap). O visual usa o tema escuro em azul-petróleo do site e um tema claro em creme, conforme a preferência do aparelho.
+Página do Estrada em Dois que lista destinos de viagem curta num raio de até 200 km da cidade escolhida. Mostra pontos turísticos, ideias de hospedagem, eventos, estimativa de combustível e link para traçar a rota no Google Maps. Tem um botão que sorteia um destino dentro do raio e filtros por duração e interesse. O mapa é real (Leaflet + OpenStreetMap). O visual segue o layout do site Estrada em Dois.
 
 Endereço: `https://estradaemdois.com.br/quicktrip/`
 
@@ -28,20 +28,17 @@ python3 -m http.server 8000                 # na raiz do repositório
 
 Abrir o `index.html` direto do disco não funciona, porque o navegador bloqueia a leitura dos JSON, e a marca e o ícone usam caminhos a partir da raiz do site. Use o servidor local acima.
 
-## Monte seu fim de semana (assistente)
+## Como a página funciona (layout novo, nov/2026)
 
-A página abre com um assistente em 8 etapas, uma por vez. Cada etapa obrigatória só libera o botão "Continuar" depois de respondida:
+A página usa a identidade do site (verde, creme e âmbar) e o mesmo topo, menu, busca e rodapé da página inicial. O `build.py` copia essas partes do `index.html` da raiz, com os links a partir de `/`, então rode o build de novo sempre que o topo ou o rodapé do site mudarem.
 
-1. Saída (cidade de origem), 2. Tempo (bate-volta, 1 noite, 2 noites ou mais), 3. Companhia, 4. Clima (os interesses de `tags`, ou "Tanto faz"),
-5. Transporte e consumo/preço do litro (opcional; "Pular" usa valores de exemplo), 6. Seu destino, 7. Custos, 8. Onde ficar (última etapa, com hospedagem).
+Tudo fica numa tela só, sem etapas: saída, tempo (bate-volta, 1 noite, 2 noites ou mais), companhia e interesses (as `tags`). O resultado aparece logo abaixo e se atualiza a cada mudança:
 
-A ferramenta escolhe o destino e os lugares do roteiro: pontua os destinos dentro do tempo escolhido por interesses e companhia, e sorteia entre os melhores. "Escolher outro destino" passa para o próximo da lista. "Me surpreenda" (etapa 1) preenche o resto e vai direto ao resultado. A lista completa com mapa continua disponível em "Prefiro ver todos os destinos".
-
-- Roteiro: bate-volta usa até 3 lugares, 1 noite até 5 em 2 dias, 2 noites ou mais distribui todos em 3 dias. Os lugares vêm de `pontos`, na ordem do arquivo (coloque os principais primeiro).
-- Se nenhum destino cabe no tempo ou nos interesses, o assistente avisa e escolhe o mais próximo, sem beco sem saída.
-- Transporte: carro e moto calculam combustível; "Ônibus ou outro" pede o valor da passagem.
-- Favoritos ficam só no navegador (localStorage). O link `?origem=sjrp&destino=olimpia` abre direto na etapa do destino.
-- Os climas disponíveis vêm das `tags` dos destinos. Para oferecer "Serra e frio" ou "Romance", adicione destinos com essas tags.
+- **Sugestão**: o destino mais bem pontuado, com foto, roteiro por dia (a partir de `pontos`), custo da estrada (combustível, pedágio opcional, pessoas dividindo e ajuste de transporte e consumo), onde ficar, espaço de Publicidade, rota no Google Maps, "Outro destino", "Quero conhecer" e "Enviar para alguém".
+- **Outras opções**: os demais destinos que cabem no tempo; "Ver todos os destinos" mostra todos até 200 km.
+- **Mapa**: Leaflet + OpenStreetMap com a saída e os destinos numerados. Sem Leaflet (prévia), um mapa esquemático em SVG.
+- "Me surpreenda" sorteia entre os destinos. Favoritos ficam só no navegador (localStorage). O link `?origem=sjrp&destino=olimpia` abre direto no destino.
+- `python3 quicktrip/_ferramentas/build.py --artefato` gera uma prévia de arquivo único em `_ferramentas/artefato/` (fica fora do Git; as fotos vão em `fotos/<id>.jpg` ao lado).
 
 ## Gasto da viagem (combustível e pedágios)
 
