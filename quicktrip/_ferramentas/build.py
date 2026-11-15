@@ -26,7 +26,7 @@ DESCRICAO = (
     "dentro do raio, com pontos turísticos, eventos, hospedagem, custo de combustível e rota, "
     "e sorteia um destino para você."
 )
-V = "20261114b"
+V = "20261115"
 
 # hashes SRI conferidos contra o pacote npm leaflet@1.9.4
 LEAFLET = (
